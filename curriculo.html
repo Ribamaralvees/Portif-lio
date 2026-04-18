@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Currículo — Ribamar Alves · Desenvolvedor Full-Stack</title>
+<meta name="description" content="Currículo profissional de José Ribamar Alves Rosa Filho — Desenvolvedor Full-Stack especializado em SaaS. Brasília, DF."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+
+:root{
+  --bg:#F4F3EF;
+  --bg2:#EDECE8;
+  --surface:#FFFFFF;
+  --ink:#0A0F1E;
+  --ink2:#4A4F5E;
+  --ink3:#9BA0AF;
+  --green:#059669;
+  --green-lt:rgba(5,150,105,0.10);
+  --amber:#D97706;
+  --amber-lt:rgba(217,119,6,0.10);
+  --blue:#2563EB;
+  --blue-lt:rgba(37,99,235,0.08);
+  --border:rgba(10,15,30,0.09);
+  --border-h:rgba(10,15,30,0.18);
+  --r:12px;
+  --shadow:0 1px 3px rgba(10,15,30,0.05),0 4px 16px rgba(10,15,30,0.06);
+  --shadow-h:0 2px 8px rgba(10,15,30,0.08),0 16px 40px rgba(10,15,30,0.10);
+}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'DM Sans',sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* Noise texture */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  opacity:.5;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  transition:background .4s,box-shadow .4s;
+  border-bottom:1px solid transparent;
+}
+nav.stuck{
+  background:rgba(244,243,239,.88);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 1px 0 var(--border);
+  border-bottom-color:var(--border);
+}
+.nav-inner{
+  max-width:960px;margin:0 auto;padding:0 28px;
+  height:64px;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:16px;font-weight:700;letter-spacing:-.4px;
+  color:var(--ink);text-decoration:none;
+  display:flex;align-items:center;gap:8px;
+}
+.nav-logo-mark{
+  width:28px;height:28px;background:var(--ink);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:#F4F3EF;letter-spacing:-.5px;
+}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.nav-back{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:500;color:var(--ink2);
+  text-decoration:none;padding:7px 14px;border-radius:100px;
+  border:1px solid var(--border);background:var(--surface);
+  transition:all .2s;box-shadow:var(--shadow);
+}
+.nav-back:hover{color:var(--ink);border-color:var(--border-h);transform:translateY(-1px);}
+.nav-back svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;}
+.print-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:#F4F3EF;
+  text-decoration:none;padding:8px 16px;border-radius:100px;
+  background:var(--ink);border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  transition:all .2s;
+}
+.print-btn:hover{background:#0B1D3A;transform:translateY(-1px);}
+.print-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;}
+
+/* ─── MAIN LAYOUT ─── */
+main{
+  max-width:960px;margin:0 auto;padding:100px 28px 80px;
+  position:relative;z-index:2;
+}
+
+/* ─── HEADER CARD ─── */
+.cv-header{
+  background:var(--ink);
+  border-radius:28px;
+  padding:48px 52px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:36px;
+  align-items:center;
+  margin-bottom:20px;
+  position:relative;
+  overflow:hidden;
+}
+.cv-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 80% at 0% 50%,rgba(5,150,105,.15),transparent 60%),
+             radial-gradient(ellipse 50% 50% at 100% 0%,rgba(37,99,235,.12),transparent 60%);
+  pointer-events:none;
+}
+.cv-header::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(5,150,105,.6),rgba(37,99,235,.4),transparent);
+}
+.cv-photo{
+  width:108px;height:108px;border-radius:18px;overflow:hidden;flex-shrink:0;
+  border:3px solid rgba(255,255,255,.12);
+  position:relative;z-index:1;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+}
+.cv-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.cv-identity{position:relative;z-index:1;}
+.cv-name{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(26px,3.5vw,40px);font-weight:800;
+  letter-spacing:-2px;color:#F4F3EF;line-height:1;
+  margin-bottom:6px;
+}
+.cv-role{
+  font-size:15px;font-weight:500;
+  color:rgba(244,243,239,.5);
+  margin-bottom:20px;letter-spacing:.1px;
+}
+.cv-role em{
+  font-style:normal;color:var(--green);font-weight:600;
+}
+.cv-contacts{
+  display:flex;flex-wrap:wrap;gap:10px;
+}
+.cv-contact-item{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12.5px;font-weight:500;
+  color:rgba(244,243,239,.65);
+  padding:5px 12px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.05);
+  text-decoration:none;
+  transition:color .2s,border-color .2s,background .2s;
+}
+.cv-contact-item:hover{color:#F4F3EF;border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.09);}
+.cv-contact-item svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;flex-shrink:0;}
+
+/* ─── TWO-COLUMN BODY ─── */
+.cv-body{
+  display:grid;
+  grid-template-columns:1fr 280px;
+  gap:20px;
+  align-items:start;
+}
+
+/* ─── PANELS ─── */
+.panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:32px 36px;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
+}
+.panel:last-child{margin-bottom:0;}
+
+.panel-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--green);margin-bottom:24px;
+  display:flex;align-items:center;gap:10px;
+}
+.panel-title::before{content:'';width:20px;height:1.5px;background:var(--green);display:block;}
+
+/* ─── SUMMARY ─── */
+.summary-text{
+  font-size:14.5px;color:var(--ink2);line-height:1.82;font-weight:400;
+}
+.summary-text strong{color:var(--ink);font-weight:600;}
+
+/* ─── EXPERIENCE ITEMS ─── */
+.exp-item{
+  padding-bottom:28px;margin-bottom:28px;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.exp-item:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0;}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;}
+.exp-company{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:16px;font-weight:700;letter-spacing:-.5px;color:var(--ink);
+}
+.exp-badge{
+  font-size:11px;font-weight:600;padding:4px 10px;border-radius:100px;
+  white-space:nowrap;flex-shrink:0;
+}
+.exp-badge.current{background:var(--green-lt);color:var(--green);}
+.exp-badge.past{background:var(--bg2);color:var(--ink3);}
+.exp-role{font-size:13.5px;font-weight:600;color:var(--ink2);margin-bottom:3px;}
+.exp-period{font-size:12px;color:var(--ink3);font-weight:400;margin-bottom:12px;}
+.exp-desc{font-size:13.5px;color:var(--ink2);line-height:1.75;}
+.exp-desc ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:5px;}
+.exp-desc ul li{display:flex;gap:8px;align-items:flex-start;}
+.exp-desc ul li::before{content:'→';color:var(--green);font-weight:700;font-size:11px;margin-top:3px;flex-shrink:0;}
+
+/* ─── PROJECTS ─── */
+.project-item{
+  padding-bottom:22px;margin-bottom:22px;
+  border-bottom:1px solid var(--border);
+}
+.project-item:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0;}
+.project-header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;}
+.project-name{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:15px;font-weight:700;letter-spacing:-.4px;color:var(--ink);
+}
+.project-link{
+  font-size:11.5px;font-weight:600;color:var(--blue);text-decoration:none;
+  display:flex;align-items:center;gap:4px;flex-shrink:0;
+  transition:opacity .2s;
+}
+.project-link:hover{opacity:.7;}
+.project-link svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;}
+.project-cat{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;}
+.project-desc{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:10px;}
+.project-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{
+  font-size:10.5px;font-weight:500;padding:3px 9px;
+  border-radius:100px;border:1px solid var(--border);
+  color:var(--ink3);background:var(--bg2);
+}
+
+/* ─── SIDEBAR PANELS ─── */
+.sidebar-panel{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:22px;padding:28px 30px;
+  box-shadow:var(--shadow);margin-bottom:16px;
+}
+.sidebar-panel:last-child{margin-bottom:0;}
+.sidebar-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--green);margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.sidebar-title::before{content:'';width:16px;height:1.5px;background:var(--green);display:block;}
+
+/* Skill bars */
+.skill-row{margin-bottom:14px;}
+.skill-row:last-child{margin-bottom:0;}
+.skill-label{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:5px;
+}
+.skill-name{font-size:13px;font-weight:500;color:var(--ink);}
+.skill-level{font-size:11px;color:var(--ink3);font-weight:400;}
+.skill-bar{height:4px;background:var(--bg2);border-radius:100px;overflow:hidden;}
+.skill-fill{
+  height:100%;border-radius:100px;
+  background:linear-gradient(90deg,var(--green),#10b981);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .8s cubic-bezier(.22,.68,0,1.1);
+}
+.skill-fill.visible{transform:scaleX(1);}
+
+/* Tag cloud */
+.tag-cloud{display:flex;flex-wrap:wrap;gap:6px;}
+.tag-cloud .tag{font-size:11.5px;padding:5px 11px;}
+.tag-cloud .tag.highlight{
+  background:var(--green-lt);border-color:rgba(5,150,105,.2);color:var(--green);
+  font-weight:600;
+}
+
+/* Info rows */
+.info-row{
+  display:flex;align-items:flex-start;gap:10px;
+  padding-bottom:13px;margin-bottom:13px;
+  border-bottom:1px solid var(--border);font-size:13px;
+}
+.info-row:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0;}
+.info-icon{
+  width:30px;height:30px;border-radius:8px;background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-size:14px;
+}
+.info-content{flex:1;}
+.info-label{font-size:10.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:2px;}
+.info-val{font-size:13px;color:var(--ink);font-weight:500;}
+
+/* Education item */
+.edu-item{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.edu-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.edu-course{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.edu-school{font-size:12.5px;color:var(--ink2);}
+.edu-period{font-size:11.5px;color:var(--ink3);margin-top:3px;}
+
+/* Languages */
+.lang-item{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.lang-item:last-child{margin-bottom:0;}
+.lang-name{font-size:13px;font-weight:500;color:var(--ink);}
+.lang-level{font-size:11.5px;color:var(--ink3);}
+
+/* Stat card */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.stat-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:14px;
+  padding:14px 16px;text-align:center;
+}
+.stat-card.wide{grid-column:span 2;}
+.stat-num{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:28px;font-weight:800;letter-spacing:-1.5px;line-height:1;
+  margin-bottom:4px;
+}
+.stat-lbl{font-size:10px;color:var(--ink3);font-weight:600;letter-spacing:.8px;text-transform:uppercase;}
+
+/* ─── FADE IN ─── */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+.fade-in.d1{transition-delay:.07s;}
+.fade-in.d2{transition-delay:.14s;}
+.fade-in.d3{transition-delay:.21s;}
+.fade-in.d4{transition-delay:.28s;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:780px){
+  .cv-body{grid-template-columns:1fr;}
+  .cv-sidebar{order:-1;}
+  .cv-header{grid-template-columns:1fr;gap:24px;padding:36px 32px;}
+  .cv-photo{width:88px;height:88px;}
+}
+@media(max-width:600px){
+  main{padding:88px 16px 60px;}
+  .panel,.sidebar-panel{padding:24px 22px;}
+  .cv-header{padding:28px 24px;border-radius:20px;}
+  .nav-inner{padding:0 16px;}
+  .print-btn span{display:none;}
+}
+
+/* ─── PRINT STYLES ─── */
+@media print{
+  nav,body::before{display:none!important;}
+  body{background:#fff;font-size:12px;}
+  main{padding:0;max-width:none;}
+  .cv-header{-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:0;}
+  .cv-body{grid-template-columns:1fr 240px;}
+  .panel,.sidebar-panel{box-shadow:none;border-radius:12px;}
+  .fade-in{opacity:1!important;transform:none!important;}
+  .skill-fill{transform:scaleX(1)!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">RA</div>
+      ribamar.dev
+    </a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Portfólio
+      </a>
+      <button class="print-btn" onclick="window.print()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        <span>Imprimir</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ─── HEADER ─── -->
+  <div class="cv-header fade-in">
+    <div class="cv-photo">
+      <img src="IMG_20260412_143755_527.webp" alt="José Ribamar Alves"/>
+    </div>
+    <div class="cv-identity">
+      <div class="cv-name">José Ribamar<br/>Alves Rosa Filho</div>
+      <div class="cv-role">Desenvolvedor Full-Stack &amp; <em>SaaS Builder</em></div>
+      <div class="cv-contacts">
+        <a href="mailto:ribamaralvees.filho@gmail.com" class="cv-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          ribamaralvees.filho@gmail.com
+        </a>
+        <a href="https://github.com/Ribamaralvees/" target="_blank" class="cv-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/Ribamaralvees
+        </a>
+        <a href="https://www.linkedin.com/in/jos%C3%A9-ribamar-01a6b6371/" target="_blank" class="cv-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <span class="cv-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Brasília, DF — Brasil
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── BODY ─── -->
+  <div class="cv-body">
+
+    <!-- ─── LEFT COLUMN ─── -->
+    <div class="cv-main">
+
+      <!-- SUMMARY -->
+      <div class="panel fade-in d1">
+        <div class="panel-title">Resumo Profissional</div>
+        <p class="summary-text">
+          Desenvolvedor <strong>Full-Stack</strong> com foco em construção de produtos SaaS do zero ao deploy — interfaces refinadas, backends robustos e integrações com IA que resolvem problemas reais de negócio. Atuei em todo o ciclo de desenvolvimento: product design, autenticação, pagamentos (Stripe / Mercado Pago), banco de dados e CI/CD. Background único combinando <strong>tecnologia e vendas consultivas</strong> no varejo premium, o que me dá visão de produto orientada ao usuário final. Atualmente aprofundando conhecimentos em <strong>Java / Spring Boot</strong> para backend enterprise.
+        </p>
+      </div>
+
+      <!-- PROFESSIONAL EXPERIENCE -->
+      <div class="panel fade-in d1">
+        <div class="panel-title">Experiência Profissional</div>
+
+        <!-- Via Veneto / Brooksfield -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-company">Via Veneto Roupas Ltda <span style="font-weight:400;color:var(--ink3);font-size:13px;">(Brooksfield)</span></div>
+            <div class="exp-badge current">Atual</div>
+          </div>
+          <div class="exp-role">Consultor de Vendas · Varejo Premium</div>
+          <div class="exp-period">📍 Brasília Shopping, Asa Norte — Nov 2021 – Presente · 4+ anos</div>
+          <div class="exp-desc">
+            <ul>
+              <li>Atendimento consultivo em moda masculina social de alto padrão, construindo relacionamentos de longo prazo com carteira de clientes fidelizados.</li>
+              <li>Remuneração 100% baseada em comissão variável (3,5% sobre vendas), exigindo alta performance e gestão própria de metas mensais.</li>
+              <li>Experiência sólida em leitura de perfil de cliente, negociação e conversão, que hoje alimenta o design de produtos SaaS voltados ao usuário real.</li>
+              <li>Férias anotadas em 2023, 2024 e 2025 — histórico consistente e sem interrupções.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- JASP -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-company">JASP Comércio de Artigos de Moda Ltda</div>
+            <div class="exp-badge past">Encerrado</div>
+          </div>
+          <div class="exp-role">Vendedor · Moda</div>
+          <div class="exp-period">📍 Setor de Habitações Individuais Norte, Brasília — Mai 2021 – Nov 2021 · 6 meses</div>
+          <div class="exp-desc">
+            <ul>
+              <li>Vendas no varejo de moda com salário fixo de R$ 1.290/mês — contrato a prazo indeterminado.</li>
+              <li>Desenvolvimento de técnicas de abordagem, vitrinismo e fidelização de clientes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CIA. Hering -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-company">Cia. Hering</div>
+            <div class="exp-badge past">Encerrado</div>
+          </div>
+          <div class="exp-role">Vendedor de Loja</div>
+          <div class="exp-period">📍 Asa Sul, Brasília — Jul 2019 – Fev 2021 · 1 ano e 7 meses</div>
+          <div class="exp-desc">
+            <ul>
+              <li>Atendimento ao cliente e vendas em loja de rede nacional, desenvolvendo base sólida em técnicas de vendas e relacionamento.</li>
+              <li>Progressão salarial de R$ 1.115 → R$ 1.200,02 durante o contrato. Promoção de vendedor temporário a contrato indeterminado.</li>
+              <li>Experiência em gestão de metas individuais, operação de caixa e controle de estoque.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="panel fade-in d2">
+        <div class="panel-title">Projetos em Produção</div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-name">Zyntra — Inteligência Financeira CLT</div>
+            <a href="https://zyntra-service.vercel.app/" target="_blank" class="project-link">
+              Ver ao vivo
+              <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+          </div>
+          <div class="project-cat">SaaS · Fintech · IA</div>
+          <div class="project-desc">Plataforma completa de inteligência financeira para trabalhadores CLT. Análise automatizada de holerites via IA (Claude), simulações de férias e 13º, dashboards interativos com Recharts, autenticação Supabase e RLS configurado em produção.</div>
+          <div class="project-tags">
+            <span class="tag">Next.js 14</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Claude AI</span>
+            <span class="tag">Recharts</span>
+            <span class="tag">Zod</span>
+            <span class="tag">Vercel</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-name">E.M Fitness — E-commerce</div>
+          </div>
+          <div class="project-cat">E-commerce · Moda Fitness</div>
+          <div class="project-desc">Loja virtual completa para marca de roupas fitness feminina. Catálogo com filtros, carrinho, checkout integrado com Mercado Pago, painel admin e animações com Framer Motion.</div>
+          <div class="project-tags">
+            <span class="tag">Next.js 14</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Mercado Pago</span>
+            <span class="tag">Framer Motion</span>
+            <span class="tag">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-name">Barbearia Lustosa — SaaS</div>
+            <a href="https://barbearia-lustosa.vercel.app/" target="_blank" class="project-link">
+              Ver ao vivo
+              <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+          </div>
+          <div class="project-cat">SaaS · Barbearia · B2B</div>
+          <div class="project-desc">Plataforma completa de gestão para barbearia: agendamento online, CRM de clientes, módulo financeiro, assinaturas via Stripe, notificações por e-mail com Resend e RLS no Supabase.</div>
+          <div class="project-tags">
+            <span class="tag">Next.js 14</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Stripe</span>
+            <span class="tag">Resend</span>
+            <span class="tag">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-name">PeladaPro — SaaS Futebol</div>
+          </div>
+          <div class="project-cat">SaaS · Esportes · Comunidade</div>
+          <div class="project-desc">Gestão de peladas amadoras com algoritmo Elo de ranqueamento, divisão automática de times por nível, histórico de partidas e pagamentos via Stripe. Mais de 20 tabelas no banco de dados.</div>
+          <div class="project-tags">
+            <span class="tag">Next.js 14</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Stripe</span>
+            <span class="tag">Algoritmo Elo</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-name">Paranoa Indica</div>
+            <a href="https://paranoaindica.vercel.app/" target="_blank" class="project-link">
+              Ver ao vivo
+              <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+          </div>
+          <div class="project-cat">Civic Tech · Comunidade Local · DF</div>
+          <div class="project-desc">Diretório de negócios locais do Paranoá — DF, com avaliações da comunidade, busca por categoria e geolocalização. Projeto de impacto social para o comércio regional.</div>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Vercel</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ─── SIDEBAR ─── -->
+    <div class="cv-sidebar">
+
+      <!-- Stats -->
+      <div class="sidebar-panel fade-in d1">
+        <div class="sidebar-title">Números</div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-num" style="color:var(--green)">4+</div>
+            <div class="stat-lbl">Produtos Live</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" style="color:#7c3aed">5</div>
+            <div class="stat-lbl">Verticais</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" style="color:var(--amber)">3+</div>
+            <div class="stat-lbl">Integrações IA</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" style="color:var(--blue)">5+</div>
+            <div class="stat-lbl">Anos em vendas</div>
+          </div>
+          <div class="stat-card wide">
+            <div class="stat-num" style="color:var(--ink)">Full</div>
+            <div class="stat-lbl">Stack · Design → Deploy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Skills -->
+      <div class="sidebar-panel fade-in d2">
+        <div class="sidebar-title">Stack Técnica</div>
+
+        <div class="skill-row">
+          <div class="skill-label"><span class="skill-name">Next.js / React</span><span class="skill-level">Avançado</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span class="skill-name">TypeScript</span><span class="skill-level">Avançado</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.90"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span class="skill-name">Supabase / PostgreSQL</span><span class="skill-level">Avançado</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.88"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span class="skill-name">Node.js / Express</span><span class="skill-level">Intermediário</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.78"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span class="skill-name">Stripe / Mercado Pago</span><span class="skill-level">Intermediário</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.75"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span class="skill-name">Flutter / Dart</span><span class="skill-level">Intermediário</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.65"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span class="skill-name">Java / Spring Boot</span><span class="skill-level">Em aprendizado</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.40"></div></div>
+        </div>
+      </div>
+
+      <!-- Technologies -->
+      <div class="sidebar-panel fade-in d2">
+        <div class="sidebar-title">Tecnologias</div>
+        <div class="tag-cloud">
+          <span class="tag highlight">Next.js</span>
+          <span class="tag highlight">TypeScript</span>
+          <span class="tag highlight">Supabase</span>
+          <span class="tag highlight">TailwindCSS</span>
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Stripe</span>
+          <span class="tag">Vercel</span>
+          <span class="tag">Claude AI</span>
+          <span class="tag">Groq</span>
+          <span class="tag">Framer Motion</span>
+          <span class="tag">Recharts</span>
+          <span class="tag">Zod</span>
+          <span class="tag">Flutter</span>
+          <span class="tag">Java</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">Git / GitHub</span>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="sidebar-panel fade-in d3">
+        <div class="sidebar-title">Informações</div>
+
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="info-content">
+            <div class="info-label">Localização</div>
+            <div class="info-val">Brasília, DF — Brasil</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🗣️</div>
+          <div class="info-content">
+            <div class="info-label">Idiomas</div>
+            <div class="info-val">Português (nativo)<br/><span style="color:var(--ink3);font-size:12px;">Inglês técnico (leitura)</span></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">💼</div>
+          <div class="info-content">
+            <div class="info-label">Disponibilidade</div>
+            <div class="info-val" style="color:var(--green);font-weight:600;">Disponível agora</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🖥️</div>
+          <div class="info-content">
+            <div class="info-label">Modalidade</div>
+            <div class="info-val">Remoto · Híbrido · Presencial</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="sidebar-panel fade-in d3">
+        <div class="sidebar-title">Formação</div>
+
+        <div class="edu-item">
+          <div class="edu-course">Desenvolvimento Full-Stack</div>
+          <div class="edu-school">Autodidata — projetos reais em produção</div>
+          <div class="edu-period">2022 – Presente</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-course">Java & Spring Boot</div>
+          <div class="edu-school">Roadmap estruturado — Java → Spring → JPA → JWT</div>
+          <div class="edu-period">2024 – Em andamento</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-course">Técnico em Vendas</div>
+          <div class="edu-school">Experiência prática · 5+ anos no varejo premium</div>
+          <div class="edu-period">2019 – Presente</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script>
+// Nav sticky
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 20), {passive:true});
+
+// Intersection Observer for fade-in
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      // Animate skill bars inside this element
+      e.target.querySelectorAll('.skill-fill[data-width]').forEach(bar => {
+        bar.style.width = (parseFloat(bar.dataset.width) * 100) + '%';
+        bar.classList.add('visible');
+      });
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
