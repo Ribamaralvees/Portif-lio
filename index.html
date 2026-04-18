@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ribamar Alves · Desenvolvedor Full-Stack & SaaS</title>
 <meta name="description" content="Desenvolvedor full-stack especializado em SaaS — da ideia ao deploy. Brasília, Brasil."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<meta name="theme-color" content="#0A0F1E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
@@ -109,6 +113,50 @@ nav.stuck {
   padding: 8px 18px !important;
 }
 .nav-cta:hover { background: var(--navy) !important; }
+
+/* ─── HAMBURGER ─── */
+.nav-burger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px; border: 1px solid var(--border);
+  border-radius: 10px; background: var(--surface);
+  cursor: pointer; padding: 10px; box-shadow: var(--shadow);
+  transition: border-color 0.2s;
+}
+.nav-burger:hover { border-color: var(--border-h); }
+.nav-burger span {
+  display: block; height: 1.5px; background: var(--ink); border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s, width 0.3s;
+}
+.nav-burger span:nth-child(2) { width: 65%; }
+.nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile drawer */
+.nav-drawer {
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 299;
+  background: rgba(244,243,239,0.97);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 18px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+  transform: translateY(-8px); opacity: 0; pointer-events: none;
+  transition: transform 0.3s cubic-bezier(.22,.68,0,1.1), opacity 0.25s;
+}
+.nav-drawer.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+.nav-drawer a {
+  color: var(--ink2); text-decoration: none; font-size: 15px; font-weight: 500;
+  padding: 12px 16px; border-radius: 12px;
+  transition: color 0.2s, background 0.2s;
+  border: 1px solid transparent;
+}
+.nav-drawer a:hover { color: var(--ink); background: var(--surface); border-color: var(--border); }
+.nav-drawer .drawer-cta {
+  background: var(--ink); color: #F4F3EF !important;
+  font-weight: 600; border-radius: 12px; margin-top: 6px;
+  text-align: center;
+}
+.nav-drawer .drawer-cta:hover { background: var(--navy); border-color: transparent; }
 
 /* ─── HERO ─── */
 .hero {
@@ -495,6 +543,7 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
   .card { padding: 24px; min-height: auto; }
   .card-band { margin: 0 -24px -24px; padding: 14px 24px; }
   .nav-links { display: none; }
+  .nav-burger { display: flex; }
   .cta-inner { border-radius: 22px; }
   .hero-stats { flex-direction: column; gap: 20px; }
   .hero-stat + .hero-stat { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 20px; }
@@ -533,8 +582,17 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
       <li><a href="curriculo.html">Currículo</a></li>
       <li><a href="#contato" class="nav-cta">Contato</a></li>
     </ul>
+    <button class="nav-burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-drawer" id="drawer">
+  <a href="#projetos" class="drawer-link">Projetos</a>
+  <a href="#sobre" class="drawer-link">Sobre</a>
+  <a href="curriculo.html" class="drawer-link">Currículo</a>
+  <a href="#contato" class="drawer-cta">Contato</a>
+</div>
 
 <!-- ─── HERO ─── -->
 <section class="hero">
@@ -822,6 +880,21 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
 // Nav sticky
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 20), {passive:true});
+
+// Hamburger menu
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  drawer.classList.toggle('open');
+});
+// Close drawer when any drawer link is clicked
+drawer.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    drawer.classList.remove('open');
+  });
+});
 
 // Card mouse sheen
 document.querySelectorAll('.card').forEach(card => {
