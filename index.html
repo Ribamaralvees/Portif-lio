@@ -1,307 +1,1025 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ribamar Alves — Desenvolvedor Full-Stack</title>
-<meta name="description" content="Desenvolvedor Full-Stack em transição do varejo para tecnologia. Brasília, DF."/>
-<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
-<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-<meta name="theme-color" content="#0A0F1E"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ribamar Alves</title>
+<meta id="meta-desc" name="description" content="Desenvolvedor Full-Stack em transição do comércio para tecnologia. Projetos reais com Next.js, TypeScript, Supabase e IA — Brasília, DF.">
+<meta name="theme-color" id="meta-theme" content="#F7F5F1">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta property="og:title" content="Ribamar Alves · Dev Full-Stack">
+<meta property="og:description" content="Do balcão ao código — projetos reais, sem bootcamp. Brasília, DF.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-:root{
-  --bg:#FAFAF8; --ink:#111118; --ink2:#6B7280; --ink3:#9CA3AF;
-  --border:#E5E7EB; --green:#059669; --surface:#FFFFFF; --max:680px;
+
+/* ════════════════════════════
+   RESET & SHARED
+════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+img  { display: block; max-width: 100%; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  transition: background 0.45s ease;
 }
-body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid transparent;transition:background .3s,border-color .3s;}
-nav.stuck{background:rgba(250,250,248,.93);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--border);}
-.nav-inner{max-width:var(--max);margin:0 auto;padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;}
-.logo{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-.3px;}
-.nav-links{list-style:none;display:flex;align-items:center;}
-.nav-links a{font-size:13.5px;font-weight:500;color:var(--ink2);text-decoration:none;padding:6px 12px;border-radius:8px;transition:color .15s,background .15s;}
-.nav-links a:hover{color:var(--ink);background:#F3F4F6;}
-.nav-links .cta{color:var(--ink)!important;font-weight:600;border:1px solid var(--border);background:var(--surface)!important;}
-.nav-links .cta:hover{border-color:#D1D5DB!important;}
+#page-card,
+#page-portfolio { display: none; }
+#page-card.active,
+#page-portfolio.active { display: block; }
 
-/* BURGER */
-.burger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:var(--surface);cursor:pointer;align-items:center;justify-content:center;}
-.burger span{width:16px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s;}
-.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
-.burger.open span:nth-child(2){opacity:0;}
-.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.drawer{position:fixed;top:58px;left:0;right:0;z-index:99;background:rgba(250,250,248,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 16px;display:flex;flex-direction:column;gap:2px;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .25s,transform .25s;}
-.drawer.open{opacity:1;transform:none;pointer-events:all;}
-.drawer a{font-size:15px;font-weight:500;color:var(--ink2);text-decoration:none;padding:11px 14px;border-radius:10px;transition:color .15s,background .15s;}
-.drawer a:hover{color:var(--ink);background:#F3F4F6;}
-.drawer .d-cta{color:var(--ink)!important;font-weight:600;border:1px solid var(--border);text-align:center;margin-top:4px;}
-
-/* LAYOUT */
-main{max-width:var(--max);margin:0 auto;padding:0 24px;}
-
-/* HERO */
-.hero{padding:130px 0 80px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
-.avail{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:22px;}
-.avail-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2.5s infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-.hero-title{font-family:'Fraunces',serif;font-size:clamp(34px,5.5vw,50px);font-weight:600;line-height:1.08;letter-spacing:-.5px;margin-bottom:18px;}
-.hero-title em{font-style:italic;font-weight:300;}
-.hero-sub{font-size:15px;color:var(--ink2);line-height:1.78;margin-bottom:32px;max-width:400px;}
-.hero-actions{display:flex;gap:8px;flex-wrap:wrap;}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:10px;font-size:13.5px;font-weight:600;text-decoration:none;font-family:'Inter',sans-serif;transition:all .15s;border:none;cursor:pointer;}
-.btn-dark{background:var(--ink);color:#FAFAF8;}
-.btn-dark:hover{background:#1F2937;transform:translateY(-1px);}
-.btn-ghost{background:var(--surface);color:var(--ink);border:1px solid var(--border);}
-.btn-ghost:hover{border-color:#D1D5DB;transform:translateY(-1px);}
-.hero-photo{width:clamp(88px,13vw,120px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:3px solid var(--border);flex-shrink:0;}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;}
-
-/* SECTION */
-hr{border:none;border-top:1px solid var(--border);}
-section{padding:60px 0;}
-.sec-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:24px;}
-
-/* PROJECTS */
-.project-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:14px;overflow:hidden;}
-.project-item{background:var(--surface);padding:20px 22px;display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;transition:background .15s;}
-.project-item:hover{background:#F9FAFB;}
-.p-logo{width:42px;height:42px;border-radius:10px;flex-shrink:0;overflow:hidden;border:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;}
-.p-logo img{width:100%;height:100%;object-fit:cover;}
-.p-logo.pad img{object-fit:contain;padding:7px;}
-.p-logo.circle{border-radius:50%;}
-.p-body{flex:1;min-width:0;}
-.p-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px;}
-.p-desc{font-size:13px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.p-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.p-tags{display:flex;gap:4px;}
-.tag{font-size:11px;font-weight:500;padding:3px 8px;border-radius:6px;border:1px solid var(--border);color:var(--ink3);background:var(--bg);white-space:nowrap;}
-.tag.live{color:var(--green);background:#F0FDF4;border-color:#BBF7D0;}
-.p-arrow{color:var(--ink3);transition:transform .15s,color .15s;}
-.project-item:hover .p-arrow{transform:translateX(3px);color:var(--ink2);}
-
-/* ABOUT */
-.about-text{font-size:15px;color:var(--ink2);line-height:1.82;}
-.about-text+.about-text{margin-top:14px;}
-.about-text strong{color:var(--ink);font-weight:600;}
-.stack-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:26px;padding-top:22px;border-top:1px solid var(--border);}
-.stack-tag{font-size:12px;font-weight:500;padding:5px 11px;border-radius:8px;border:1px solid var(--border);color:var(--ink2);background:var(--surface);}
-
-/* CONTACT */
-.contact-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:14px;overflow:hidden;}
-.contact-item{background:var(--surface);padding:18px 22px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:inherit;transition:background .15s;}
-.contact-item:hover{background:#F9FAFB;}
-.c-label{font-size:14px;font-weight:500;color:var(--ink);}
-.c-val{font-size:13px;color:var(--ink3);transition:color .15s;}
-.contact-item:hover .c-val{color:var(--ink2);}
-
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:26px 0;}
-.footer-inner{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
-.footer-copy{font-size:12.5px;color:var(--ink3);}
-.footer-link{font-size:12.5px;color:var(--ink3);text-decoration:none;transition:color .15s;}
-.footer-link:hover{color:var(--ink);}
-
-/* FADE */
-.fade{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;}
-.fade.d1{transition-delay:.08s}.fade.d2{transition-delay:.16s}.fade.d3{transition-delay:.22s}
-.fade.in{opacity:1;transform:none;}
-
-/* RESPONSIVE */
-@media(max-width:600px){
-  .nav-links{display:none;}.burger{display:flex;}
-  .hero{grid-template-columns:1fr;padding:96px 0 60px;gap:28px;}
-  .hero-photo{width:76px;order:-1;}
-  .hero-sub{max-width:none;}
-  .p-tags{display:none;}
-  .p-desc{white-space:normal;overflow:visible;text-overflow:unset;}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 22px; border-radius: 16px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+  transition: all 0.2s; border: none; cursor: pointer;
+  font-family: 'Outfit', sans-serif; letter-spacing: -0.1px;
+  -webkit-tap-highlight-color: transparent;
 }
-@media(max-width:380px){
-  .hero-actions{flex-direction:column;}
-  .hero-actions .btn{justify-content:center;}
+.btn-whatsapp {
+  background: #25D366; color: #fff;
+  box-shadow: 0 6px 20px rgba(37,211,102,0.22);
 }
+.btn-whatsapp:hover { box-shadow: 0 12px 32px rgba(37,211,102,0.34); transform: translateY(-1px); }
+
+.fade-up {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+
+/* ════════════════════════════
+   PAGE — CARD (escuro)
+════════════════════════════ */
+#page-card {
+  --bg:      #07070A;
+  --surface: #111118;
+  --sur2:    #18181F;
+  --border:  rgba(255,255,255,0.07);
+  --bord2:   rgba(255,255,255,0.13);
+  --gold:    #C9A96E;
+  --text:    #F2EDE6;
+  --text2:   rgba(242,237,230,0.50);
+  --text3:   rgba(242,237,230,0.28);
+
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100svh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+
+/* Ambient */
+#page-card .c-ambient {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%,  rgba(201,169,110,.09) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 100%, rgba(37,211,102,.05)  0%, transparent 60%);
+}
+#page-card .c-noise {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#page-card .c-wrap {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 380px; margin: 0 auto;
+  padding: 40px 20px 56px;
+  display: flex; flex-direction: column; align-items: center;
+  animation: c-up .7s cubic-bezier(.22,.68,0,1) both;
+}
+@keyframes c-up { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
+
+/* Avatar com foto */
+#page-card .c-avatar {
+  width: 84px; height: 84px; border-radius: 50%;
+  border: 1.5px solid var(--bord2);
+  overflow: hidden;
+  margin-bottom: 22px;
+  position: relative;
+  box-shadow: 0 0 0 7px rgba(201,169,110,.06);
+  flex-shrink: 0;
+}
+#page-card .c-avatar::after {
+  content: '';
+  position: absolute; inset: -3px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--gold), transparent 40%, transparent 60%, var(--gold));
+  z-index: -1; opacity: .4;
+  animation: c-spin 6s linear infinite;
+}
+#page-card .c-avatar img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  border-radius: 50%;
+}
+@keyframes c-spin { to { transform: rotate(360deg); } }
+
+/* Identidade */
+#page-card .c-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; font-weight: 500; letter-spacing: -.5px;
+  color: var(--text); text-align: center; line-height: 1; margin-bottom: 8px;
+}
+#page-card .c-role {
+  font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--gold);
+  text-align: center; margin-bottom: 36px;
+}
+#page-card .c-divider {
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bord2), transparent);
+  margin: 0 auto 32px;
+}
+
+/* Botões principais */
+#page-card .c-actions { width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+#page-card .c-btn {
+  width: 100%; height: 54px; border-radius: 18px; border: none;
+  font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+  text-decoration: none; transition: transform .2s, box-shadow .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+#page-card .c-btn:active { transform: scale(.97); }
+#page-card .c-btn-wa {
+  background: #25D366; color: #fff;
+  box-shadow: 0 8px 28px rgba(37,211,102,.22);
+}
+#page-card .c-btn-wa:hover { box-shadow: 0 12px 36px rgba(37,211,102,.34); transform: translateY(-1px); }
+#page-card .c-btn-port { background: var(--sur2); color: var(--text); border: 1px solid var(--bord2); }
+#page-card .c-btn-port:hover { background: #20202A; border-color: rgba(255,255,255,.2); }
+
+/* Botões secundários */
+#page-card .c-sec { width: 100%; display: flex; gap: 8px; margin-bottom: 28px; }
+#page-card .c-btn-sm {
+  flex: 1; height: 40px; border-radius: 12px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text2); font-family: 'Outfit', sans-serif;
+  font-size: 12.5px; font-weight: 500; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  transition: all .2s; -webkit-tap-highlight-color: transparent;
+}
+#page-card .c-btn-sm:hover { background: var(--surface); color: var(--text); border-color: var(--bord2); }
+#page-card .c-btn-sm:active { transform: scale(.97); }
+
+/* Painel QR */
+#page-card .c-qr {
+  width: 100%; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 28px; display: flex; flex-direction: column; align-items: center; gap: 16px;
+  overflow: hidden;
+  max-height: 0; padding: 0 24px; opacity: 0;
+  transition: max-height .5s cubic-bezier(.22,.68,0,1), opacity .35s, padding .4s;
+}
+#page-card .c-qr.open { max-height: 340px; padding: 28px 24px 22px; opacity: 1; }
+#page-card .c-qr-box { background: #fff; padding: 14px; border-radius: 14px; }
+#page-card .c-qr-label { font-size: 11.5px; color: var(--text3); text-align: center; line-height: 1.65; }
+
+/* NFC status */
+#page-card .c-nfc {
+  font-size: 12px; color: var(--text3); text-align: center;
+  min-height: 20px; margin-top: 4px; transition: color .3s;
+}
+#page-card .c-nfc.ok  { color: #25D366; }
+#page-card .c-nfc.err { color: #f87171; }
+
+#page-card .c-foot { margin-top: 28px; font-size: 11px; color: var(--text3); text-align: center; letter-spacing: .4px; }
+
+
+/* ════════════════════════════
+   PAGE — PORTFÓLIO (claro)
+════════════════════════════ */
+#page-portfolio {
+  --bg:      #F7F5F1;
+  --bg2:     #EDECEA;
+  --surface: #FFFFFF;
+  --ink:     #1C1814;
+  --ink2:    #6B6158;
+  --ink3:    #A89F96;
+  --gold:    #C8913A;
+  --gold-lt: rgba(200,145,58,.10);
+  --gold-md: rgba(200,145,58,.18);
+  --green:   #2A9D6A;
+  --grn-lt:  rgba(42,157,106,.10);
+  --blue:    #2563EB;
+  --amber:   #D97706;
+  --border:  rgba(28,24,20,.08);
+  --bord-h:  rgba(28,24,20,.16);
+  --r:       16px;
+  --r-lg:    24px;
+  --sh:      0 1px 3px rgba(28,24,20,.05), 0 6px 20px rgba(28,24,20,.06);
+  --sh-h:    0 2px 8px rgba(28,24,20,.08), 0 20px 48px rgba(28,24,20,.12);
+
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Grain */
+#page-portfolio::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ── Layout ── */
+.pw { max-width: 1100px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+
+/* ── Nav ── */
+#pnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  transition: background .4s, box-shadow .4s;
+}
+#pnav.stuck {
+  background: rgba(247,245,241,.90);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--border);
+}
+.pnav-i {
+  max-width: 1100px; margin: 0 auto; padding: 0 28px;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+}
+.pnav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 600; letter-spacing: -.3px;
+  color: var(--ink); text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.pnav-mark {
+  width: 30px; height: 30px; background: var(--ink); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-weight: 600; color: var(--bg); flex-shrink: 0;
+}
+.pnav-links { display: flex; gap: 2px; list-style: none; align-items: center; }
+.pnav-links a {
+  color: var(--ink2); text-decoration: none; font-size: 13.5px; font-weight: 500;
+  padding: 7px 15px; border-radius: 100px; transition: color .2s, background .2s;
+}
+.pnav-links a:hover { color: var(--ink); background: rgba(28,24,20,.05); }
+.pnav-cta { background: var(--ink) !important; color: var(--bg) !important; font-weight: 600 !important; }
+.pnav-cta:hover { opacity: .85 !important; }
+@media (max-width: 640px) { .pnav-links { display: none; } }
+
+/* ── Botões portfólio ── */
+.pb  { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: var(--r); font-size: 14px; font-weight: 600; text-decoration: none; transition: all .2s; border: none; cursor: pointer; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
+.pb-dark  { background: var(--ink); color: var(--bg); }
+.pb-dark:hover  { opacity: .85; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(28,24,20,.2); }
+.pb-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--border); box-shadow: var(--sh); }
+.pb-ghost:hover { border-color: var(--bord-h); transform: translateY(-1px); box-shadow: var(--sh-h); }
+
+/* ── Labels de seção ── */
+.peyebrow {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.peyebrow::before { content: ''; width: 20px; height: 1.5px; background: var(--gold); display: block; }
+.ptitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 500; letter-spacing: -2px; color: var(--ink);
+  margin-bottom: 12px; line-height: 1.0;
+}
+.psub { font-size: 15px; color: var(--ink2); max-width: 460px; line-height: 1.8; }
+
+/* ── Hero ── */
+.phero {
+  min-height: 100svh;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 56px; padding: 100px 0 80px;
+}
+.phero-badge {
+  display: inline-flex; align-items: center; gap: 9px;
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 100px; padding: 6px 16px 6px 10px;
+  font-size: 12px; font-weight: 500; color: var(--ink2);
+  margin-bottom: 36px; width: fit-content; box-shadow: var(--sh);
+}
+.pbdot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 0 3px var(--grn-lt); animation: pblink 2.5s infinite; flex-shrink: 0;
+}
+@keyframes pblink { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+.phero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7vw, 96px); font-weight: 500;
+  line-height: .95; letter-spacing: -2.5px; color: var(--ink); margin-bottom: 10px;
+}
+.phero-title .it { font-style: italic; color: var(--gold); display: block; }
+.phero-subh { font-size: clamp(14px, 1.5vw, 16px); font-weight: 600; color: var(--ink); margin-bottom: 14px; }
+.phero-sub  { font-size: clamp(14px, 1.5vw, 16px); color: var(--ink2); max-width: 460px; line-height: 1.85; margin-bottom: 40px; }
+.phero-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 56px; }
+
+.phero-stats { display: flex; border-top: 1px solid var(--border); padding-top: 32px; }
+.pstat { flex: 1; padding-right: 24px; }
+.pstat + .pstat { padding-left: 24px; border-left: 1px solid var(--border); }
+.pstat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 3.5vw, 48px); font-weight: 500;
+  letter-spacing: -2px; line-height: 1; color: var(--ink); margin-bottom: 4px;
+}
+.pstat-n em { font-style: normal; color: var(--gold); }
+.pstat-l { font-size: 11.5px; color: var(--ink3); font-weight: 500; }
+
+/* Foto do herói */
+.pphoto-wrap { position: relative; flex-shrink: 0; width: clamp(200px, 20vw, 300px); }
+.pphoto-ring {
+  position: absolute; inset: -8px; border-radius: 34px;
+  background: conic-gradient(from 90deg, var(--gold), var(--bg2) 40%, var(--bg2) 60%, var(--gold));
+  z-index: 0; opacity: .5; animation: pring 14s linear infinite;
+}
+@keyframes pring { to { transform: rotate(360deg); } }
+.pphoto-bg  { position: absolute; inset: -3px; border-radius: 30px; background: var(--bg); z-index: 1; }
+.pphoto {
+  position: relative; z-index: 2; width: 100%; aspect-ratio: 3/4;
+  border-radius: 24px; overflow: hidden;
+  box-shadow: var(--sh-h); border: 2px solid var(--surface);
+}
+.pphoto img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.pphoto-tag {
+  position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); z-index: 3;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 100px;
+  padding: 5px 14px; font-size: 11px; font-weight: 600; color: var(--ink);
+  white-space: nowrap; box-shadow: var(--sh);
+  display: flex; align-items: center; gap: 6px;
+}
+.pdot-live { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pblink 2s infinite; }
+
+/* ── Transição ── */
+#ptransicao { padding: 100px 0 80px; }
+.pt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 52px; }
+.pt-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 32px 28px;
+  box-shadow: var(--sh); position: relative; overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
+}
+.pt-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
+.pt-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.pt-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px; font-weight: 400; color: rgba(28,24,20,.05);
+  line-height: 1; letter-spacing: -3px; position: absolute; top: 14px; right: 18px;
+}
+.pt-icon {
+  width: 40px; height: 40px; background: var(--gold-lt); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 18px;
+}
+.pt-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; letter-spacing: -.8px; color: var(--ink); margin-bottom: 10px; line-height: 1.1; }
+.pt-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.75; }
+
+/* ── Projetos ── */
+#pprojetos { padding: 80px 0; }
+.pbento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 52px; }
+.cc7  { grid-column: span 7; }
+.cc5  { grid-column: span 5; }
+.cc12 { grid-column: span 12; }
+
+/* Card base */
+.pcard {
+  position: relative; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 32px;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  transition: border-color .25s, transform .3s cubic-bezier(.22,.68,0,1.2), box-shadow .25s;
+  min-height: 300px; box-shadow: var(--sh);
+}
+.pcard:hover { border-color: var(--bord-h); transform: translateY(-4px); box-shadow: var(--sh-h); }
+
+/* Card com logo e arrow no topo */
+.pcard-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.pcard-logo {
+  width: 52px; height: 52px; border-radius: 14px;
+  border: 1px solid var(--border); overflow: hidden;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.pcard-logo img { width: 100%; height: 100%; object-fit: cover; }
+.pcard-logo.pad img { object-fit: contain; padding: 8px; }
+.pcard-logo.round { border-radius: 50%; }
+.parrow {
+  width: 34px; height: 34px; border-radius: 10px;
+  border: 1px solid var(--border); background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink2); text-decoration: none; transition: all .2s; flex-shrink: 0;
+}
+.pcard:hover .parrow { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+.pcard-cat { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 7px; }
+.pcard-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 2.5vw, 30px); font-weight: 600;
+  letter-spacing: -1px; color: var(--ink); margin-bottom: 12px; line-height: 1.05;
+}
+.pcard-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.78; flex: 1; margin-bottom: 18px; }
+
+.pcard-impact {
+  background: var(--gold-lt); border: 1px solid var(--gold-md);
+  border-radius: 10px; padding: 9px 13px; margin-bottom: 16px;
+  font-size: 12px; color: var(--gold); font-weight: 600;
+  display: flex; align-items: center; gap: 7px;
+}
+
+.pcard-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.ptag { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(28,24,20,.055); color: var(--ink2); }
+
+.pcard-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border); }
+.pcard-live { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; }
+.pcard-live-dot { width: 7px; height: 7px; border-radius: 50%; animation: pblink 2s infinite; }
+
+/* Card destaque (Zyntra) */
+.pcard-feat { background: var(--ink); border-color: transparent; }
+.pcard-feat .pcard-name    { color: var(--bg); }
+.pcard-feat .pcard-cat     { color: rgba(200,145,58,.75) !important; }
+.pcard-feat .pcard-desc    { color: rgba(247,245,241,.60); }
+.pcard-feat .ptag          { background: rgba(247,245,241,.10); color: rgba(247,245,241,.68); }
+.pcard-feat .pcard-footer  { border-color: rgba(247,245,241,.10); }
+.pcard-feat .parrow        { border-color: rgba(247,245,241,.14); color: rgba(247,245,241,.55); }
+.pcard-feat:hover .parrow  { background: var(--gold); border-color: var(--gold); color: #fff; }
+.pcard-feat .pcard-impact  { background: rgba(200,145,58,.13); border-color: rgba(200,145,58,.26); color: #E8B060; }
+.pcard-feat .pcard-logo    { background: #fff; border-color: transparent; }
+.pcard-feat .pcard-logo.pad { border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.08); }
+.pcard-feat .pcard-live    { color: #4ade80; }
+.pcard-feat .pcard-live-dot { background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,.15); }
+
+/* Card full-width horizontal (Paranoa) */
+.pcard-full { flex-direction: row; gap: 32px; min-height: 0; padding: 28px 32px; }
+.pcard-full .pcard-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 0; flex-shrink: 0; width: 240px; }
+.pcard-full .pcard-logo   { width: 64px; height: 64px; }
+.pcard-full .pcontent     { flex: 1; display: flex; flex-direction: column; }
+.pcard-full .pcard-footer { padding-top: 12px; }
+
+/* ── Stack ── */
+#pstack { padding: 80px 0; background: var(--bg2); }
+.pstack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 48px; }
+.pstack-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 18px;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: var(--sh); transition: transform .2s, box-shadow .2s;
+}
+.pstack-item:hover { transform: translateY(-2px); box-shadow: var(--sh-h); }
+.psdot   { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.psname  { font-size: 13px; font-weight: 600; color: var(--ink); }
+.pslevel { font-size: 11px; color: var(--ink3); margin-top: 1px; }
+
+/* ── Por que contratar ── */
+#psobre { padding: 80px 0; }
+.pabout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 52px; }
+.pabout-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 32px; box-shadow: var(--sh);
+}
+.pabout-icon { width: 42px; height: 42px; border-radius: 12px; background: var(--gold-lt); display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 16px; }
+.pabout-t    { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -.2px; }
+.pabout-d    { font-size: 13.5px; color: var(--ink2); line-height: 1.78; }
+
+/* ── CTA ── */
+#pcontato { padding: 100px 0; }
+.pcta-box {
+  background: var(--ink); border-radius: 32px; padding: 72px 56px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.pcta-box::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(200,145,58,.10) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 80% 50%, rgba(42,157,106,.07) 0%, transparent 70%);
+}
+.pcta-eye {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(200,145,58,.8); margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.pcta-eye::before, .pcta-eye::after { content: ''; width: 20px; height: 1.5px; background: rgba(200,145,58,.5); display: block; }
+.pcta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 68px); font-weight: 500;
+  letter-spacing: -2px; color: var(--bg); line-height: 1; margin-bottom: 18px; position: relative;
+}
+.pcta-sub  { font-size: 15px; color: rgba(247,245,241,.55); margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.8; position: relative; }
+.pcta-acts { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+.pcta-note { font-size: 12px; color: rgba(247,245,241,.3); margin-top: 20px; position: relative; }
+
+/* ── Footer ── */
+#pfooter { border-top: 1px solid var(--border); padding: 28px 0; }
+.pfooter-i { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.pfooter-c { font-size: 12px; color: var(--ink3); }
+.pfooter-l { display: flex; gap: 20px; }
+.pfooter-l a { font-size: 12px; color: var(--ink3); text-decoration: none; transition: color .2s; }
+.pfooter-l a:hover { color: var(--ink); }
+
+/* ── Responsivo ── */
+@media (max-width: 900px) {
+  .phero   { grid-template-columns: 1fr; gap: 0; }
+  .pphoto-wrap { display: none; }
+  .pt-grid { grid-template-columns: 1fr; }
+  .pbento  { grid-template-columns: 1fr; }
+  .cc7,.cc5,.cc12 { grid-column: span 1; }
+  .pcard-full { flex-direction: column; }
+  .pcard-full .pcard-header { width: 100%; flex-direction: row; align-items: center; justify-content: space-between; }
+  .pabout-grid { grid-template-columns: 1fr; }
+  .pcta-box { padding: 48px 28px; }
+}
+@media (max-width: 640px) {
+  .pw  { padding: 0 18px; }
+  .phero { padding: 90px 0 64px; }
+  .pstack-grid { grid-template-columns: 1fr 1fr; }
+}
+
 </style>
 </head>
 <body>
 
-<nav id="nav">
-  <div class="nav-inner">
-    <a href="#" class="logo">Ribamar Alves</a>
-    <ul class="nav-links">
-      <li><a href="#projetos">Projetos</a></li>
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="curriculo.html">Currículo</a></li>
-      <li><a href="#contato" class="cta">Contato</a></li>
-    </ul>
-    <button class="burger" id="burger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+<!-- ══════════════════════════════
+     CARTÃO DIGITAL
+══════════════════════════════ -->
+<div id="page-card">
+  <div class="c-ambient"></div>
+  <div class="c-noise"></div>
+
+  <div class="c-wrap">
+
+    <div class="c-avatar">
+      <img src="eu.webp" alt="Ribamar Alves">
+    </div>
+
+    <h1 class="c-name">Ribamar Alves</h1>
+    <p class="c-role">Consultor Comercial &amp; Dev Full-Stack</p>
+    <div class="c-divider"></div>
+
+    <div class="c-actions">
+      <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+te+encontrei+pelo+cartão+digital!"
+         target="_blank" rel="noopener" class="c-btn c-btn-wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+        </svg>
+        Falar no WhatsApp
+      </a>
+
+      <button class="c-btn c-btn-port" onclick="goPortfolio()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+        Ver meu Portfólio
+      </button>
+    </div>
+
+    <div class="c-sec">
+      <button class="c-btn-sm" onclick="saveContact()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Salvar
+      </button>
+      <button class="c-btn-sm" id="c-qr-btn" onclick="toggleQR()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="4" height="4"/></svg>
+        QR Code
+      </button>
+      <button class="c-btn-sm" onclick="writeNFC()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a9 9 0 019-9"/><path d="M3 12a4 4 0 014-4"/><circle cx="3" cy="17" r="1"/></svg>
+        NFC
+      </button>
+    </div>
+
+    <div class="c-qr" id="c-qr-panel">
+      <div class="c-qr-box"><div id="c-qrcode"></div></div>
+      <p class="c-qr-label">Aponte a câmera para abrir no WhatsApp</p>
+    </div>
+
+    <div id="c-nfc-status" class="c-nfc"></div>
+
+    <p class="c-foot">Brasília, DF &middot; ribamaralves.dev</p>
   </div>
-</nav>
-<div class="drawer" id="drawer">
-  <a href="#projetos">Projetos</a>
-  <a href="#sobre">Sobre</a>
-  <a href="curriculo.html">Currículo</a>
-  <a href="#contato" class="d-cta">Contato</a>
 </div>
 
-<main>
 
-  <div class="hero">
-    <div>
-      <div class="avail fade">
-        <span class="avail-dot"></span>
-        Disponível · Brasília, DF
+<!-- ══════════════════════════════
+     PORTFÓLIO
+══════════════════════════════ -->
+<div id="page-portfolio">
+
+  <nav id="pnav">
+    <div class="pnav-i">
+      <a href="#" class="pnav-logo" onclick="goPortfolio(); return false;">
+        <div class="pnav-mark">RA</div>
+        Ribamar Alves
+      </a>
+      <ul class="pnav-links">
+        <li><a href="#ptransicao">Trajetória</a></li>
+        <li><a href="#pprojetos">Projetos</a></li>
+        <li><a href="#pstack">Stack</a></li>
+        <li>
+          <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+vi+seu+portfólio+e+quero+conversar!"
+             target="_blank" rel="noopener" class="pnav-cta">Falar comigo →</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="pw">
+    <div class="phero">
+      <div>
+        <div class="phero-badge fade-up">
+          <span class="pbdot"></span>
+          Disponível para oportunidades · Brasília, DF
+        </div>
+
+        <h1 class="phero-title fade-up" style="transition-delay:.08s">
+          Ribamar
+          <span class="it">Alves</span>
+        </h1>
+
+        <p class="phero-subh fade-up" style="transition-delay:.14s">
+          Desenvolvedor Full-Stack em transição do comércio para tecnologia
+        </p>
+
+        <p class="phero-sub fade-up" style="transition-delay:.18s">
+          Passei anos no comércio entendendo como pessoas usam sistemas.
+          Hoje construo esses sistemas — SaaS completos com
+          Next.js, TypeScript, Supabase e IA, do zero ao deploy.
+        </p>
+
+        <div class="phero-acts fade-up" style="transition-delay:.24s">
+          <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+vi+seu+portfólio+e+quero+conversar!"
+             target="_blank" rel="noopener" class="btn btn-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Falar no WhatsApp
+          </a>
+          <a href="#pprojetos" class="pb pb-ghost">Ver projetos ↓</a>
+        </div>
+
+        <div class="phero-stats fade-up" style="transition-delay:.30s">
+          <div class="pstat"><div class="pstat-n">3<em>+</em></div><div class="pstat-l">Projetos em produção</div></div>
+          <div class="pstat"><div class="pstat-n">2<em>+</em></div><div class="pstat-l">SaaS com IA integrada</div></div>
+          <div class="pstat"><div class="pstat-n">0</div><div class="pstat-l">Bootcamp. Autodidata.</div></div>
+        </div>
       </div>
-      <h1 class="hero-title fade d1">
-        Desenvolvedor<br/><em>Full-Stack.</em>
-      </h1>
-      <p class="hero-sub fade d2">
-        Venho do varejo, aprendi a pensar pelo usuário. Hoje construo produtos web completos — do banco de dados à interface — com autenticação, pagamentos e IA.
+
+      <div class="pphoto-wrap fade-up" style="transition-delay:.12s">
+        <div class="pphoto-ring"></div>
+        <div class="pphoto-bg"></div>
+        <div class="pphoto">
+          <img src="eu.webp" alt="Ribamar Alves, Desenvolvedor Full-Stack">
+        </div>
+        <div class="pphoto-tag">
+          <span class="pdot-live"></span>
+          Disponível agora
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRANSIÇÃO -->
+  <section id="ptransicao">
+    <div class="pw">
+      <div class="peyebrow fade-up">Minha trajetória</div>
+      <h2 class="ptitle fade-up" style="transition-delay:.06s">Por que um vendedor<br>virou desenvolvedor</h2>
+      <p class="psub fade-up" style="transition-delay:.10s">
+        Não vim de bootcamp nem de faculdade de TI.
+        Vim do comércio — e isso me deu uma perspectiva diferente sobre o que sistemas precisam resolver.
       </p>
-      <div class="hero-actions fade d3">
-        <a href="#projetos" class="btn btn-dark">Ver projetos</a>
-        <a href="curriculo.html" class="btn btn-ghost">Currículo</a>
+
+      <div class="pt-grid">
+        <div class="pt-card fade-up">
+          <span class="pt-num">01</span>
+          <div class="pt-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 20V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/><rect x="2" y="20" width="20" height="2" rx="1"/></svg>
+          </div>
+          <div class="pt-name">Anos no comércio</div>
+          <p class="pt-desc">Como consultor comercial, aprendi o que nenhuma aula ensina: como pessoas reais usam (e odeiam) sistemas. Processos manuais, planilhas quebradas, relatórios que não fechavam.</p>
+        </div>
+        <div class="pt-card fade-up" style="transition-delay:.07s">
+          <span class="pt-num">02</span>
+          <div class="pt-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="pt-name">Primeiro código</div>
+          <p class="pt-desc">Enquanto trabalhava, comecei a construir o que faltava — controle de comissões, metas, gestão de estoque. O código funcionou melhor do que qualquer planilha.</p>
+        </div>
+        <div class="pt-card fade-up" style="transition-delay:.14s">
+          <span class="pt-num">03</span>
+          <div class="pt-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="pt-name">Transição real</div>
+          <p class="pt-desc">Hoje desenvolvo SaaS completos — do design ao banco de dados — com projetos rodando em produção. Sem mentores, com problemas reais. É isso que me diferencia.</p>
+        </div>
       </div>
     </div>
-    <div class="hero-photo fade d2">
-      <img src="IMG_20260412_143755_527.webp" alt="Ribamar Alves"/>
-    </div>
-  </div>
+  </section>
 
-  <hr/>
+  <!-- PROJETOS -->
+  <section id="pprojetos">
+    <div class="pw">
+      <div class="peyebrow fade-up">Projetos</div>
+      <h2 class="ptitle fade-up" style="transition-delay:.06s">Construídos para<br>resolver problemas</h2>
+      <p class="psub fade-up" style="transition-delay:.10s">Cada projeto nasceu de uma necessidade real. Não são exercícios de curso — são sistemas que funcionam.</p>
 
-  <section id="projetos">
-    <div class="sec-label fade">Projetos</div>
-    <div class="project-list fade d1">
+      <div class="pbento">
 
-      <a href="https://zyntra-service.vercel.app/" target="_blank" rel="noopener" class="project-item">
-        <div class="p-logo pad" style="background:#f5f3ff;border-color:#e9d5ff;">
-          <img src="zyntra-logo.png" alt="Zyntra"/>
-        </div>
-        <div class="p-body">
-          <div class="p-name">Zyntra</div>
-          <div class="p-desc">Inteligência financeira para CLT — análise de holerites com IA e simulações</div>
-        </div>
-        <div class="p-right">
-          <div class="p-tags">
-            <span class="tag live">Live</span>
-            <span class="tag">Next.js</span>
-            <span class="tag">Supabase</span>
-            <span class="tag">IA</span>
+        <!-- ZYNTRA — destaque -->
+        <a href="https://zyntra-service.vercel.app/" target="_blank" rel="noopener"
+           class="pcard pcard-feat cc7 fade-up" style="transition-delay:.05s">
+          <div class="pcard-header">
+            <div class="pcard-logo pad">
+              <img src="zyntra-logo.png" alt="Zyntra">
+            </div>
+            <span class="parrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </span>
           </div>
-          <svg class="p-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </div>
-      </a>
-
-      <a href="https://barbearia-lustosa.vercel.app/" target="_blank" rel="noopener" class="project-item">
-        <div class="p-logo circle" style="background:#fffbeb;border-color:#fde68a;">
-          <img src="logo.jpg" alt="Barbearia Lustosa"/>
-        </div>
-        <div class="p-body">
-          <div class="p-name">Barbearia Lustosa</div>
-          <div class="p-desc">SaaS para barbearia — agendamentos, CRM e assinaturas via Stripe</div>
-        </div>
-        <div class="p-right">
-          <div class="p-tags">
-            <span class="tag live">Live</span>
-            <span class="tag">Next.js</span>
-            <span class="tag">Stripe</span>
+          <div class="pcard-cat" style="color:rgba(200,145,58,.75)">Finanças · Inteligência CLT</div>
+          <div class="pcard-name">Zyntra</div>
+          <p class="pcard-desc">Plataforma de inteligência financeira para trabalhadores CLT. Análise automatizada de holerites, simulações de férias e 13º, projeções de carreira e dashboards interativos.</p>
+          <div class="pcard-impact">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            Resolvi meu próprio problema antes de vender pra alguém
           </div>
-          <svg class="p-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </div>
-      </a>
-
-      <a href="https://paranoaindica.vercel.app/" target="_blank" rel="noopener" class="project-item">
-        <div class="p-logo circle" style="background:#eff6ff;border-color:#bfdbfe;">
-          <img src="logo.png" alt="Paranoa Indica"/>
-        </div>
-        <div class="p-body">
-          <div class="p-name">Paranoa Indica</div>
-          <div class="p-desc">Diretório de negócios locais do Paranoá-DF com avaliações da comunidade</div>
-        </div>
-        <div class="p-right">
-          <div class="p-tags">
-            <span class="tag live">Live</span>
-            <span class="tag">React</span>
-            <span class="tag">TypeScript</span>
+          <div class="pcard-tags">
+            <span class="ptag">Next.js 14</span><span class="ptag">TypeScript</span>
+            <span class="ptag">Supabase</span><span class="ptag">Claude AI</span><span class="ptag">Recharts</span>
           </div>
-          <svg class="p-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </div>
-      </a>
+          <div class="pcard-footer">
+            <span class="pcard-live" style="color:#4ade80">
+              <span class="pcard-live-dot" style="background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.15)"></span>
+              Live
+            </span>
+          </div>
+        </a>
 
+        <!-- BARBEARIA LUSTOSA -->
+        <a href="https://barbearia-lustosa.vercel.app/" target="_blank" rel="noopener"
+           class="pcard cc5 fade-up" style="transition-delay:.10s">
+          <div class="pcard-header">
+            <div class="pcard-logo round" style="border-color:rgba(217,119,6,.2);background:#fffbeb;">
+              <img src="logo-barbearia.jpg" alt="Barbearia Lustosa">
+            </div>
+            <span class="parrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </span>
+          </div>
+          <div class="pcard-cat" style="color:var(--amber)">Barbearia · SaaS Premium</div>
+          <div class="pcard-name">Barbearia Lustosa</div>
+          <p class="pcard-desc">SaaS completo para barbearia — agendamento inteligente, CRM de clientes, gestão financeira e assinaturas via Stripe.</p>
+          <div class="pcard-impact" style="background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.18);color:var(--amber)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Auth, agendamento, pagamentos e notificações
+          </div>
+          <div class="pcard-tags">
+            <span class="ptag">Next.js 14</span><span class="ptag">Supabase</span>
+            <span class="ptag">Stripe</span><span class="ptag">Resend</span>
+          </div>
+          <div class="pcard-footer">
+            <span class="pcard-live" style="color:var(--green)">
+              <span class="pcard-live-dot" style="background:var(--green);box-shadow:0 0 0 3px var(--grn-lt)"></span>
+              Live
+            </span>
+          </div>
+        </a>
+
+        <!-- PARANOA INDICA — full width, horizontal -->
+        <a href="https://paranoaindica.vercel.app/" target="_blank" rel="noopener"
+           class="pcard pcard-full cc12 fade-up" style="transition-delay:.08s; min-height:0;">
+          <div class="pcard-header">
+            <div class="pcard-logo round" style="width:64px;height:64px;border-color:rgba(37,99,235,.2);background:#eff6ff;">
+              <img src="logo-paranoa.png" alt="Paranoa Indica">
+            </div>
+            <span class="parrow" style="display:none"></span>
+          </div>
+          <div class="pcontent">
+            <div class="pcard-cat" style="color:var(--blue)">Local · Comunidade · DF</div>
+            <div class="pcard-name">Paranoá Indica</div>
+            <p class="pcard-desc" style="margin-bottom:14px">
+              Descubra os melhores negócios locais do Paranoá — restaurantes, serviços e comércios avaliados pela própria comunidade. Um projeto com raiz no território onde cresci.
+            </p>
+            <div class="pcard-tags" style="margin-bottom:0">
+              <span class="ptag">React</span><span class="ptag">TypeScript</span><span class="ptag">Vercel</span>
+            </div>
+            <div class="pcard-footer" style="padding-top:14px">
+              <span class="pcard-live" style="color:var(--green)">
+                <span class="pcard-live-dot" style="background:var(--green);box-shadow:0 0 0 3px var(--grn-lt)"></span>
+                Live
+              </span>
+              <span style="font-size:12.5px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:5px">
+                Ver projeto
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+      </div>
     </div>
   </section>
 
-  <hr/>
-
-  <section id="sobre">
-    <div class="sec-label fade">Sobre</div>
-    <p class="about-text fade d1">
-      Sou <strong>José Ribamar</strong>, desenvolvedor full-stack baseado em Brasília. Passei 5 anos no varejo de moda — Cia. Hering e Brooksfield — e aprendi algo que poucos devs têm na largada: <strong>pensar como usuário antes de pensar como programador.</strong>
-    </p>
-    <p class="about-text fade d2">
-      Em 2022 comecei a aprender desenvolvimento por conta própria. Hoje tenho <strong>3 produtos rodando em produção</strong>, com autenticação, pagamentos integrados e IA. Estou em transição definitiva para tecnologia e busco minha primeira oportunidade formal como desenvolvedor.
-    </p>
-    <div class="stack-row fade d3">
-      <span class="stack-tag">Next.js</span>
-      <span class="stack-tag">TypeScript</span>
-      <span class="stack-tag">React</span>
-      <span class="stack-tag">Supabase</span>
-      <span class="stack-tag">Node.js</span>
-      <span class="stack-tag">TailwindCSS</span>
-      <span class="stack-tag">Stripe</span>
-      <span class="stack-tag">PostgreSQL</span>
+  <!-- STACK -->
+  <section id="pstack">
+    <div class="pw">
+      <div class="peyebrow fade-up">Tecnologias</div>
+      <h2 class="ptitle fade-up" style="transition-delay:.06s">O que uso<br>no dia a dia</h2>
+      <p class="psub fade-up" style="transition-delay:.10s">Stack moderno, orientado a produto. Foco em velocidade de entrega com qualidade de produção.</p>
+      <div class="pstack-grid fade-up" style="transition-delay:.14s">
+        <div class="pstack-item"><span class="psdot" style="background:#000"></span><div><div class="psname">Next.js</div><div class="pslevel">App Router</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#3178C6"></span><div><div class="psname">TypeScript</div><div class="pslevel">Principal</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#61DAFB"></span><div><div class="psname">React</div><div class="pslevel">Hooks + Context</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#3ECF8E"></span><div><div class="psname">Supabase</div><div class="pslevel">BaaS + Auth + RLS</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#06B6D4"></span><div><div class="psname">Tailwind CSS</div><div class="pslevel">Estilização</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#336791"></span><div><div class="psname">PostgreSQL</div><div class="pslevel">RLS + migrations</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#8B5CF6"></span><div><div class="psname">Claude AI</div><div class="pslevel">Anthropic API</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#F55036"></span><div><div class="psname">Groq</div><div class="pslevel">LLM rápido</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#000"></span><div><div class="psname">Vercel</div><div class="pslevel">Deploy + Edge</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#635BFF"></span><div><div class="psname">Stripe</div><div class="pslevel">Pagamentos</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#68A063"></span><div><div class="psname">Node.js</div><div class="pslevel">APIs + scripts</div></div></div>
+        <div class="pstack-item"><span class="psdot" style="background:#F05032"></span><div><div class="psname">Git</div><div class="pslevel">GitHub + CI</div></div></div>
+      </div>
     </div>
   </section>
 
-  <hr/>
-
-  <section id="contato">
-    <div class="sec-label fade">Contato</div>
-    <div class="contact-list fade d1">
-      <a href="https://wa.me/5561993397747" target="_blank" class="contact-item">
-        <span class="c-label">WhatsApp</span>
-        <span class="c-val">(61) 99339-7747 ↗</span>
-      </a>
-      <a href="mailto:ribamaralvees.filho@gmail.com" class="contact-item">
-        <span class="c-label">E-mail</span>
-        <span class="c-val">ribamaralvees.filho@gmail.com ↗</span>
-      </a>
-      <a href="https://github.com/Ribamaralvees/" target="_blank" class="contact-item">
-        <span class="c-label">GitHub</span>
-        <span class="c-val">github.com/Ribamaralvees ↗</span>
-      </a>
-      <a href="https://www.linkedin.com/in/jos%C3%A9-ribamar-01a6b6371/" target="_blank" class="contact-item">
-        <span class="c-label">LinkedIn</span>
-        <span class="c-val">linkedin.com/in/josé-ribamar ↗</span>
-      </a>
+  <!-- POR QUE CONTRATAR -->
+  <section id="psobre">
+    <div class="pw">
+      <div class="peyebrow fade-up">Por que me contratar</div>
+      <h2 class="ptitle fade-up" style="transition-delay:.06s">O que me<br>diferencia</h2>
+      <p class="psub fade-up" style="transition-delay:.10s">Não sou só dev. Sou alguém que entende o problema antes de abrir o editor.</p>
+      <div class="pabout-grid fade-up" style="transition-delay:.14s">
+        <div class="pabout-card">
+          <div class="pabout-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div class="pabout-t">Penso como usuário, construo como dev</div>
+          <p class="pabout-d">Anos atendendo clientes me ensinaram que o software perfeito é aquele que a pessoa não precisa pensar para usar. Carrego isso em cada decisão de interface.</p>
+        </div>
+        <div class="pabout-card">
+          <div class="pabout-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="pabout-t">Projetos reais, não projetos de curso</div>
+          <p class="pabout-d">Cada app tem auth real, banco em produção, tratamento de erros e lógica de negócio que resolveu um problema concreto. Não é clone de tutorial.</p>
+        </div>
+        <div class="pabout-card">
+          <div class="pabout-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="pabout-t">Velocidade de entrega com contexto</div>
+          <p class="pabout-d">Aprendi a construir rápido porque aprendo resolvendo. Integro IA no processo para iterar mais rápido sem abrir mão de qualidade e segurança.</p>
+        </div>
+        <div class="pabout-card">
+          <div class="pabout-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="pabout-t">Comunicação clara e proativa</div>
+          <p class="pabout-d">Do comércio aprendi que comunicação é parte do produto. Atualizo, questiono e sugiro. Não espero que me digam o que fazer quando o caminho fica claro.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-</main>
+  <!-- CTA FINAL -->
+  <section id="pcontato">
+    <div class="pw">
+      <div class="pcta-box fade-up">
+        <div class="pcta-eye">Vamos conversar</div>
+        <h2 class="pcta-title">Tem um projeto?<br>Me chama.</h2>
+        <p class="pcta-sub">Aberto a freela, emprego CLT e oportunidades de estágio/júnior em tecnologia. Respondendo em até 24h.</p>
+        <div class="pcta-acts">
+          <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+vi+seu+portfólio+e+quero+conversar!"
+             target="_blank" rel="noopener" class="btn btn-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Falar no WhatsApp
+          </a>
+          <button onclick="goCard()" class="pb" style="background:rgba(247,245,241,.10);color:rgba(247,245,241,.8);border:1px solid rgba(247,245,241,.12)">
+            Ver cartão digital
+          </button>
+        </div>
+        <p class="pcta-note">+55 (61) 99339-7747 · Brasília, DF</p>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  <div class="footer-inner">
-    <span class="footer-copy">© 2026 Ribamar Alves</span>
-    <a href="curriculo.html" class="footer-link">Ver currículo →</a>
-  </div>
-</footer>
+  <footer id="pfooter">
+    <div class="pw">
+      <div class="pfooter-i">
+        <p class="pfooter-c">© 2025 Ribamar Alves — Construído do zero, sem template.</p>
+        <div class="pfooter-l">
+          <a href="#" onclick="goCard(); return false;">Cartão digital</a>
+          <a href="#pprojetos">Projetos</a>
+          <a href="https://wa.me/5561993397747" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
+</div><!-- /page-portfolio -->
+
+
+<!-- ══════════════════════════════
+     ROTEAMENTO E LÓGICA
+══════════════════════════════ -->
 <script>
-const nav=document.getElementById('nav'),burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
-window.addEventListener('scroll',()=>nav.classList.toggle('stuck',scrollY>10),{passive:true});
-burger.addEventListener('click',()=>{burger.classList.toggle('open');drawer.classList.toggle('open');});
-drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');drawer.classList.remove('open');}));
-const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.08,rootMargin:'0px 0px -28px 0px'});
-document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+const PHONE   = "5561993397747";
+const WA_CARD = `https://wa.me/${PHONE}?text=${encodeURIComponent("Olá Ribamar, te encontrei pelo cartão digital!")}`;
+
+/* ─── Router ─── */
+function showCard() {
+  document.getElementById("page-card").classList.add("active");
+  document.getElementById("page-portfolio").classList.remove("active");
+  document.body.style.background = "#07070A";
+  document.getElementById("meta-theme").content = "#07070A";
+  document.title = "Ribamar Alves · Cartão Digital";
+  history.replaceState(null, "", "?card");
+}
+
+function showPortfolio() {
+  document.getElementById("page-portfolio").classList.add("active");
+  document.getElementById("page-card").classList.remove("active");
+  document.body.style.background = "#F7F5F1";
+  document.getElementById("meta-theme").content = "#F7F5F1";
+  document.title = "Ribamar Alves · Dev Full-Stack";
+  history.replaceState(null, "", location.pathname);
+  setTimeout(() => {
+    document.querySelectorAll(".phero .fade-up").forEach(el => el.classList.add("visible"));
+  }, 60);
+}
+
+function goCard()      { showCard();      window.scrollTo(0, 0); }
+function goPortfolio() { showPortfolio(); window.scrollTo(0, 0); }
+
+/* ─── Init ─── */
+document.addEventListener("DOMContentLoaded", () => {
+  const isCard = location.search.includes("card") || location.hash === "#card";
+  isCard ? showCard() : showPortfolio();
+});
+
+/* ─── Sticky nav ─── */
+const pnav = document.getElementById("pnav");
+window.addEventListener("scroll", () => {
+  if (document.getElementById("page-portfolio").classList.contains("active")) {
+    pnav.classList.toggle("stuck", window.scrollY > 20);
+  }
+}, { passive: true });
+
+/* ─── Scroll reveal ─── */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.10, rootMargin: "0px 0px -40px 0px" });
+document.querySelectorAll(".fade-up").forEach(el => obs.observe(el));
+
+/* ─── QR toggle ─── */
+let qrReady = false;
+function toggleQR() {
+  const panel = document.getElementById("c-qr-panel");
+  const btn   = document.getElementById("c-qr-btn");
+  const open  = panel.classList.contains("open");
+  if (!open) {
+    if (!qrReady) {
+      new QRCode(document.getElementById("c-qrcode"), {
+        text: WA_CARD, width: 180, height: 180,
+        colorDark: "#000", colorLight: "#fff",
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      qrReady = true;
+    }
+    panel.classList.add("open");
+    btn.style.color = "var(--gold)"; btn.style.borderColor = "rgba(201,169,110,.3)";
+  } else {
+    panel.classList.remove("open");
+    btn.style.color = btn.style.borderColor = "";
+  }
+}
+
+/* ─── Salvar contato ─── */
+function saveContact() {
+  const v = ["BEGIN:VCARD","VERSION:3.0","FN:Ribamar Alves",
+    `TEL;TYPE=CELL:+${PHONE}`,"TITLE:Consultor Comercial & Dev Full-Stack",
+    "ADR:;;Brasília;;;DF;Brasil","URL:https://ribamaralves.dev","END:VCARD"].join("\n");
+  const a = Object.assign(document.createElement("a"), {
+    href: URL.createObjectURL(new Blob([v], { type: "text/vcard;charset=utf-8" })),
+    download: "Ribamar_Alves.vcf"
+  });
+  a.click();
+}
+
+/* ─── NFC ─── */
+async function writeNFC() {
+  const s = document.getElementById("c-nfc-status");
+  if (!("NDEFReader" in window)) {
+    s.textContent = "NFC não suportado neste dispositivo";
+    s.className = "c-nfc err"; return;
+  }
+  try {
+    s.textContent = "Aproxime os dispositivos..."; s.className = "c-nfc";
+    await (new NDEFReader()).write({ records: [{ recordType: "url", data: WA_CARD }] });
+    s.textContent = "✓ Pronto — encoste no outro celular"; s.className = "c-nfc ok";
+    setTimeout(() => { s.textContent = ""; s.className = "c-nfc"; }, 4000);
+  } catch { s.textContent = "Erro ao gravar NFC"; s.className = "c-nfc err"; }
+}
 </script>
+
 </body>
 </html>
