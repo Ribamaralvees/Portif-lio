@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Currículo — Ribamar Alves</title>
+<meta name="description" content="Currículo de José Ribamar Alves — Desenvolvedor Full-Stack em transição de carreira. Brasília, DF."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<meta name="theme-color" content="#0A0F1E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+:root{
+  --bg:#FAFAF8; --ink:#111118; --ink2:#6B7280; --ink3:#9CA3AF;
+  --border:#E5E7EB; --green:#059669; --surface:#FFFFFF; --max:700px;
+}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid transparent;transition:background .3s,border-color .3s;}
+nav.stuck{background:rgba(250,250,248,.93);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--border);}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-.3px;}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.nav-back{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:var(--ink2);text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);background:var(--surface);transition:all .15s;}
+.nav-back:hover{color:var(--ink);border-color:#D1D5DB;}
+.nav-back svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+.print-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#FAFAF8;background:var(--ink);padding:8px 15px;border-radius:8px;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;}
+.print-btn:hover{background:#1F2937;}
+.print-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* BURGER */
+.burger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:var(--surface);cursor:pointer;align-items:center;justify-content:center;}
+.burger span{width:16px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s;}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.drawer{position:fixed;top:58px;left:0;right:0;z-index:99;background:rgba(250,250,248,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 16px;display:flex;flex-direction:column;gap:6px;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .25s,transform .25s;}
+.drawer.open{opacity:1;transform:none;pointer-events:all;}
+.drawer a{font-size:15px;font-weight:500;color:var(--ink2);text-decoration:none;padding:11px 14px;border-radius:10px;transition:color .15s,background .15s;text-align:center;}
+.drawer a:hover{color:var(--ink);background:#F3F4F6;}
+.drawer .d-back{border:1px solid var(--border);}
+.drawer .d-print{background:var(--ink);color:#FAFAF8!important;font-weight:600;margin-top:2px;}
+
+/* MAIN */
+main{max-width:var(--max);margin:0 auto;padding:88px 24px 72px;}
+
+/* CV HEADER */
+.cv-head{
+  display:flex;align-items:flex-start;gap:24px;
+  padding-bottom:36px;margin-bottom:36px;
+  border-bottom:1px solid var(--border);
+}
+.cv-photo{width:76px;height:76px;border-radius:50%;overflow:hidden;border:2px solid var(--border);flex-shrink:0;}
+.cv-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.cv-identity{flex:1;}
+.cv-name{font-family:'Fraunces',serif;font-size:clamp(24px,4vw,32px);font-weight:600;letter-spacing:-.5px;line-height:1.1;margin-bottom:5px;}
+.cv-role{font-size:14px;color:var(--ink2);margin-bottom:12px;}
+.cv-contacts{display:flex;flex-wrap:wrap;gap:6px;}
+.cv-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:500;color:var(--ink2);
+  padding:4px 11px;border-radius:20px;border:1px solid var(--border);
+  text-decoration:none;background:var(--surface);
+  transition:color .15s,border-color .15s;
+}
+.cv-chip:hover{color:var(--ink);border-color:#D1D5DB;}
+.cv-chip svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;}
+
+/* BLOCKS */
+.block{margin-bottom:36px;}
+.block:last-child{margin-bottom:0;}
+.block-title{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:18px;}
+
+/* SUMMARY */
+.summary{font-size:14.5px;color:var(--ink2);line-height:1.82;}
+.summary strong{color:var(--ink);font-weight:600;}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;gap:24px;}
+.exp-item{}
+.exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:2px;flex-wrap:wrap;}
+.exp-company{font-size:14.5px;font-weight:600;color:var(--ink);}
+.exp-period{font-size:12px;color:var(--ink3);white-space:nowrap;}
+.exp-role{font-size:13px;color:var(--ink2);margin-bottom:8px;}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.exp-bullets li{font-size:13.5px;color:var(--ink2);padding-left:16px;position:relative;line-height:1.65;}
+.exp-bullets li::before{content:'–';position:absolute;left:0;color:var(--ink3);}
+.exp-bullets li strong{color:var(--ink);font-weight:600;}
+.exp-divider{border:none;border-top:1px solid var(--border);margin-top:24px;}
+
+/* PROJECTS */
+.proj-list{display:flex;flex-direction:column;gap:18px;}
+.proj-item{padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;transition:border-color .15s;}
+.proj-item:hover{border-color:#D1D5DB;}
+.proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;gap:10px;}
+.proj-name{font-size:14px;font-weight:600;color:var(--ink);}
+.proj-link{font-size:12px;font-weight:500;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:3px;flex-shrink:0;transition:opacity .15s;}
+.proj-link:hover{opacity:.7;}
+.proj-link svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;}
+.proj-desc{font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:10px;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-size:11px;font-weight:500;padding:3px 8px;border-radius:6px;border:1px solid var(--border);color:var(--ink3);background:var(--bg);}
+
+/* SKILLS */
+.skill-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.skill-tag{font-size:12.5px;font-weight:500;padding:6px 13px;border-radius:8px;border:1px solid var(--border);color:var(--ink2);background:var(--surface);}
+
+/* TWO COL GRID (side by side blocks) */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+
+/* EDU */
+.edu-list{display:flex;flex-direction:column;gap:14px;}
+.edu-item{}
+.edu-course{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:1px;}
+.edu-place{font-size:12.5px;color:var(--ink2);}
+.edu-year{font-size:12px;color:var(--ink3);}
+
+/* DIVIDER */
+.sep{border:none;border-top:1px solid var(--border);margin:32px 0;}
+
+/* FADE */
+.fade{opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease;}
+.fade.d1{transition-delay:.07s}.fade.d2{transition-delay:.14s}.fade.d3{transition-delay:.2s}
+.fade.in{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .nav-right .nav-back,.nav-right .print-btn{display:none;}
+  .burger{display:flex;}
+  main{padding:78px 16px 60px;}
+  .cv-head{flex-direction:column;gap:16px;}
+  .two-col{grid-template-columns:1fr;}
+}
+
+/* PRINT */
+@media print{
+  nav,.drawer{display:none!important;}
+  body{background:#fff;font-size:12px;}
+  main{padding:0;max-width:none;}
+  .fade{opacity:1!important;transform:none!important;}
+  .proj-item,.cv-head{break-inside:avoid;}
+  a{color:inherit!important;text-decoration:none!important;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Ribamar Alves</a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Portfólio
+      </a>
+      <button class="print-btn" onclick="window.print()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Imprimir PDF
+      </button>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="drawer" id="drawer">
+  <a href="index.html" class="d-back">← Portfólio</a>
+  <a href="#" class="d-print" onclick="window.print();return false;">Imprimir / Salvar PDF</a>
+</div>
+
+<main>
+
+  <!-- HEADER -->
+  <div class="cv-head fade">
+    <div class="cv-photo">
+      <img src="IMG_20260412_143755_527.webp" alt="Ribamar Alves"/>
+    </div>
+    <div class="cv-identity">
+      <div class="cv-name">José Ribamar Alves</div>
+      <div class="cv-role">Desenvolvedor Full-Stack · Brasília, DF</div>
+      <div class="cv-contacts">
+        <a href="mailto:ribamaralvees.filho@gmail.com" class="cv-chip">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          ribamaralvees.filho@gmail.com
+        </a>
+        <a href="https://wa.me/5561993397747" target="_blank" class="cv-chip">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (61) 99339-7747
+        </a>
+        <a href="https://github.com/Ribamaralvees/" target="_blank" class="cv-chip">
+          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/jos%C3%A9-ribamar-01a6b6371/" target="_blank" class="cv-chip">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="block fade d1">
+    <div class="block-title">Sobre</div>
+    <p class="summary">
+      Desenvolvedor full-stack em transição do varejo para tecnologia. Passei <strong>5 anos em vendas consultivas</strong> no varejo de moda premium — Cia. Hering e Brooksfield — e aprendi a enxergar software pela perspectiva de quem vai usá-lo. Desde 2022 construo produtos web reais: <strong>3 aplicações em produção</strong>, com autenticação, pagamentos (Stripe) e integração com IA. Busco minha <strong>primeira oportunidade formal como desenvolvedor.</strong>
+    </p>
+  </div>
+
+  <hr class="sep"/>
+
+  <!-- PROJECTS -->
+  <div class="block fade">
+    <div class="block-title">Projetos em Produção</div>
+    <div class="proj-list">
+
+      <div class="proj-item">
+        <div class="proj-top">
+          <div class="proj-name">Zyntra — Inteligência Financeira CLT</div>
+          <a href="https://zyntra-service.vercel.app/" target="_blank" class="proj-link">
+            Ver ao vivo
+            <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+        <div class="proj-desc">Plataforma SaaS com análise automática de holerites via IA (Claude), simulações de férias e 13°, autenticação completa com Supabase e RLS configurado.</div>
+        <div class="proj-tags">
+          <span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">Supabase</span><span class="tag">Claude AI</span><span class="tag">Recharts</span>
+        </div>
+      </div>
+
+      <div class="proj-item">
+        <div class="proj-top">
+          <div class="proj-name">Barbearia Lustosa — SaaS</div>
+          <a href="https://barbearia-lustosa.vercel.app/" target="_blank" class="proj-link">
+            Ver ao vivo
+            <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+        <div class="proj-desc">Sistema completo de gestão para barbearia: agendamento online, CRM de clientes, módulo financeiro e assinaturas via Stripe com notificações por e-mail.</div>
+        <div class="proj-tags">
+          <span class="tag">Next.js 14</span><span class="tag">Supabase</span><span class="tag">Stripe</span><span class="tag">Resend</span><span class="tag">TypeScript</span>
+        </div>
+      </div>
+
+      <div class="proj-item">
+        <div class="proj-top">
+          <div class="proj-name">Paranoa Indica</div>
+          <a href="https://paranoaindica.vercel.app/" target="_blank" class="proj-link">
+            Ver ao vivo
+            <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+        <div class="proj-desc">Diretório de negócios locais do Paranoá-DF com avaliações da comunidade, busca por categoria e foco em impacto social para o comércio regional.</div>
+        <div class="proj-tags">
+          <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Vercel</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="sep"/>
+
+  <!-- EXPERIENCE -->
+  <div class="block fade">
+    <div class="block-title">Experiência Profissional</div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-top">
+          <div class="exp-company">Via Veneto Roupas Ltda (Brooksfield)</div>
+          <div class="exp-period">Nov 2021 – Presente</div>
+        </div>
+        <div class="exp-role">Consultor de Vendas · Brasília Shopping, Asa Norte</div>
+        <ul class="exp-bullets">
+          <li>Atendimento consultivo em moda masculina de alto padrão, com remuneração <strong>100% variável</strong> por comissão — exige autodisciplina e gestão de metas.</li>
+          <li>Habilidade de ler o perfil do cliente e adaptar a comunicação; competência que hoje aplico no design de interfaces e na escrita de código orientado ao usuário.</li>
+        </ul>
+      </div>
+
+      <hr class="exp-divider"/>
+
+      <div class="exp-item">
+        <div class="exp-top">
+          <div class="exp-company">Cia. Hering</div>
+          <div class="exp-period">Jul 2019 – Fev 2021</div>
+        </div>
+        <div class="exp-role">Vendedor de Loja · Asa Sul, Brasília</div>
+        <ul class="exp-bullets">
+          <li>1 ano e 7 meses em rede nacional de varejo, evoluindo de contrato temporário a prazo indeterminado por desempenho.</li>
+          <li>Gestão de metas individuais, operação de caixa e controle de estoque.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="sep"/>
+
+  <!-- SKILLS + EDU -->
+  <div class="two-col fade">
+    <div class="block">
+      <div class="block-title">Stack Técnica</div>
+      <div class="skill-grid">
+        <span class="skill-tag">Next.js</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Supabase</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">TailwindCSS</span>
+        <span class="skill-tag">Stripe</span>
+        <span class="skill-tag">Firebase</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Java (aprendendo)</span>
+      </div>
+    </div>
+    <div class="block">
+      <div class="block-title">Formação</div>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-course">Desenvolvimento Full-Stack</div>
+          <div class="edu-place">Autodidata — projetos em produção</div>
+          <div class="edu-year">2022 – presente</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-course">Java & Spring Boot</div>
+          <div class="edu-place">Roadmap estruturado</div>
+          <div class="edu-year">2024 – em andamento</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-course">Vendas e Atendimento ao Cliente</div>
+          <div class="edu-place">5+ anos de prática no varejo premium</div>
+          <div class="edu-year">2019 – 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const nav=document.getElementById('nav'),burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
+window.addEventListener('scroll',()=>nav.classList.toggle('stuck',scrollY>10),{passive:true});
+burger.addEventListener('click',()=>{burger.classList.toggle('open');drawer.classList.toggle('open');});
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');drawer.classList.remove('open');}));
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.08});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
