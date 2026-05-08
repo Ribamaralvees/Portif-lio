@@ -1,0 +1,14 @@
+{
+  "name": "Ribamar Alves",
+  "short_name": "Ribamar",
+  "description": "Cartão digital de Ribamar Alves — Dev Full-Stack",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07070B",
+  "theme_color": "#07070B",
+  "start_url": "/card",
+  "scope": "/",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
