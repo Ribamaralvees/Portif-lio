@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ribamar Alves · Cartão Digital</title>
+<meta name="description" content="Cartão digital de Ribamar Alves — Consultor Comercial & Dev Full-Stack, Brasília DF.">
+<meta name="theme-color" content="#07070B">
+<link rel="icon" href="icon-192.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:     #07070B;
+  --bg2:    #0F0F16;
+  --surf:   rgba(255,255,255,0.05);
+  --surf2:  rgba(255,255,255,0.08);
+  --bord:   rgba(255,255,255,0.07);
+  --bord2:  rgba(255,255,255,0.13);
+  --gold:   #C8A96A;
+  --glt:    rgba(200,169,106,0.12);
+  --gmd:    rgba(200,169,106,0.22);
+  --text:   #EDE8E0;
+  --text2:  rgba(237,232,224,0.52);
+  --text3:  rgba(237,232,224,0.28);
+  --green:  #25D366;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100svh; overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient */
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% -5%, rgba(200,169,106,.09) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 35% at 90% 95%, rgba(37,211,102,.05) 0%, transparent 60%);
+}
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: .35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+/* Wrap */
+.wrap {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 348px; margin: 0 auto;
+  padding: 48px 22px 60px;
+  display: flex; flex-direction: column; align-items: center;
+  animation: up .6s cubic-bezier(.22,.68,0,1) both;
+}
+@keyframes up { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
+
+/* Avatar */
+.avatar {
+  width: 90px; height: 90px; border-radius: 50%;
+  overflow: hidden; position: relative;
+  margin-bottom: 20px; flex-shrink: 0;
+  box-shadow: 0 0 0 1.5px var(--bord2), 0 0 0 9px var(--glt);
+}
+.avatar::before {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--gold), transparent 35%, transparent 65%, var(--gold));
+  opacity: .45; animation: spin 7s linear infinite; z-index: -1;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+/* Identity */
+.name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; font-weight: 400; letter-spacing: -.5px;
+  text-align: center; line-height: 1; margin-bottom: 8px;
+}
+.role {
+  font-size: 10.5px; font-weight: 600; letter-spacing: 2.8px;
+  text-transform: uppercase; color: var(--gold);
+  text-align: center; margin-bottom: 10px;
+}
+.location {
+  font-size: 12px; color: var(--text3); text-align: center;
+  margin-bottom: 28px; display: flex; align-items: center; gap: 5px; justify-content: center;
+}
+
+.divider {
+  width: 36px; height: 1px; margin: 0 auto 26px;
+  background: linear-gradient(90deg, transparent, var(--bord2), transparent);
+}
+
+/* Main buttons */
+.actions { width: 100%; display: flex; flex-direction: column; gap: 9px; margin-bottom: 11px; }
+.btn {
+  width: 100%; height: 52px; border-radius: 14px; border: none;
+  font-family: 'Outfit', sans-serif; font-size: 14.5px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 9px;
+  text-decoration: none; transition: all .2s; -webkit-tap-highlight-color: transparent;
+}
+.btn:active { transform: scale(.97); }
+.btn-wa {
+  background: var(--green); color: #fff;
+  box-shadow: 0 8px 26px rgba(37,211,102,.22);
+}
+.btn-wa:hover { box-shadow: 0 12px 34px rgba(37,211,102,.36); transform: translateY(-1px); }
+.btn-port { background: var(--surf2); color: var(--text); border: 1px solid var(--bord2); }
+.btn-port:hover { background: var(--bg2); border-color: rgba(255,255,255,.2); }
+
+/* Secondary */
+.sec { width: 100%; display: flex; gap: 7px; margin-bottom: 22px; }
+.sm {
+  flex: 1; height: 39px; border-radius: 11px;
+  border: 1px solid var(--bord); background: transparent;
+  color: var(--text2); font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 500; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  transition: all .2s; -webkit-tap-highlight-color: transparent;
+}
+.sm:hover   { background: var(--surf); color: var(--text); border-color: var(--bord2); }
+.sm:active  { transform: scale(.97); }
+.sm.on      { color: var(--gold); border-color: var(--gmd); background: var(--glt); }
+
+/* QR */
+.qr-panel {
+  width: 100%; background: var(--surf); border: 1px solid var(--bord);
+  border-radius: 20px; overflow: hidden;
+  max-height: 0; padding: 0 20px; opacity: 0;
+  transition: max-height .48s cubic-bezier(.22,.68,0,1), opacity .32s, padding .38s;
+  display: flex; flex-direction: column; align-items: center; gap: 13px;
+}
+.qr-panel.open { max-height: 300px; padding: 22px 20px 18px; opacity: 1; }
+.qr-box { background: #fff; padding: 11px; border-radius: 12px; }
+.qr-label { font-size: 11px; color: var(--text3); text-align: center; line-height: 1.65; }
+
+/* NFC Modal */
+.overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.78); backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; opacity: 0; pointer-events: none; transition: opacity .28s;
+}
+.overlay.on { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--bg2); border: 1px solid var(--bord2);
+  border-radius: 22px; padding: 30px 26px;
+  max-width: 320px; width: 100%;
+  transform: translateY(14px); transition: transform .3s cubic-bezier(.22,.68,0,1);
+}
+.overlay.on .modal { transform: translateY(0); }
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 500; margin-bottom: 7px; letter-spacing: -.4px;
+}
+.modal-sub { font-size: 12.5px; color: var(--text2); line-height: 1.7; margin-bottom: 20px; }
+
+.steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+.step {
+  display: flex; align-items: flex-start; gap: 11px;
+  background: var(--surf); border: 1px solid var(--bord);
+  border-radius: 13px; padding: 13px;
+}
+.step-n {
+  width: 24px; height: 24px; border-radius: 7px;
+  background: var(--glt); border: 1px solid var(--gmd);
+  color: var(--gold); font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-t { font-size: 12.5px; color: var(--text); line-height: 1.65; }
+.step-t strong { color: var(--gold); font-weight: 600; }
+
+.url-box {
+  background: #0a0a12; border: 1px solid var(--bord);
+  border-radius: 10px; padding: 10px 12px;
+  font-size: 11.5px; color: var(--text2); font-family: monospace;
+  word-break: break-all; margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.copy-btn {
+  background: var(--surf2); border: 1px solid var(--bord2); color: var(--text);
+  border-radius: 7px; padding: 4px 11px; font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all .2s;
+}
+.copy-btn:hover { background: var(--bg2); }
+
+.nfc-status { font-size: 12px; text-align: center; min-height: 17px; margin-bottom: 8px; transition: color .25s; }
+.nfc-status.ok   { color: var(--green); }
+.nfc-status.err  { color: #f87171; }
+.nfc-status.info { color: var(--gold); }
+
+.write-btn {
+  width: 100%; height: 44px; background: var(--glt); border: 1px solid var(--gmd);
+  color: var(--gold); border-radius: 11px; font-family: 'Outfit', sans-serif;
+  font-size: 13.5px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  transition: all .2s; margin-bottom: 8px;
+}
+.write-btn:hover    { background: var(--gmd); }
+.write-btn:disabled { opacity: .5; cursor: not-allowed; }
+.close-btn {
+  width: 100%; height: 38px; background: transparent;
+  border: 1px solid var(--bord); color: var(--text3);
+  border-radius: 11px; font-family: 'Outfit', sans-serif;
+  font-size: 13px; cursor: pointer; transition: all .2s;
+}
+.close-btn:hover { background: var(--surf); color: var(--text2); }
+
+/* Footer */
+.foot { font-size: 11px; color: var(--text3); text-align: center; letter-spacing: .4px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="avatar">
+    <img src="eu.webp" alt="Ribamar Alves">
+  </div>
+
+  <h1 class="name">Ribamar Alves</h1>
+  <p class="role">Consultor Comercial &amp; Dev Full-Stack</p>
+  <p class="location">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Brasília, DF
+  </p>
+  <div class="divider"></div>
+
+  <div class="actions">
+    <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+te+encontrei+pelo+cartão+digital!"
+       target="_blank" rel="noopener" class="btn btn-wa">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      Falar no WhatsApp
+    </a>
+    <a href="index.html" class="btn btn-port">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Ver meu Portfólio
+    </a>
+  </div>
+
+  <div class="sec">
+    <button class="sm" onclick="saveContact()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Salvar
+    </button>
+    <button class="sm" id="qr-btn" onclick="toggleQR()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="4" height="4"/></svg>
+      QR Code
+    </button>
+    <button class="sm" onclick="openNfc()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a9 9 0 019-9"/><path d="M3 12a4 4 0 014-4"/><circle cx="3" cy="17" r="1"/></svg>
+      NFC
+    </button>
+  </div>
+
+  <div class="qr-panel" id="qr-panel">
+    <div class="qr-box"><div id="qrcode"></div></div>
+    <p class="qr-label">Aponte a câmera para abrir no WhatsApp</p>
+  </div>
+
+  <p class="foot">portiflio-one.vercel.app</p>
+</div>
+
+<!-- NFC Modal -->
+<div class="overlay" id="nfc-overlay" onclick="closeNfc(event)">
+  <div class="modal">
+    <div class="modal-title">Configurar NFC</div>
+    <p class="modal-sub">Duas formas de compartilhar seu cartão por NFC:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-t">
+          <strong>Cartão físico</strong> — Use o app <strong>NFC Tools</strong>,
+          escolha "Escrita → URL" e cole o endereço abaixo no chip do cartão.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-t">
+          <strong>Celular a celular</strong> — Clique em "Gravar" abaixo
+          (Android Chrome), aproxime os dois celulares.
+        </div>
+      </div>
+    </div>
+
+    <div class="url-box">
+      <span id="nfc-url">https://portiflio-one.vercel.app/card</span>
+      <button class="copy-btn" onclick="copyUrl()">Copiar</button>
+    </div>
+
+    <div class="nfc-status" id="nfc-status"></div>
+    <button class="write-btn" id="write-btn" onclick="writeNFC()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a9 9 0 019-9"/><path d="M3 12a4 4 0 014-4"/><circle cx="3" cy="17" r="1"/></svg>
+      Gravar via NFC (Android Chrome)
+    </button>
+    <button class="close-btn" onclick="closeNfc()">Fechar</button>
+  </div>
+</div>
+
+<script>
+const PHONE    = "5561993397747";
+const CARD_URL = "https://portiflio-one.vercel.app/card";
+const WA_URL   = `https://wa.me/${PHONE}?text=${encodeURIComponent("Olá Ribamar, te encontrei pelo cartão digital!")}`;
+
+/* QR */
+let qrDone = false;
+function toggleQR() {
+  const p = document.getElementById("qr-panel"), b = document.getElementById("qr-btn");
+  const open = p.classList.contains("open");
+  if (!open && !qrDone) {
+    new QRCode(document.getElementById("qrcode"), { text: WA_URL, width: 165, height: 165, colorDark:"#000", colorLight:"#fff", correctLevel: QRCode.CorrectLevel.M });
+    qrDone = true;
+  }
+  p.classList.toggle("open", !open);
+  b.classList.toggle("on", !open);
+}
+
+/* NFC modal */
+function openNfc()  { document.getElementById("nfc-overlay").classList.add("on"); }
+function closeNfc(e){ if (!e || e.target.id === "nfc-overlay") { document.getElementById("nfc-overlay").classList.remove("on"); clearStatus(); } }
+function clearStatus() { const s = document.getElementById("nfc-status"); s.textContent=""; s.className="nfc-status"; }
+
+function copyUrl() {
+  navigator.clipboard.writeText(CARD_URL).then(() => {
+    const b = document.querySelector(".copy-btn"); b.textContent="Copiado ✓";
+    setTimeout(() => b.textContent = "Copiar", 2200);
+  });
+}
+
+async function writeNFC() {
+  const s = document.getElementById("nfc-status"), b = document.getElementById("write-btn");
+  if (!("NDEFReader" in window)) {
+    s.textContent = "Use o app NFC Tools para o cartão físico."; s.className = "nfc-status info"; return;
+  }
+  try {
+    b.disabled = true;
+    s.textContent = "Aproxime o dispositivo NFC..."; s.className = "nfc-status info";
+    await (new NDEFReader()).write({ records: [{ recordType: "url", data: CARD_URL }] });
+    s.textContent = "✓ Gravado com sucesso!"; s.className = "nfc-status ok";
+    b.disabled = false;
+    setTimeout(clearStatus, 4000);
+  } catch(err) {
+    s.textContent = err.name === "NotAllowedError" ? "Permissão negada pelo navegador." : "Nenhum dispositivo encontrado.";
+    s.className = "nfc-status err"; b.disabled = false;
+  }
+}
+
+/* Save contact */
+function saveContact() {
+  const v = ["BEGIN:VCARD","VERSION:3.0","FN:Ribamar Alves",`TEL;TYPE=CELL:+${PHONE}`,"TITLE:Consultor Comercial & Dev Full-Stack","ADR:;;Brasília;;;DF;Brasil","URL:"+CARD_URL,"END:VCARD"].join("\n");
+  Object.assign(document.createElement("a"),{href:URL.createObjectURL(new Blob([v],{type:"text/vcard;charset=utf-8"})),download:"Ribamar_Alves.vcf"}).click();
+}
+</script>
+</body>
+</html>
