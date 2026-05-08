@@ -3,1023 +3,1157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Ribamar Alves</title>
-<meta id="meta-desc" name="description" content="Desenvolvedor Full-Stack em transição do comércio para tecnologia. Projetos reais com Next.js, TypeScript, Supabase e IA — Brasília, DF.">
-<meta name="theme-color" id="meta-theme" content="#F7F5F1">
-<link rel="icon" type="image/png" href="icon-192.png">
+<title>Ribamar Alves · Dev Full-Stack</title>
+<meta id="meta-desc" name="description" content="Desenvolvedor Full-Stack em Brasília. Next.js, TypeScript, Supabase e IA. Projetos reais em produção.">
+<meta name="theme-color" content="#0A090F">
+<link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta property="og:title" content="Ribamar Alves · Dev Full-Stack">
-<meta property="og:description" content="Do balcão ao código — projetos reais, sem bootcamp. Brasília, DF.">
-<meta property="og:type" content="website">
+<meta property="og:description" content="Construo SaaS do zero ao deploy. Brasília, DF.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-
-/* ════════════════════════════
-   RESET & SHARED
-════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-img  { display: block; max-width: 100%; }
-
-body {
-  font-family: 'Outfit', sans-serif;
-  font-size: 15px;
-  line-height: 1.65;
-  overflow-x: hidden;
-  transition: background 0.45s ease;
-}
-
-#page-card,
-#page-portfolio { display: none; }
-#page-card.active,
-#page-portfolio.active { display: block; }
-
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 22px; border-radius: 16px;
-  font-size: 14px; font-weight: 600; text-decoration: none;
-  transition: all 0.2s; border: none; cursor: pointer;
-  font-family: 'Outfit', sans-serif; letter-spacing: -0.1px;
-  -webkit-tap-highlight-color: transparent;
-}
-.btn-whatsapp {
-  background: #25D366; color: #fff;
-  box-shadow: 0 6px 20px rgba(37,211,102,0.22);
-}
-.btn-whatsapp:hover { box-shadow: 0 12px 32px rgba(37,211,102,0.34); transform: translateY(-1px); }
-
-.fade-up {
-  opacity: 0; transform: translateY(26px);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1);
-}
-.fade-up.visible { opacity: 1; transform: translateY(0); }
-
-
-/* ════════════════════════════
-   PAGE — CARD (escuro)
-════════════════════════════ */
-#page-card {
-  --bg:      #07070A;
-  --surface: #111118;
-  --sur2:    #18181F;
+/* ══════════════════════════════════════
+   TOKENS & RESET
+══════════════════════════════════════ */
+:root {
+  --bg:      #0A090F;
+  --bg2:     #100F16;
+  --bg3:     #16151E;
+  --surf:    rgba(255,255,255,0.04);
+  --surf2:   rgba(255,255,255,0.07);
   --border:  rgba(255,255,255,0.07);
   --bord2:   rgba(255,255,255,0.13);
-  --gold:    #C9A96E;
-  --text:    #F2EDE6;
-  --text2:   rgba(242,237,230,0.50);
-  --text3:   rgba(242,237,230,0.28);
-
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100svh;
-  display: flex; align-items: center; justify-content: center;
-  position: relative;
-}
-
-/* Ambient */
-#page-card .c-ambient {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 0%,  rgba(201,169,110,.09) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 30% at 80% 100%, rgba(37,211,102,.05)  0%, transparent 60%);
-}
-#page-card .c-noise {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .025;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-#page-card .c-wrap {
-  position: relative; z-index: 2;
-  width: 100%; max-width: 380px; margin: 0 auto;
-  padding: 40px 20px 56px;
-  display: flex; flex-direction: column; align-items: center;
-  animation: c-up .7s cubic-bezier(.22,.68,0,1) both;
-}
-@keyframes c-up { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
-
-/* Avatar com foto */
-#page-card .c-avatar {
-  width: 84px; height: 84px; border-radius: 50%;
-  border: 1.5px solid var(--bord2);
-  overflow: hidden;
-  margin-bottom: 22px;
-  position: relative;
-  box-shadow: 0 0 0 7px rgba(201,169,110,.06);
-  flex-shrink: 0;
-}
-#page-card .c-avatar::after {
-  content: '';
-  position: absolute; inset: -3px; border-radius: 50%;
-  background: conic-gradient(from 0deg, var(--gold), transparent 40%, transparent 60%, var(--gold));
-  z-index: -1; opacity: .4;
-  animation: c-spin 6s linear infinite;
-}
-#page-card .c-avatar img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  border-radius: 50%;
-}
-@keyframes c-spin { to { transform: rotate(360deg); } }
-
-/* Identidade */
-#page-card .c-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 40px; font-weight: 500; letter-spacing: -.5px;
-  color: var(--text); text-align: center; line-height: 1; margin-bottom: 8px;
-}
-#page-card .c-role {
-  font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--gold);
-  text-align: center; margin-bottom: 36px;
-}
-#page-card .c-divider {
-  width: 40px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--bord2), transparent);
-  margin: 0 auto 32px;
-}
-
-/* Botões principais */
-#page-card .c-actions { width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
-#page-card .c-btn {
-  width: 100%; height: 54px; border-radius: 18px; border: none;
-  font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600;
-  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-  text-decoration: none; transition: transform .2s, box-shadow .2s;
-  -webkit-tap-highlight-color: transparent;
-}
-#page-card .c-btn:active { transform: scale(.97); }
-#page-card .c-btn-wa {
-  background: #25D366; color: #fff;
-  box-shadow: 0 8px 28px rgba(37,211,102,.22);
-}
-#page-card .c-btn-wa:hover { box-shadow: 0 12px 36px rgba(37,211,102,.34); transform: translateY(-1px); }
-#page-card .c-btn-port { background: var(--sur2); color: var(--text); border: 1px solid var(--bord2); }
-#page-card .c-btn-port:hover { background: #20202A; border-color: rgba(255,255,255,.2); }
-
-/* Botões secundários */
-#page-card .c-sec { width: 100%; display: flex; gap: 8px; margin-bottom: 28px; }
-#page-card .c-btn-sm {
-  flex: 1; height: 40px; border-radius: 12px;
-  border: 1px solid var(--border); background: transparent;
-  color: var(--text2); font-family: 'Outfit', sans-serif;
-  font-size: 12.5px; font-weight: 500; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  transition: all .2s; -webkit-tap-highlight-color: transparent;
-}
-#page-card .c-btn-sm:hover { background: var(--surface); color: var(--text); border-color: var(--bord2); }
-#page-card .c-btn-sm:active { transform: scale(.97); }
-
-/* Painel QR */
-#page-card .c-qr {
-  width: 100%; background: var(--surface); border: 1px solid var(--border);
-  border-radius: 28px; display: flex; flex-direction: column; align-items: center; gap: 16px;
-  overflow: hidden;
-  max-height: 0; padding: 0 24px; opacity: 0;
-  transition: max-height .5s cubic-bezier(.22,.68,0,1), opacity .35s, padding .4s;
-}
-#page-card .c-qr.open { max-height: 340px; padding: 28px 24px 22px; opacity: 1; }
-#page-card .c-qr-box { background: #fff; padding: 14px; border-radius: 14px; }
-#page-card .c-qr-label { font-size: 11.5px; color: var(--text3); text-align: center; line-height: 1.65; }
-
-/* NFC status */
-#page-card .c-nfc {
-  font-size: 12px; color: var(--text3); text-align: center;
-  min-height: 20px; margin-top: 4px; transition: color .3s;
-}
-#page-card .c-nfc.ok  { color: #25D366; }
-#page-card .c-nfc.err { color: #f87171; }
-
-#page-card .c-foot { margin-top: 28px; font-size: 11px; color: var(--text3); text-align: center; letter-spacing: .4px; }
-
-
-/* ════════════════════════════
-   PAGE — PORTFÓLIO (claro)
-════════════════════════════ */
-#page-portfolio {
-  --bg:      #F7F5F1;
-  --bg2:     #EDECEA;
-  --surface: #FFFFFF;
-  --ink:     #1C1814;
-  --ink2:    #6B6158;
-  --ink3:    #A89F96;
-  --gold:    #C8913A;
-  --gold-lt: rgba(200,145,58,.10);
-  --gold-md: rgba(200,145,58,.18);
-  --green:   #2A9D6A;
-  --grn-lt:  rgba(42,157,106,.10);
-  --blue:    #2563EB;
-  --amber:   #D97706;
-  --border:  rgba(28,24,20,.08);
-  --bord-h:  rgba(28,24,20,.16);
+  --gold:    #C8A96A;
+  --gold-lt: rgba(200,169,106,0.12);
+  --gold-md: rgba(200,169,106,0.22);
+  --text:    #EDE8E0;
+  --text2:   rgba(237,232,224,0.55);
+  --text3:   rgba(237,232,224,0.28);
+  --green:   #25D366;
+  --grn-lt:  rgba(37,211,102,0.12);
   --r:       16px;
   --r-lg:    24px;
-  --sh:      0 1px 3px rgba(28,24,20,.05), 0 6px 20px rgba(28,24,20,.06);
-  --sh-h:    0 2px 8px rgba(28,24,20,.08), 0 20px 48px rgba(28,24,20,.12);
+  --trans:   0.42s cubic-bezier(.4,0,.2,1);
+}
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; -webkit-font-smoothing: antialiased; overflow: hidden; }
+body {
   background: var(--bg);
-  color: var(--ink);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  height: 100%; overflow: hidden;
 }
 
-/* Grain */
-#page-portfolio::before {
-  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+img { display: block; max-width: 100%; }
+
+/* Grain overlay global */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  opacity: .4;
 }
 
-/* ── Layout ── */
-.pw { max-width: 1100px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+/* Ambient glow */
+.ambient {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 10%, rgba(200,169,106,.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 35% at 85% 85%, rgba(37,211,102,.04) 0%, transparent 60%);
+}
 
-/* ── Nav ── */
-#pnav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
-  transition: background .4s, box-shadow .4s;
+/* ══════════════════════════════════════
+   VIEWS — card / portfolio
+══════════════════════════════════════ */
+#view-card,
+#view-portfolio { display: none; position: fixed; inset: 0; }
+#view-card.on,
+#view-portfolio.on { display: flex; }
+
+/* ══════════════════════════════════════
+   SHARED BUTTON
+══════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  border: none; cursor: pointer; text-decoration: none;
+  font-family: 'Outfit', sans-serif; font-weight: 600;
+  transition: all .22s; -webkit-tap-highlight-color: transparent;
 }
-#pnav.stuck {
-  background: rgba(247,245,241,.90);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 var(--border);
+.btn-wa {
+  background: var(--green); color: #fff; border-radius: 14px;
+  padding: 14px 24px; font-size: 15px;
+  box-shadow: 0 8px 28px rgba(37,211,102,.22);
 }
-.pnav-i {
-  max-width: 1100px; margin: 0 auto; padding: 0 28px;
-  height: 64px; display: flex; align-items: center; justify-content: space-between;
+.btn-wa:hover { box-shadow: 0 12px 36px rgba(37,211,102,.36); transform: translateY(-1px); }
+.btn-wa:active { transform: scale(.97); }
+.btn-ghost {
+  background: var(--surf2); color: var(--text); border-radius: 14px;
+  padding: 14px 24px; font-size: 15px; border: 1px solid var(--bord2);
+}
+.btn-ghost:hover { background: var(--bg3); border-color: rgba(255,255,255,.2); }
+.btn-ghost:active { transform: scale(.97); }
+
+
+/* ══════════════════════════════════════
+   CARD VIEW
+══════════════════════════════════════ */
+#view-card {
+  align-items: center; justify-content: center;
+  background: var(--bg);
+}
+
+.card-wrap {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 360px; margin: 0 auto;
+  padding: 44px 22px 56px;
+  display: flex; flex-direction: column; align-items: center;
+  animation: slideUp .65s cubic-bezier(.22,.68,0,1) both;
+}
+@keyframes slideUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+
+/* Avatar */
+.card-avatar {
+  width: 88px; height: 88px; border-radius: 50%;
+  overflow: hidden; position: relative; margin-bottom: 20px;
+  box-shadow: 0 0 0 1.5px var(--bord2), 0 0 0 8px var(--gold-lt);
+}
+.card-avatar::before {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%; z-index: -1;
+  background: conic-gradient(from 0deg, var(--gold), transparent 35%, transparent 65%, var(--gold));
+  opacity: .5; animation: spin 7s linear infinite;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+.card-avatar img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+
+/* Name / role */
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 400; letter-spacing: -.4px;
+  text-align: center; line-height: 1; margin-bottom: 7px;
+}
+.card-role {
+  font-size: 10.5px; font-weight: 600; letter-spacing: 2.8px;
+  text-transform: uppercase; color: var(--gold);
+  text-align: center; margin-bottom: 32px;
+}
+
+/* Divider */
+.card-div {
+  width: 32px; height: 1px; margin: 0 auto 28px;
+  background: linear-gradient(90deg, transparent, var(--bord2), transparent);
+}
+
+/* Main actions */
+.card-actions { width:100%; display:flex; flex-direction:column; gap:10px; margin-bottom:12px; }
+.card-btn {
+  width:100%; height:52px; border-radius:14px; border:none;
+  font-family:'Outfit',sans-serif; font-size:14.5px; font-weight:600;
+  cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;
+  text-decoration:none; transition:all .2s; -webkit-tap-highlight-color:transparent;
+  letter-spacing:-.1px;
+}
+.card-btn:active { transform:scale(.97); }
+.card-btn-wa  { background:var(--green); color:#fff; box-shadow:0 8px 26px rgba(37,211,102,.22); }
+.card-btn-wa:hover { box-shadow:0 12px 34px rgba(37,211,102,.34); transform:translateY(-1px); }
+.card-btn-port { background:var(--surf2); color:var(--text); border:1px solid var(--bord2); }
+.card-btn-port:hover { background:var(--bg3); border-color:rgba(255,255,255,.2); }
+
+/* Secondary actions */
+.card-sec { width:100%; display:flex; gap:8px; margin-bottom:22px; }
+.card-sm {
+  flex:1; height:40px; border-radius:12px; border:1px solid var(--border);
+  background:transparent; color:var(--text2); font-family:'Outfit',sans-serif;
+  font-size:12px; font-weight:500; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:5px;
+  transition:all .2s; -webkit-tap-highlight-color:transparent;
+}
+.card-sm:hover { background:var(--surf); color:var(--text); border-color:var(--bord2); }
+.card-sm:active { transform:scale(.97); }
+.card-sm.active { color:var(--gold); border-color:var(--gold-md); background:var(--gold-lt); }
+
+/* QR panel */
+.card-qr {
+  width:100%; background:var(--surf); border:1px solid var(--border);
+  border-radius:20px; overflow:hidden;
+  max-height:0; padding:0 20px; opacity:0;
+  transition:max-height .5s cubic-bezier(.22,.68,0,1), opacity .35s, padding .4s;
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+}
+.card-qr.open { max-height:320px; padding:24px 20px 20px; opacity:1; }
+.card-qr-box { background:#fff; padding:12px; border-radius:12px; }
+.card-qr-label { font-size:11.5px; color:var(--text3); text-align:center; line-height:1.65; }
+
+/* NFC modal */
+.nfc-modal-overlay {
+  position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.75);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  padding:20px; opacity:0; pointer-events:none; transition:opacity .3s;
+}
+.nfc-modal-overlay.open { opacity:1; pointer-events:all; }
+.nfc-modal {
+  background:var(--bg2); border:1px solid var(--bord2); border-radius:24px;
+  padding:32px 28px; max-width:340px; width:100%;
+  transform:translateY(16px); transition:transform .3s cubic-bezier(.22,.68,0,1);
+}
+.nfc-modal-overlay.open .nfc-modal { transform:translateY(0); }
+.nfc-modal-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px; font-weight:500; margin-bottom:8px; letter-spacing:-.5px;
+}
+.nfc-modal-sub { font-size:13px; color:var(--text2); line-height:1.7; margin-bottom:22px; }
+.nfc-steps { display:flex; flex-direction:column; gap:12px; margin-bottom:24px; }
+.nfc-step {
+  display:flex; align-items:flex-start; gap:12px;
+  background:var(--surf); border:1px solid var(--border);
+  border-radius:14px; padding:14px;
+}
+.nfc-step-n {
+  width:26px; height:26px; border-radius:8px; background:var(--gold-lt);
+  border:1px solid var(--gold-md); color:var(--gold); font-size:12px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;
+}
+.nfc-step-text { font-size:13px; color:var(--text); line-height:1.6; }
+.nfc-step-text strong { color:var(--gold); font-weight:600; }
+.nfc-url {
+  background:var(--bg3); border:1px solid var(--border); border-radius:10px;
+  padding:10px 14px; font-size:12px; color:var(--text2);
+  font-family:monospace; word-break:break-all; margin-bottom:20px;
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+}
+.nfc-copy-btn {
+  background:var(--surf2); border:1px solid var(--bord2); color:var(--text);
+  border-radius:8px; padding:5px 12px; font-family:'Outfit',sans-serif;
+  font-size:11px; font-weight:600; cursor:pointer; white-space:nowrap;
+  transition:all .2s;
+}
+.nfc-copy-btn:hover { background:var(--bg3); }
+.nfc-write-btn {
+  width:100%; height:46px; background:var(--gold-lt);
+  border:1px solid var(--gold-md); color:var(--gold);
+  border-radius:12px; font-family:'Outfit',sans-serif;
+  font-size:14px; font-weight:600; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  transition:all .2s; margin-bottom:10px;
+}
+.nfc-write-btn:hover { background:var(--gold-md); }
+.nfc-write-btn:disabled { opacity:.5; cursor:not-allowed; }
+.nfc-close {
+  width:100%; height:40px; background:transparent;
+  border:1px solid var(--border); color:var(--text3);
+  border-radius:12px; font-family:'Outfit',sans-serif;
+  font-size:13px; cursor:pointer; transition:all .2s;
+}
+.nfc-close:hover { background:var(--surf); color:var(--text2); }
+.nfc-status-text {
+  font-size:12px; text-align:center; min-height:18px;
+  margin-bottom:8px; transition:color .3s;
+}
+.nfc-status-text.ok  { color:var(--green); }
+.nfc-status-text.err { color:#f87171; }
+.nfc-status-text.info { color:var(--gold); }
+
+/* Card footer */
+.card-foot { font-size:10.5px; color:var(--text3); text-align:center; letter-spacing:.4px; }
+
+
+/* ══════════════════════════════════════
+   PORTFOLIO VIEW
+══════════════════════════════════════ */
+#view-portfolio {
+  flex-direction: column;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* ── Top nav ── */
+#port-nav {
+  position: relative; z-index: 100;
+  flex-shrink: 0;
+  height: 58px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10,9,15,.85);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
 }
 .pnav-logo {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px; font-weight: 600; letter-spacing: -.3px;
-  color: var(--ink); text-decoration: none;
+  font-size: 18px; font-weight: 500; letter-spacing: -.2px;
+  color: var(--text); cursor: pointer;
   display: flex; align-items: center; gap: 10px;
+  text-decoration: none; flex-shrink: 0;
 }
 .pnav-mark {
-  width: 30px; height: 30px; background: var(--ink); border-radius: 8px;
+  width: 28px; height: 28px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--gold), rgba(200,169,106,.6));
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px; font-weight: 600; color: var(--bg); flex-shrink: 0;
+  font-size: 12px; font-weight: 700; color: var(--bg); flex-shrink: 0;
 }
-.pnav-links { display: flex; gap: 2px; list-style: none; align-items: center; }
-.pnav-links a {
-  color: var(--ink2); text-decoration: none; font-size: 13.5px; font-weight: 500;
-  padding: 7px 15px; border-radius: 100px; transition: color .2s, background .2s;
+.pnav-pages {
+  display: flex; gap: 4px;
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 100px; padding: 4px;
 }
-.pnav-links a:hover { color: var(--ink); background: rgba(28,24,20,.05); }
-.pnav-cta { background: var(--ink) !important; color: var(--bg) !important; font-weight: 600 !important; }
-.pnav-cta:hover { opacity: .85 !important; }
-@media (max-width: 640px) { .pnav-links { display: none; } }
+.pnav-pill {
+  height: 30px; padding: 0 16px; border-radius: 100px;
+  border: none; background: transparent;
+  font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+  color: var(--text2); cursor: pointer; transition: all .22s;
+  -webkit-tap-highlight-color: transparent; white-space: nowrap;
+}
+.pnav-pill:hover { color: var(--text); background: var(--surf2); }
+.pnav-pill.active {
+  background: var(--bg3); color: var(--text);
+  border: 1px solid var(--bord2); font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+.pnav-cta {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--green); color: #fff; border-radius: 10px;
+  padding: 8px 16px; font-size: 13px; font-weight: 600;
+  text-decoration: none; transition: all .2s; flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(37,211,102,.2);
+}
+.pnav-cta:hover { box-shadow: 0 6px 20px rgba(37,211,102,.34); transform: translateY(-1px); }
+@media (max-width: 600px) {
+  #port-nav { padding: 0 16px; }
+  .pnav-logo span { display: none; }
+  .pnav-cta span { display: none; }
+  .pnav-cta { padding: 8px 12px; }
+}
 
-/* ── Botões portfólio ── */
-.pb  { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: var(--r); font-size: 14px; font-weight: 600; text-decoration: none; transition: all .2s; border: none; cursor: pointer; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
-.pb-dark  { background: var(--ink); color: var(--bg); }
-.pb-dark:hover  { opacity: .85; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(28,24,20,.2); }
-.pb-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--border); box-shadow: var(--sh); }
-.pb-ghost:hover { border-color: var(--bord-h); transform: translateY(-1px); box-shadow: var(--sh-h); }
-
-/* ── Labels de seção ── */
-.peyebrow {
-  font-size: 10.5px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+/* ── Pages container ── */
+#port-pages {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
 }
-.peyebrow::before { content: ''; width: 20px; height: 1.5px; background: var(--gold); display: block; }
-.ptitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 4.5vw, 56px);
-  font-weight: 500; letter-spacing: -2px; color: var(--ink);
-  margin-bottom: 12px; line-height: 1.0;
-}
-.psub { font-size: 15px; color: var(--ink2); max-width: 460px; line-height: 1.8; }
 
-/* ── Hero ── */
-.phero {
-  min-height: 100svh;
+/* ── Individual page ── */
+.port-page {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px 28px 28px;
+  overflow-y: auto;
+  opacity: 0; pointer-events: none;
+  transform: translateX(40px);
+  transition: opacity var(--trans), transform var(--trans);
+}
+.port-page.active {
+  opacity: 1; pointer-events: all; transform: translateX(0);
+}
+.port-page.exit-left  { opacity: 0; transform: translateX(-40px); }
+.port-page.exit-right { opacity: 0; transform: translateX(40px); }
+
+/* ── Page dot nav ── */
+#port-dots {
+  position: relative; z-index: 100;
+  flex-shrink: 0; height: 40px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  border-top: 1px solid var(--border);
+}
+.pdot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--bord2); border: none; cursor: pointer;
+  transition: all .22s; padding: 0;
+}
+.pdot.active { background: var(--gold); width: 20px; border-radius: 3px; }
+.pdot:hover:not(.active) { background: var(--text3); }
+
+
+/* ══════════════════════════════════════
+   PAGE 1 — HOME
+══════════════════════════════════════ */
+#page-home { padding-top: 24px; }
+
+.home-inner {
+  width: 100%; max-width: 1040px;
   display: grid; grid-template-columns: 1fr auto;
-  align-items: center; gap: 56px; padding: 100px 0 80px;
+  align-items: center; gap: 64px;
 }
-.phero-badge {
-  display: inline-flex; align-items: center; gap: 9px;
-  border: 1px solid var(--border); background: var(--surface);
-  border-radius: 100px; padding: 6px 16px 6px 10px;
-  font-size: 12px; font-weight: 500; color: var(--ink2);
-  margin-bottom: 36px; width: fit-content; box-shadow: var(--sh);
+
+/* Left */
+.home-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 100px; padding: 5px 14px 5px 9px;
+  font-size: 11.5px; font-weight: 500; color: var(--text2);
+  margin-bottom: 28px; width: fit-content;
 }
-.pbdot {
+.home-badge-dot {
   width: 7px; height: 7px; border-radius: 50%; background: var(--green);
-  box-shadow: 0 0 0 3px var(--grn-lt); animation: pblink 2.5s infinite; flex-shrink: 0;
+  box-shadow: 0 0 0 3px var(--grn-lt); animation: blink 2.5s infinite; flex-shrink: 0;
 }
-@keyframes pblink { 0%,100%{opacity:1} 50%{opacity:.4} }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-.phero-title {
+.home-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(52px, 7vw, 96px); font-weight: 500;
-  line-height: .95; letter-spacing: -2.5px; color: var(--ink); margin-bottom: 10px;
+  font-size: clamp(56px, 7.5vw, 100px);
+  font-weight: 300; line-height: .92;
+  letter-spacing: -3px; color: var(--text);
+  margin-bottom: 22px;
 }
-.phero-title .it { font-style: italic; color: var(--gold); display: block; }
-.phero-subh { font-size: clamp(14px, 1.5vw, 16px); font-weight: 600; color: var(--ink); margin-bottom: 14px; }
-.phero-sub  { font-size: clamp(14px, 1.5vw, 16px); color: var(--ink2); max-width: 460px; line-height: 1.85; margin-bottom: 40px; }
-.phero-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 56px; }
+.home-title .it { font-style: italic; color: var(--gold); display: block; }
 
-.phero-stats { display: flex; border-top: 1px solid var(--border); padding-top: 32px; }
-.pstat { flex: 1; padding-right: 24px; }
-.pstat + .pstat { padding-left: 24px; border-left: 1px solid var(--border); }
-.pstat-n {
+.home-bio {
+  font-size: clamp(14px, 1.6vw, 16px);
+  color: var(--text2); line-height: 1.8;
+  max-width: 420px; margin-bottom: 32px;
+}
+.home-bio strong { color: var(--text); font-weight: 600; }
+
+.home-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+
+.home-stats {
+  display: flex; gap: 0;
+  border-top: 1px solid var(--border); padding-top: 28px;
+}
+.hstat { flex: 1; padding-right: 24px; }
+.hstat + .hstat { padding-left: 24px; border-left: 1px solid var(--border); }
+.hstat-n {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 3.5vw, 48px); font-weight: 500;
-  letter-spacing: -2px; line-height: 1; color: var(--ink); margin-bottom: 4px;
+  font-size: clamp(30px, 3.5vw, 46px); font-weight: 400;
+  letter-spacing: -2px; line-height: 1; color: var(--text); margin-bottom: 3px;
 }
-.pstat-n em { font-style: normal; color: var(--gold); }
-.pstat-l { font-size: 11.5px; color: var(--ink3); font-weight: 500; }
+.hstat-n em { font-style: normal; color: var(--gold); }
+.hstat-l { font-size: 11px; color: var(--text3); font-weight: 500; letter-spacing: .3px; }
 
-/* Foto do herói */
-.pphoto-wrap { position: relative; flex-shrink: 0; width: clamp(200px, 20vw, 300px); }
-.pphoto-ring {
-  position: absolute; inset: -8px; border-radius: 34px;
-  background: conic-gradient(from 90deg, var(--gold), var(--bg2) 40%, var(--bg2) 60%, var(--gold));
-  z-index: 0; opacity: .5; animation: pring 14s linear infinite;
+/* Right: Photo */
+.home-photo-wrap { position: relative; flex-shrink: 0; width: clamp(180px, 18vw, 260px); }
+.home-photo-ring {
+  position: absolute; inset: -8px; border-radius: 30px;
+  background: conic-gradient(from 90deg, var(--gold), transparent 40%, transparent 60%, var(--gold));
+  opacity: .3; animation: spin 16s linear infinite; z-index: 0;
 }
-@keyframes pring { to { transform: rotate(360deg); } }
-.pphoto-bg  { position: absolute; inset: -3px; border-radius: 30px; background: var(--bg); z-index: 1; }
-.pphoto {
+.home-photo-bg { position: absolute; inset: -3px; border-radius: 26px; background: var(--bg); z-index: 1; }
+.home-photo {
   position: relative; z-index: 2; width: 100%; aspect-ratio: 3/4;
-  border-radius: 24px; overflow: hidden;
-  box-shadow: var(--sh-h); border: 2px solid var(--surface);
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--bord2);
+  box-shadow: 0 24px 64px rgba(0,0,0,.5);
 }
-.pphoto img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.pphoto-tag {
-  position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); z-index: 3;
-  background: var(--surface); border: 1px solid var(--border); border-radius: 100px;
-  padding: 5px 14px; font-size: 11px; font-weight: 600; color: var(--ink);
-  white-space: nowrap; box-shadow: var(--sh);
+.home-photo img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+.home-photo-tag {
+  position: absolute; bottom: -13px; left: 50%; transform: translateX(-50%);
+  z-index: 3; background: var(--bg2); border: 1px solid var(--bord2);
+  border-radius: 100px; padding: 5px 13px;
+  font-size: 11px; font-weight: 600; color: var(--text);
+  white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,.4);
   display: flex; align-items: center; gap: 6px;
 }
-.pdot-live { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pblink 2s infinite; }
+.dot-live { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 2s infinite; }
 
-/* ── Transição ── */
-#ptransicao { padding: 100px 0 80px; }
-.pt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 52px; }
-.pt-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--r-lg); padding: 32px 28px;
-  box-shadow: var(--sh); position: relative; overflow: hidden;
-  transition: transform .3s, box-shadow .3s;
+/* ══════════════════════════════════════
+   PAGE 2 — PROJETOS
+══════════════════════════════════════ */
+#page-projects { align-items: flex-start; padding-top: 32px; }
+.proj-inner { width: 100%; max-width: 1040px; }
+
+.proj-header { margin-bottom: 28px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.proj-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 2.8px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
 }
-.pt-card:hover { transform: translateY(-4px); box-shadow: var(--sh-h); }
-.pt-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--gold), transparent);
-}
-.pt-num {
+.proj-eyebrow::before { content:''; width:16px; height:1.5px; background:var(--gold); display:block; }
+.proj-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 64px; font-weight: 400; color: rgba(28,24,20,.05);
-  line-height: 1; letter-spacing: -3px; position: absolute; top: 14px; right: 18px;
+  font-size: clamp(32px, 4vw, 52px); font-weight: 400;
+  letter-spacing: -2px; line-height: 1;
 }
-.pt-icon {
-  width: 40px; height: 40px; background: var(--gold-lt); border-radius: 12px;
-  display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 18px;
+
+.proj-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
 }
-.pt-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; letter-spacing: -.8px; color: var(--ink); margin-bottom: 10px; line-height: 1.1; }
-.pt-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.75; }
 
-/* ── Projetos ── */
-#pprojetos { padding: 80px 0; }
-.pbento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 52px; }
-.cc7  { grid-column: span 7; }
-.cc5  { grid-column: span 5; }
-.cc12 { grid-column: span 12; }
-
-/* Card base */
-.pcard {
-  position: relative; overflow: hidden;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--r-lg); padding: 32px;
+/* Project card */
+.pj-card {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 24px;
   text-decoration: none; color: inherit;
   display: flex; flex-direction: column;
-  transition: border-color .25s, transform .3s cubic-bezier(.22,.68,0,1.2), box-shadow .25s;
-  min-height: 300px; box-shadow: var(--sh);
+  transition: border-color .25s, transform .28s cubic-bezier(.22,.68,0,1.2), box-shadow .25s;
+  position: relative; overflow: hidden;
 }
-.pcard:hover { border-color: var(--bord-h); transform: translateY(-4px); box-shadow: var(--sh-h); }
+.pj-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  opacity: 0; transition: opacity .25s;
+}
+.pj-card:hover { border-color: var(--bord2); transform: translateY(-4px); box-shadow: 0 20px 52px rgba(0,0,0,.5); }
+.pj-card:hover::before { opacity: 1; }
 
-/* Card com logo e arrow no topo */
-.pcard-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-.pcard-logo {
-  width: 52px; height: 52px; border-radius: 14px;
-  border: 1px solid var(--border); overflow: hidden;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+/* Zyntra accent */
+.pj-zyntra::before    { background: linear-gradient(90deg,#7C3AED,transparent); }
+.pj-barbearia::before { background: linear-gradient(90deg,#D97706,transparent); }
+.pj-paranoa::before   { background: linear-gradient(90deg,#2563EB,transparent); }
+
+.pj-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.pj-logo {
+  width: 48px; height: 48px; border-radius: 12px;
+  border: 1px solid var(--bord2); overflow: hidden;
+  background: var(--bg2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.pcard-logo img { width: 100%; height: 100%; object-fit: cover; }
-.pcard-logo.pad img { object-fit: contain; padding: 8px; }
-.pcard-logo.round { border-radius: 50%; }
-.parrow {
-  width: 34px; height: 34px; border-radius: 10px;
+.pj-logo img { width:100%; height:100%; object-fit:cover; }
+.pj-logo.pad img { object-fit:contain; padding:8px; }
+.pj-logo.round { border-radius: 50%; }
+.pj-arrow {
+  width: 32px; height: 32px; border-radius: 10px;
   border: 1px solid var(--border); background: transparent;
   display: flex; align-items: center; justify-content: center;
-  color: var(--ink2); text-decoration: none; transition: all .2s; flex-shrink: 0;
+  color: var(--text3); text-decoration: none; transition: all .2s;
 }
-.pcard:hover .parrow { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.pj-card:hover .pj-arrow { background: var(--surf2); color: var(--text); border-color: var(--bord2); }
 
-.pcard-cat { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 7px; }
-.pcard-name {
+.pj-cat { font-size: 10px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; margin-bottom: 6px; }
+.pj-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(24px, 2.5vw, 30px); font-weight: 600;
-  letter-spacing: -1px; color: var(--ink); margin-bottom: 12px; line-height: 1.05;
+  font-size: clamp(22px, 2vw, 28px); font-weight: 500;
+  letter-spacing: -.8px; color: var(--text); margin-bottom: 10px; line-height: 1.05;
 }
-.pcard-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.78; flex: 1; margin-bottom: 18px; }
+.pj-desc { font-size: 13px; color: var(--text2); line-height: 1.75; flex: 1; margin-bottom: 16px; }
 
-.pcard-impact {
-  background: var(--gold-lt); border: 1px solid var(--gold-md);
-  border-radius: 10px; padding: 9px 13px; margin-bottom: 16px;
-  font-size: 12px; color: var(--gold); font-weight: 600;
-  display: flex; align-items: center; gap: 7px;
+.pj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
+.pj-tag {
+  font-size: 10.5px; font-weight: 600; padding: 3px 9px;
+  border-radius: 6px; background: var(--surf2); color: var(--text2);
+  border: 1px solid var(--border); letter-spacing: .1px;
 }
 
-.pcard-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-.ptag { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(28,24,20,.055); color: var(--ink2); }
+.pj-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--border); margin-top: auto; }
+.pj-live { display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; }
+.pj-live-dot { width: 7px; height: 7px; border-radius: 50%; animation: blink 2s infinite; }
+.pj-link { font-size: 12px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap .2s; }
+.pj-card:hover .pj-link { gap: 7px; }
 
-.pcard-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border); }
-.pcard-live { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; }
-.pcard-live-dot { width: 7px; height: 7px; border-radius: 50%; animation: pblink 2s infinite; }
+/* ══════════════════════════════════════
+   PAGE 3 — CONTATO
+══════════════════════════════════════ */
+#page-contact { align-items: flex-start; padding-top: 32px; }
+.contact-inner { width: 100%; max-width: 1040px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
 
-/* Card destaque (Zyntra) */
-.pcard-feat { background: var(--ink); border-color: transparent; }
-.pcard-feat .pcard-name    { color: var(--bg); }
-.pcard-feat .pcard-cat     { color: rgba(200,145,58,.75) !important; }
-.pcard-feat .pcard-desc    { color: rgba(247,245,241,.60); }
-.pcard-feat .ptag          { background: rgba(247,245,241,.10); color: rgba(247,245,241,.68); }
-.pcard-feat .pcard-footer  { border-color: rgba(247,245,241,.10); }
-.pcard-feat .parrow        { border-color: rgba(247,245,241,.14); color: rgba(247,245,241,.55); }
-.pcard-feat:hover .parrow  { background: var(--gold); border-color: var(--gold); color: #fff; }
-.pcard-feat .pcard-impact  { background: rgba(200,145,58,.13); border-color: rgba(200,145,58,.26); color: #E8B060; }
-.pcard-feat .pcard-logo    { background: #fff; border-color: transparent; }
-.pcard-feat .pcard-logo.pad { border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.08); }
-.pcard-feat .pcard-live    { color: #4ade80; }
-.pcard-feat .pcard-live-dot { background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,.15); }
-
-/* Card full-width horizontal (Paranoa) */
-.pcard-full { flex-direction: row; gap: 32px; min-height: 0; padding: 28px 32px; }
-.pcard-full .pcard-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 0; flex-shrink: 0; width: 240px; }
-.pcard-full .pcard-logo   { width: 64px; height: 64px; }
-.pcard-full .pcontent     { flex: 1; display: flex; flex-direction: column; }
-.pcard-full .pcard-footer { padding-top: 12px; }
-
-/* ── Stack ── */
-#pstack { padding: 80px 0; background: var(--bg2); }
-.pstack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 48px; }
-.pstack-item {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 14px; padding: 18px;
-  display: flex; align-items: center; gap: 12px;
-  box-shadow: var(--sh); transition: transform .2s, box-shadow .2s;
+/* Stack */
+.stack-block {}
+.stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 24px; }
+.sitem {
+  background: var(--surf); border: 1px solid var(--border); border-radius: 12px;
+  padding: 12px 14px; display: flex; align-items: center; gap: 11px;
+  transition: border-color .2s, background .2s;
 }
-.pstack-item:hover { transform: translateY(-2px); box-shadow: var(--sh-h); }
-.psdot   { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.psname  { font-size: 13px; font-weight: 600; color: var(--ink); }
-.pslevel { font-size: 11px; color: var(--ink3); margin-top: 1px; }
+.sitem:hover { background: var(--surf2); border-color: var(--bord2); }
+.sdot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.sname { font-size: 13px; font-weight: 600; color: var(--text); }
+.slevel { font-size: 11px; color: var(--text3); margin-top: 1px; }
 
-/* ── Por que contratar ── */
-#psobre { padding: 80px 0; }
-.pabout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 52px; }
-.pabout-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--r-lg); padding: 32px; box-shadow: var(--sh);
+/* CTA block */
+.cta-block {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 40px 36px;
+  display: flex; flex-direction: column; gap: 20px;
+  position: relative; overflow: hidden;
 }
-.pabout-icon { width: 42px; height: 42px; border-radius: 12px; background: var(--gold-lt); display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 16px; }
-.pabout-t    { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -.2px; }
-.pabout-d    { font-size: 13.5px; color: var(--ink2); line-height: 1.78; }
-
-/* ── CTA ── */
-#pcontato { padding: 100px 0; }
-.pcta-box {
-  background: var(--ink); border-radius: 32px; padding: 72px 56px;
-  text-align: center; position: relative; overflow: hidden;
+.cta-block::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, var(--gold-lt) 0%, transparent 70%);
+  pointer-events: none;
 }
-.pcta-box::before {
-  content: ''; position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(200,145,58,.10) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 60% at 80% 50%, rgba(42,157,106,.07) 0%, transparent 70%);
+.cta-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 2.8px; text-transform: uppercase;
+  color: var(--gold); display: flex; align-items: center; gap: 8px;
 }
-.pcta-eye {
-  font-size: 10.5px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-  color: rgba(200,145,58,.8); margin-bottom: 20px;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-}
-.pcta-eye::before, .pcta-eye::after { content: ''; width: 20px; height: 1.5px; background: rgba(200,145,58,.5); display: block; }
-.pcta-title {
+.cta-eyebrow::before { content:''; width:16px; height:1.5px; background:var(--gold); display:block; }
+.cta-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(36px, 5vw, 68px); font-weight: 500;
-  letter-spacing: -2px; color: var(--bg); line-height: 1; margin-bottom: 18px; position: relative;
+  font-size: clamp(32px, 3.5vw, 44px); font-weight: 400;
+  letter-spacing: -1.5px; line-height: 1.05; color: var(--text);
 }
-.pcta-sub  { font-size: 15px; color: rgba(247,245,241,.55); margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.8; position: relative; }
-.pcta-acts { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
-.pcta-note { font-size: 12px; color: rgba(247,245,241,.3); margin-top: 20px; position: relative; }
+.cta-sub { font-size: 14px; color: var(--text2); line-height: 1.75; }
+.cta-acts { display: flex; flex-direction: column; gap: 9px; }
+.cta-note { font-size: 11.5px; color: var(--text3); }
+.cta-note a { color: var(--text2); text-decoration: none; }
+.cta-note a:hover { color: var(--text); }
 
-/* ── Footer ── */
-#pfooter { border-top: 1px solid var(--border); padding: 28px 0; }
-.pfooter-i { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-.pfooter-c { font-size: 12px; color: var(--ink3); }
-.pfooter-l { display: flex; gap: 20px; }
-.pfooter-l a { font-size: 12px; color: var(--ink3); text-decoration: none; transition: color .2s; }
-.pfooter-l a:hover { color: var(--ink); }
-
-/* ── Responsivo ── */
-@media (max-width: 900px) {
-  .phero   { grid-template-columns: 1fr; gap: 0; }
-  .pphoto-wrap { display: none; }
-  .pt-grid { grid-template-columns: 1fr; }
-  .pbento  { grid-template-columns: 1fr; }
-  .cc7,.cc5,.cc12 { grid-column: span 1; }
-  .pcard-full { flex-direction: column; }
-  .pcard-full .pcard-header { width: 100%; flex-direction: row; align-items: center; justify-content: space-between; }
-  .pabout-grid { grid-template-columns: 1fr; }
-  .pcta-box { padding: 48px 28px; }
+/* Back to card link */
+.back-to-card {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text3); text-decoration: none;
+  background: transparent; border: none; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: color .2s;
+  padding: 0; margin-top: 4px;
 }
-@media (max-width: 640px) {
-  .pw  { padding: 0 18px; }
-  .phero { padding: 90px 0 64px; }
-  .pstack-grid { grid-template-columns: 1fr 1fr; }
+.back-to-card:hover { color: var(--text2); }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 860px) {
+  .home-inner { grid-template-columns: 1fr; gap: 32px; }
+  .home-photo-wrap { display: none; }
+  .home-title { font-size: clamp(48px, 12vw, 72px); }
+  .proj-grid { grid-template-columns: 1fr; gap: 12px; }
+  .pj-card { min-height: 0; }
+  .contact-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .port-page { padding: 20px 16px 16px; }
+  .home-stats { gap: 0; }
+  #port-nav { height: 52px; }
+  .pnav-pages { gap: 2px; }
+  .pnav-pill { padding: 0 10px; font-size: 12px; }
+  .cta-block { padding: 28px 22px; }
+  .stack-grid { grid-template-columns: 1fr 1fr; }
 }
 
+/* ══════════════════════════════════════
+   ENTRANCE ANIMATIONS
+══════════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .55s ease, transform .55s cubic-bezier(.22,.68,0,1);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
+<div class="ambient"></div>
 
-<!-- ══════════════════════════════
-     CARTÃO DIGITAL
-══════════════════════════════ -->
-<div id="page-card">
-  <div class="c-ambient"></div>
-  <div class="c-noise"></div>
 
-  <div class="c-wrap">
+<!-- ═══════════════════════════════════
+     CARTÃO DIGITAL  (?card)
+═══════════════════════════════════ -->
+<div id="view-card">
+  <div class="card-wrap">
 
-    <div class="c-avatar">
+    <div class="card-avatar">
       <img src="eu.webp" alt="Ribamar Alves">
     </div>
 
-    <h1 class="c-name">Ribamar Alves</h1>
-    <p class="c-role">Consultor Comercial &amp; Dev Full-Stack</p>
-    <div class="c-divider"></div>
+    <h1 class="card-name">Ribamar Alves</h1>
+    <p class="card-role">Consultor Comercial &amp; Dev Full-Stack</p>
+    <div class="card-div"></div>
 
-    <div class="c-actions">
+    <div class="card-actions">
       <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+te+encontrei+pelo+cartão+digital!"
-         target="_blank" rel="noopener" class="c-btn c-btn-wa">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
-        </svg>
+         target="_blank" rel="noopener" class="card-btn card-btn-wa">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
         Falar no WhatsApp
       </a>
-
-      <button class="c-btn c-btn-port" onclick="goPortfolio()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="3" width="20" height="14" rx="2"/>
-          <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-        </svg>
+      <button class="card-btn card-btn-port" onclick="goPortfolio()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         Ver meu Portfólio
       </button>
     </div>
 
-    <div class="c-sec">
-      <button class="c-btn-sm" onclick="saveContact()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <div class="card-sec">
+      <button class="card-sm" onclick="saveContact()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Salvar
       </button>
-      <button class="c-btn-sm" id="c-qr-btn" onclick="toggleQR()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="4" height="4"/></svg>
+      <button class="card-sm" id="qr-toggle-btn" onclick="toggleQR()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="4" height="4"/></svg>
         QR Code
       </button>
-      <button class="c-btn-sm" onclick="writeNFC()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a9 9 0 019-9"/><path d="M3 12a4 4 0 014-4"/><circle cx="3" cy="17" r="1"/></svg>
+      <button class="card-sm" onclick="openNfcModal()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a9 9 0 019-9"/><path d="M3 12a4 4 0 014-4"/><circle cx="3" cy="17" r="1"/></svg>
         NFC
       </button>
     </div>
 
-    <div class="c-qr" id="c-qr-panel">
-      <div class="c-qr-box"><div id="c-qrcode"></div></div>
-      <p class="c-qr-label">Aponte a câmera para abrir no WhatsApp</p>
+    <div class="card-qr" id="card-qr-panel">
+      <div class="card-qr-box"><div id="card-qrcode"></div></div>
+      <p class="card-qr-label">Aponte a câmera para abrir no WhatsApp</p>
     </div>
 
-    <div id="c-nfc-status" class="c-nfc"></div>
+    <p class="card-foot">Brasília, DF &middot; portiflio-one.vercel.app</p>
+  </div>
+</div>
 
-    <p class="c-foot">Brasília, DF &middot; ribamaralves.dev</p>
+<!-- NFC Modal -->
+<div class="nfc-modal-overlay" id="nfc-overlay" onclick="closeNfcModal(event)">
+  <div class="nfc-modal">
+    <div class="nfc-modal-title">Configurar NFC</div>
+    <p class="nfc-modal-sub">
+      O NFC permite que qualquer celular abra seu cartão com um toque.
+      Há duas formas de usar:
+    </p>
+
+    <div class="nfc-steps">
+      <div class="nfc-step">
+        <div class="nfc-step-n">1</div>
+        <div class="nfc-step-text">
+          <strong>Cartão físico</strong> — Baixe o app <strong>NFC Tools</strong> (Android/iOS),
+          abra "Escrita → Adicionar registro → URL", cole a URL abaixo e aproxime do chip do cartão.
+        </div>
+      </div>
+      <div class="nfc-step">
+        <div class="nfc-step-n">2</div>
+        <div class="nfc-step-text">
+          <strong>Celular para celular</strong> — Clique em "Gravar via NFC" abaixo (Chrome Android), aproxime os celulares e o link é transferido.
+        </div>
+      </div>
+    </div>
+
+    <div class="nfc-url">
+      <span id="nfc-url-text">https://portiflio-one.vercel.app/?card</span>
+      <button class="nfc-copy-btn" onclick="copyUrl()">Copiar</button>
+    </div>
+
+    <div class="nfc-status-text" id="nfc-status"></div>
+
+    <button class="nfc-write-btn" id="nfc-write-btn" onclick="writeNFC()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a9 9 0 019-9"/><path d="M3 12a4 4 0 014-4"/><circle cx="3" cy="17" r="1"/><path d="M15 5l4 4"/><path d="M19 5l-4 4"/></svg>
+      Gravar via NFC (Android)
+    </button>
+    <button class="nfc-close" onclick="closeNfcModal()">Fechar</button>
   </div>
 </div>
 
 
-<!-- ══════════════════════════════
+<!-- ═══════════════════════════════════
      PORTFÓLIO
-══════════════════════════════ -->
-<div id="page-portfolio">
+═══════════════════════════════════ -->
+<div id="view-portfolio">
 
-  <nav id="pnav">
-    <div class="pnav-i">
-      <a href="#" class="pnav-logo" onclick="goPortfolio(); return false;">
-        <div class="pnav-mark">RA</div>
-        Ribamar Alves
-      </a>
-      <ul class="pnav-links">
-        <li><a href="#ptransicao">Trajetória</a></li>
-        <li><a href="#pprojetos">Projetos</a></li>
-        <li><a href="#pstack">Stack</a></li>
-        <li>
-          <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+vi+seu+portfólio+e+quero+conversar!"
-             target="_blank" rel="noopener" class="pnav-cta">Falar comigo →</a>
-        </li>
-      </ul>
+  <!-- Nav -->
+  <nav id="port-nav">
+    <a class="pnav-logo" onclick="goPortfolio(); goPage('home')" href="#">
+      <div class="pnav-mark">RA</div>
+      <span>Ribamar Alves</span>
+    </a>
+
+    <div class="pnav-pages">
+      <button class="pnav-pill active" data-page="home"     onclick="goPage('home')">Início</button>
+      <button class="pnav-pill"        data-page="projects" onclick="goPage('projects')">Projetos</button>
+      <button class="pnav-pill"        data-page="contact"  onclick="goPage('contact')">Contato</button>
     </div>
+
+    <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+vi+seu+portfólio+e+quero+conversar!"
+       target="_blank" rel="noopener" class="pnav-cta">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      <span>Falar comigo</span>
+    </a>
   </nav>
 
-  <!-- HERO -->
-  <div class="pw">
-    <div class="phero">
-      <div>
-        <div class="phero-badge fade-up">
-          <span class="pbdot"></span>
-          Disponível para oportunidades · Brasília, DF
+  <!-- Pages -->
+  <div id="port-pages">
+
+    <!-- ── HOME ── -->
+    <div class="port-page active" id="page-home">
+      <div class="home-inner">
+        <div>
+          <div class="home-badge reveal">
+            <span class="home-badge-dot"></span>
+            Disponível para oportunidades · Brasília, DF
+          </div>
+
+          <h1 class="home-title reveal" style="transition-delay:.07s">
+            Ribamar
+            <span class="it">Alves</span>
+          </h1>
+
+          <p class="home-bio reveal" style="transition-delay:.13s">
+            <strong>Dev Full-Stack em transição do comércio para tecnologia.</strong>
+            Construo SaaS do zero ao deploy — Next.js, TypeScript,
+            Supabase e IA. Projetos reais em produção, sem bootcamp.
+          </p>
+
+          <div class="home-acts reveal" style="transition-delay:.18s">
+            <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+vi+seu+portfólio+e+quero+conversar!"
+               target="_blank" rel="noopener" class="btn btn-wa">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+              Falar no WhatsApp
+            </a>
+            <button class="btn btn-ghost" onclick="goPage('projects')">
+              Ver projetos
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+
+          <div class="home-stats reveal" style="transition-delay:.24s">
+            <div class="hstat"><div class="hstat-n">3<em>+</em></div><div class="hstat-l">Projetos live</div></div>
+            <div class="hstat"><div class="hstat-n">2<em>+</em></div><div class="hstat-l">SaaS com IA</div></div>
+            <div class="hstat"><div class="hstat-n">0</div><div class="hstat-l">Bootcamp</div></div>
+          </div>
         </div>
 
-        <h1 class="phero-title fade-up" style="transition-delay:.08s">
-          Ribamar
-          <span class="it">Alves</span>
-        </h1>
-
-        <p class="phero-subh fade-up" style="transition-delay:.14s">
-          Desenvolvedor Full-Stack em transição do comércio para tecnologia
-        </p>
-
-        <p class="phero-sub fade-up" style="transition-delay:.18s">
-          Passei anos no comércio entendendo como pessoas usam sistemas.
-          Hoje construo esses sistemas — SaaS completos com
-          Next.js, TypeScript, Supabase e IA, do zero ao deploy.
-        </p>
-
-        <div class="phero-acts fade-up" style="transition-delay:.24s">
-          <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+vi+seu+portfólio+e+quero+conversar!"
-             target="_blank" rel="noopener" class="btn btn-whatsapp">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            Falar no WhatsApp
-          </a>
-          <a href="#pprojetos" class="pb pb-ghost">Ver projetos ↓</a>
-        </div>
-
-        <div class="phero-stats fade-up" style="transition-delay:.30s">
-          <div class="pstat"><div class="pstat-n">3<em>+</em></div><div class="pstat-l">Projetos em produção</div></div>
-          <div class="pstat"><div class="pstat-n">2<em>+</em></div><div class="pstat-l">SaaS com IA integrada</div></div>
-          <div class="pstat"><div class="pstat-n">0</div><div class="pstat-l">Bootcamp. Autodidata.</div></div>
-        </div>
-      </div>
-
-      <div class="pphoto-wrap fade-up" style="transition-delay:.12s">
-        <div class="pphoto-ring"></div>
-        <div class="pphoto-bg"></div>
-        <div class="pphoto">
-          <img src="eu.webp" alt="Ribamar Alves, Desenvolvedor Full-Stack">
-        </div>
-        <div class="pphoto-tag">
-          <span class="pdot-live"></span>
-          Disponível agora
+        <div class="home-photo-wrap reveal" style="transition-delay:.10s">
+          <div class="home-photo-ring"></div>
+          <div class="home-photo-bg"></div>
+          <div class="home-photo">
+            <img src="eu.webp" alt="Ribamar Alves">
+          </div>
+          <div class="home-photo-tag">
+            <span class="dot-live"></span>
+            Disponível agora
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- ── PROJETOS ── -->
+    <div class="port-page" id="page-projects">
+      <div class="proj-inner">
+        <div class="proj-header reveal">
+          <div>
+            <div class="proj-eyebrow">Portfólio</div>
+            <h2 class="proj-title">Projetos em produção</h2>
+          </div>
+        </div>
+
+        <div class="proj-grid">
+
+          <!-- Zyntra -->
+          <a href="https://zyntra-service.vercel.app/" target="_blank" rel="noopener"
+             class="pj-card pj-zyntra reveal" style="transition-delay:.05s">
+            <div class="pj-header">
+              <div class="pj-logo pad" style="background:#f5f3ff;border-color:rgba(124,58,237,.2)">
+                <img src="zyntra-logo.png" alt="Zyntra">
+              </div>
+              <span class="pj-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </span>
+            </div>
+            <div class="pj-cat" style="color:#7C3AED">Finanças · IA · CLT</div>
+            <div class="pj-name">Zyntra</div>
+            <p class="pj-desc">Plataforma financeira para trabalhadores CLT. Extrai holerites com IA, simula férias e 13º, e exibe dashboards que o contracheque não mostra.</p>
+            <div class="pj-tags">
+              <span class="pj-tag">Next.js 14</span><span class="pj-tag">TypeScript</span>
+              <span class="pj-tag">Supabase</span><span class="pj-tag">Claude AI</span>
+            </div>
+            <div class="pj-footer">
+              <span class="pj-live" style="color:var(--green)">
+                <span class="pj-live-dot" style="background:var(--green);box-shadow:0 0 0 3px var(--grn-lt)"></span>Live
+              </span>
+              <span class="pj-link" style="color:#7C3AED">Ver projeto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+          </a>
+
+          <!-- Barbearia -->
+          <a href="https://barbearia-lustosa.vercel.app/" target="_blank" rel="noopener"
+             class="pj-card pj-barbearia reveal" style="transition-delay:.10s">
+            <div class="pj-header">
+              <div class="pj-logo round" style="background:#fffbeb;border-color:rgba(217,119,6,.2)">
+                <img src="logo-barbearia.jpg" alt="Barbearia Lustosa">
+              </div>
+              <span class="pj-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </span>
+            </div>
+            <div class="pj-cat" style="color:#D97706">Barbearia · SaaS</div>
+            <div class="pj-name">Barbearia Lustosa</div>
+            <p class="pj-desc">SaaS completo com agendamento inteligente, CRM de clientes, gestão financeira e assinaturas via Stripe. Do zero ao deploy.</p>
+            <div class="pj-tags">
+              <span class="pj-tag">Next.js 14</span><span class="pj-tag">Supabase</span>
+              <span class="pj-tag">Stripe</span><span class="pj-tag">Resend</span>
+            </div>
+            <div class="pj-footer">
+              <span class="pj-live" style="color:var(--green)">
+                <span class="pj-live-dot" style="background:var(--green);box-shadow:0 0 0 3px var(--grn-lt)"></span>Live
+              </span>
+              <span class="pj-link" style="color:#D97706">Ver projeto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+          </a>
+
+          <!-- Paranoá -->
+          <a href="https://paranoaindica.vercel.app/" target="_blank" rel="noopener"
+             class="pj-card pj-paranoa reveal" style="transition-delay:.15s">
+            <div class="pj-header">
+              <div class="pj-logo round" style="background:#eff6ff;border-color:rgba(37,99,235,.2)">
+                <img src="logo-paranoa.png" alt="Paranoá Indica">
+              </div>
+              <span class="pj-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </span>
+            </div>
+            <div class="pj-cat" style="color:#2563EB">Local · Comunidade · DF</div>
+            <div class="pj-name">Paranoá Indica</div>
+            <p class="pj-desc">Descubra os melhores negócios do Paranoá — restaurantes, serviços e comércios avaliados pela própria comunidade local.</p>
+            <div class="pj-tags">
+              <span class="pj-tag">React</span><span class="pj-tag">TypeScript</span>
+              <span class="pj-tag">Vercel</span>
+            </div>
+            <div class="pj-footer">
+              <span class="pj-live" style="color:var(--green)">
+                <span class="pj-live-dot" style="background:var(--green);box-shadow:0 0 0 3px var(--grn-lt)"></span>Live
+              </span>
+              <span class="pj-link" style="color:#2563EB">Ver projeto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONTATO ── -->
+    <div class="port-page" id="page-contact">
+      <div class="contact-inner">
+
+        <!-- Stack -->
+        <div class="stack-block">
+          <div class="proj-eyebrow reveal">Stack</div>
+          <h2 class="proj-title reveal" style="transition-delay:.05s;font-size:clamp(28px,3.5vw,44px)">O que uso</h2>
+          <div class="stack-grid reveal" style="transition-delay:.10s">
+            <div class="sitem"><span class="sdot" style="background:#000"></span><div><div class="sname">Next.js</div><div class="slevel">App Router</div></div></div>
+            <div class="sitem"><span class="sdot" style="background:#3178C6"></span><div><div class="sname">TypeScript</div><div class="slevel">Principal</div></div></div>
+            <div class="sitem"><span class="sdot" style="background:#61DAFB"></span><div><div class="sname">React</div><div class="slevel">Hooks</div></div></div>
+            <div class="sitem"><span class="sdot" style="background:#3ECF8E"></span><div><div class="sname">Supabase</div><div class="slevel">BaaS + RLS</div></div></div>
+            <div class="sitem"><span class="sdot" style="background:#06B6D4"></span><div><div class="sname">Tailwind</div><div class="slevel">CSS</div></div></div>
+            <div class="sitem"><span class="sdot" style="background:#336791"></span><div><div class="sname">PostgreSQL</div><div class="slevel">Banco</div></div></div>
+            <div class="sitem"><span class="sdot" style="background:#8B5CF6"></span><div><div class="sname">Claude AI</div><div class="slevel">Anthropic</div></div></div>
+            <div class="sitem"><span class="sdot" style="background:#F55036"></span><div><div class="sname">Groq</div><div class="slevel">LLM</div></div></div>
+            <div class="sitem"><span class="sdot" style="background:#635BFF"></span><div><div class="sname">Stripe</div><div class="slevel">Pagamentos</div></div></div>
+            <div class="sitem"><span class="sdot" style="background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.15)"></span><div><div class="sname">Vercel</div><div class="slevel">Deploy</div></div></div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-block reveal" style="transition-delay:.08s">
+          <div class="cta-eyebrow">Contato</div>
+          <h2 class="cta-title">Tem um projeto<br>ou vaga?</h2>
+          <p class="cta-sub">Aberto a freela, CLT e estágio/júnior em tech.<br>Respondo em até 24h.</p>
+          <div class="cta-acts">
+            <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+vi+seu+portfólio+e+quero+conversar!"
+               target="_blank" rel="noopener" class="btn btn-wa">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+              Falar no WhatsApp
+            </a>
+            <button class="btn btn-ghost" onclick="goCard()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              Cartão digital
+            </button>
+          </div>
+          <p class="cta-note">
+            +55 (61) 99339-7747 &nbsp;·&nbsp; Brasília, DF
+          </p>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
-  <!-- TRANSIÇÃO -->
-  <section id="ptransicao">
-    <div class="pw">
-      <div class="peyebrow fade-up">Minha trajetória</div>
-      <h2 class="ptitle fade-up" style="transition-delay:.06s">Por que um vendedor<br>virou desenvolvedor</h2>
-      <p class="psub fade-up" style="transition-delay:.10s">
-        Não vim de bootcamp nem de faculdade de TI.
-        Vim do comércio — e isso me deu uma perspectiva diferente sobre o que sistemas precisam resolver.
-      </p>
+  <!-- Dot nav -->
+  <div id="port-dots">
+    <button class="pdot active" data-page="home"     onclick="goPage('home')"     aria-label="Início"></button>
+    <button class="pdot"        data-page="projects" onclick="goPage('projects')" aria-label="Projetos"></button>
+    <button class="pdot"        data-page="contact"  onclick="goPage('contact')"  aria-label="Contato"></button>
+  </div>
 
-      <div class="pt-grid">
-        <div class="pt-card fade-up">
-          <span class="pt-num">01</span>
-          <div class="pt-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 20V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/><rect x="2" y="20" width="20" height="2" rx="1"/></svg>
-          </div>
-          <div class="pt-name">Anos no comércio</div>
-          <p class="pt-desc">Como consultor comercial, aprendi o que nenhuma aula ensina: como pessoas reais usam (e odeiam) sistemas. Processos manuais, planilhas quebradas, relatórios que não fechavam.</p>
-        </div>
-        <div class="pt-card fade-up" style="transition-delay:.07s">
-          <span class="pt-num">02</span>
-          <div class="pt-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          </div>
-          <div class="pt-name">Primeiro código</div>
-          <p class="pt-desc">Enquanto trabalhava, comecei a construir o que faltava — controle de comissões, metas, gestão de estoque. O código funcionou melhor do que qualquer planilha.</p>
-        </div>
-        <div class="pt-card fade-up" style="transition-delay:.14s">
-          <span class="pt-num">03</span>
-          <div class="pt-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div class="pt-name">Transição real</div>
-          <p class="pt-desc">Hoje desenvolvo SaaS completos — do design ao banco de dados — com projetos rodando em produção. Sem mentores, com problemas reais. É isso que me diferencia.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJETOS -->
-  <section id="pprojetos">
-    <div class="pw">
-      <div class="peyebrow fade-up">Projetos</div>
-      <h2 class="ptitle fade-up" style="transition-delay:.06s">Construídos para<br>resolver problemas</h2>
-      <p class="psub fade-up" style="transition-delay:.10s">Cada projeto nasceu de uma necessidade real. Não são exercícios de curso — são sistemas que funcionam.</p>
-
-      <div class="pbento">
-
-        <!-- ZYNTRA — destaque -->
-        <a href="https://zyntra-service.vercel.app/" target="_blank" rel="noopener"
-           class="pcard pcard-feat cc7 fade-up" style="transition-delay:.05s">
-          <div class="pcard-header">
-            <div class="pcard-logo pad">
-              <img src="zyntra-logo.png" alt="Zyntra">
-            </div>
-            <span class="parrow">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-            </span>
-          </div>
-          <div class="pcard-cat" style="color:rgba(200,145,58,.75)">Finanças · Inteligência CLT</div>
-          <div class="pcard-name">Zyntra</div>
-          <p class="pcard-desc">Plataforma de inteligência financeira para trabalhadores CLT. Análise automatizada de holerites, simulações de férias e 13º, projeções de carreira e dashboards interativos.</p>
-          <div class="pcard-impact">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            Resolvi meu próprio problema antes de vender pra alguém
-          </div>
-          <div class="pcard-tags">
-            <span class="ptag">Next.js 14</span><span class="ptag">TypeScript</span>
-            <span class="ptag">Supabase</span><span class="ptag">Claude AI</span><span class="ptag">Recharts</span>
-          </div>
-          <div class="pcard-footer">
-            <span class="pcard-live" style="color:#4ade80">
-              <span class="pcard-live-dot" style="background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.15)"></span>
-              Live
-            </span>
-          </div>
-        </a>
-
-        <!-- BARBEARIA LUSTOSA -->
-        <a href="https://barbearia-lustosa.vercel.app/" target="_blank" rel="noopener"
-           class="pcard cc5 fade-up" style="transition-delay:.10s">
-          <div class="pcard-header">
-            <div class="pcard-logo round" style="border-color:rgba(217,119,6,.2);background:#fffbeb;">
-              <img src="logo-barbearia.jpg" alt="Barbearia Lustosa">
-            </div>
-            <span class="parrow">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-            </span>
-          </div>
-          <div class="pcard-cat" style="color:var(--amber)">Barbearia · SaaS Premium</div>
-          <div class="pcard-name">Barbearia Lustosa</div>
-          <p class="pcard-desc">SaaS completo para barbearia — agendamento inteligente, CRM de clientes, gestão financeira e assinaturas via Stripe.</p>
-          <div class="pcard-impact" style="background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.18);color:var(--amber)">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Auth, agendamento, pagamentos e notificações
-          </div>
-          <div class="pcard-tags">
-            <span class="ptag">Next.js 14</span><span class="ptag">Supabase</span>
-            <span class="ptag">Stripe</span><span class="ptag">Resend</span>
-          </div>
-          <div class="pcard-footer">
-            <span class="pcard-live" style="color:var(--green)">
-              <span class="pcard-live-dot" style="background:var(--green);box-shadow:0 0 0 3px var(--grn-lt)"></span>
-              Live
-            </span>
-          </div>
-        </a>
-
-        <!-- PARANOA INDICA — full width, horizontal -->
-        <a href="https://paranoaindica.vercel.app/" target="_blank" rel="noopener"
-           class="pcard pcard-full cc12 fade-up" style="transition-delay:.08s; min-height:0;">
-          <div class="pcard-header">
-            <div class="pcard-logo round" style="width:64px;height:64px;border-color:rgba(37,99,235,.2);background:#eff6ff;">
-              <img src="logo-paranoa.png" alt="Paranoa Indica">
-            </div>
-            <span class="parrow" style="display:none"></span>
-          </div>
-          <div class="pcontent">
-            <div class="pcard-cat" style="color:var(--blue)">Local · Comunidade · DF</div>
-            <div class="pcard-name">Paranoá Indica</div>
-            <p class="pcard-desc" style="margin-bottom:14px">
-              Descubra os melhores negócios locais do Paranoá — restaurantes, serviços e comércios avaliados pela própria comunidade. Um projeto com raiz no território onde cresci.
-            </p>
-            <div class="pcard-tags" style="margin-bottom:0">
-              <span class="ptag">React</span><span class="ptag">TypeScript</span><span class="ptag">Vercel</span>
-            </div>
-            <div class="pcard-footer" style="padding-top:14px">
-              <span class="pcard-live" style="color:var(--green)">
-                <span class="pcard-live-dot" style="background:var(--green);box-shadow:0 0 0 3px var(--grn-lt)"></span>
-                Live
-              </span>
-              <span style="font-size:12.5px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:5px">
-                Ver projeto
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-              </span>
-            </div>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- STACK -->
-  <section id="pstack">
-    <div class="pw">
-      <div class="peyebrow fade-up">Tecnologias</div>
-      <h2 class="ptitle fade-up" style="transition-delay:.06s">O que uso<br>no dia a dia</h2>
-      <p class="psub fade-up" style="transition-delay:.10s">Stack moderno, orientado a produto. Foco em velocidade de entrega com qualidade de produção.</p>
-      <div class="pstack-grid fade-up" style="transition-delay:.14s">
-        <div class="pstack-item"><span class="psdot" style="background:#000"></span><div><div class="psname">Next.js</div><div class="pslevel">App Router</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#3178C6"></span><div><div class="psname">TypeScript</div><div class="pslevel">Principal</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#61DAFB"></span><div><div class="psname">React</div><div class="pslevel">Hooks + Context</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#3ECF8E"></span><div><div class="psname">Supabase</div><div class="pslevel">BaaS + Auth + RLS</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#06B6D4"></span><div><div class="psname">Tailwind CSS</div><div class="pslevel">Estilização</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#336791"></span><div><div class="psname">PostgreSQL</div><div class="pslevel">RLS + migrations</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#8B5CF6"></span><div><div class="psname">Claude AI</div><div class="pslevel">Anthropic API</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#F55036"></span><div><div class="psname">Groq</div><div class="pslevel">LLM rápido</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#000"></span><div><div class="psname">Vercel</div><div class="pslevel">Deploy + Edge</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#635BFF"></span><div><div class="psname">Stripe</div><div class="pslevel">Pagamentos</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#68A063"></span><div><div class="psname">Node.js</div><div class="pslevel">APIs + scripts</div></div></div>
-        <div class="pstack-item"><span class="psdot" style="background:#F05032"></span><div><div class="psname">Git</div><div class="pslevel">GitHub + CI</div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- POR QUE CONTRATAR -->
-  <section id="psobre">
-    <div class="pw">
-      <div class="peyebrow fade-up">Por que me contratar</div>
-      <h2 class="ptitle fade-up" style="transition-delay:.06s">O que me<br>diferencia</h2>
-      <p class="psub fade-up" style="transition-delay:.10s">Não sou só dev. Sou alguém que entende o problema antes de abrir o editor.</p>
-      <div class="pabout-grid fade-up" style="transition-delay:.14s">
-        <div class="pabout-card">
-          <div class="pabout-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
-          <div class="pabout-t">Penso como usuário, construo como dev</div>
-          <p class="pabout-d">Anos atendendo clientes me ensinaram que o software perfeito é aquele que a pessoa não precisa pensar para usar. Carrego isso em cada decisão de interface.</p>
-        </div>
-        <div class="pabout-card">
-          <div class="pabout-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <div class="pabout-t">Projetos reais, não projetos de curso</div>
-          <p class="pabout-d">Cada app tem auth real, banco em produção, tratamento de erros e lógica de negócio que resolveu um problema concreto. Não é clone de tutorial.</p>
-        </div>
-        <div class="pabout-card">
-          <div class="pabout-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <div class="pabout-t">Velocidade de entrega com contexto</div>
-          <p class="pabout-d">Aprendi a construir rápido porque aprendo resolvendo. Integro IA no processo para iterar mais rápido sem abrir mão de qualidade e segurança.</p>
-        </div>
-        <div class="pabout-card">
-          <div class="pabout-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-          <div class="pabout-t">Comunicação clara e proativa</div>
-          <p class="pabout-d">Do comércio aprendi que comunicação é parte do produto. Atualizo, questiono e sugiro. Não espero que me digam o que fazer quando o caminho fica claro.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section id="pcontato">
-    <div class="pw">
-      <div class="pcta-box fade-up">
-        <div class="pcta-eye">Vamos conversar</div>
-        <h2 class="pcta-title">Tem um projeto?<br>Me chama.</h2>
-        <p class="pcta-sub">Aberto a freela, emprego CLT e oportunidades de estágio/júnior em tecnologia. Respondendo em até 24h.</p>
-        <div class="pcta-acts">
-          <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+vi+seu+portfólio+e+quero+conversar!"
-             target="_blank" rel="noopener" class="btn btn-whatsapp">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            Falar no WhatsApp
-          </a>
-          <button onclick="goCard()" class="pb" style="background:rgba(247,245,241,.10);color:rgba(247,245,241,.8);border:1px solid rgba(247,245,241,.12)">
-            Ver cartão digital
-          </button>
-        </div>
-        <p class="pcta-note">+55 (61) 99339-7747 · Brasília, DF</p>
-      </div>
-    </div>
-  </section>
-
-  <footer id="pfooter">
-    <div class="pw">
-      <div class="pfooter-i">
-        <p class="pfooter-c">© 2025 Ribamar Alves — Construído do zero, sem template.</p>
-        <div class="pfooter-l">
-          <a href="#" onclick="goCard(); return false;">Cartão digital</a>
-          <a href="#pprojetos">Projetos</a>
-          <a href="https://wa.me/5561993397747" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-</div><!-- /page-portfolio -->
+</div><!-- /view-portfolio -->
 
 
-<!-- ══════════════════════════════
-     ROTEAMENTO E LÓGICA
-══════════════════════════════ -->
+<!-- ═══════════════════════════════════
+     SCRIPT
+═══════════════════════════════════ -->
 <script>
-const PHONE   = "5561993397747";
-const WA_CARD = `https://wa.me/${PHONE}?text=${encodeURIComponent("Olá Ribamar, te encontrei pelo cartão digital!")}`;
+/* ─── Constants ─── */
+const PHONE    = "5561993397747";
+const CARD_URL = "https://portiflio-one.vercel.app/?card";
+const WA_CARD  = `https://wa.me/${PHONE}?text=${encodeURIComponent("Olá Ribamar, te encontrei pelo cartão digital!")}`;
 
-/* ─── Router ─── */
+/* ─── Router principal ─── */
+function isCard() { return location.search.includes("card") || location.hash === "#card"; }
+
 function showCard() {
-  document.getElementById("page-card").classList.add("active");
-  document.getElementById("page-portfolio").classList.remove("active");
-  document.body.style.background = "#07070A";
-  document.getElementById("meta-theme").content = "#07070A";
+  document.getElementById("view-card").classList.add("on");
+  document.getElementById("view-portfolio").classList.remove("on");
   document.title = "Ribamar Alves · Cartão Digital";
+  document.getElementById("meta-theme").content = "#0A090F";
   history.replaceState(null, "", "?card");
+  document.body.style.overflow = "hidden";
 }
 
 function showPortfolio() {
-  document.getElementById("page-portfolio").classList.add("active");
-  document.getElementById("page-card").classList.remove("active");
-  document.body.style.background = "#F7F5F1";
-  document.getElementById("meta-theme").content = "#F7F5F1";
+  document.getElementById("view-portfolio").classList.add("on");
+  document.getElementById("view-card").classList.remove("on");
   document.title = "Ribamar Alves · Dev Full-Stack";
+  document.getElementById("meta-theme").content = "#0A090F";
   history.replaceState(null, "", location.pathname);
+  triggerReveals();
+}
+
+function goCard()      { showCard(); }
+function goPortfolio() { showPortfolio(); }
+
+document.addEventListener("DOMContentLoaded", () => {
+  isCard() ? showCard() : showPortfolio();
+});
+
+/* ─── Portfolio page navigation ─── */
+const PAGES = ["home", "projects", "contact"];
+let currentPage = "home";
+let transitioning = false;
+
+function goPage(id) {
+  if (id === currentPage || transitioning) return;
+  transitioning = true;
+
+  const fromEl = document.getElementById("page-" + currentPage);
+  const toEl   = document.getElementById("page-" + id);
+  const fromIdx = PAGES.indexOf(currentPage);
+  const toIdx   = PAGES.indexOf(id);
+  const goRight = toIdx > fromIdx;
+
+  // Exit current
+  fromEl.classList.remove("active");
+  fromEl.classList.add(goRight ? "exit-left" : "exit-right");
+
+  // Prepare incoming
+  toEl.style.transition = "none";
+  toEl.classList.remove("active", "exit-left", "exit-right");
+  toEl.style.transform = goRight ? "translateX(40px)" : "translateX(-40px)";
+  toEl.style.opacity   = "0";
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      toEl.style.transition = "";
+      toEl.style.transform  = "";
+      toEl.style.opacity    = "";
+      toEl.classList.add("active");
+
+      setTimeout(() => {
+        fromEl.classList.remove("exit-left", "exit-right");
+        transitioning = false;
+        triggerReveals();
+      }, 440);
+    });
+  });
+
+  currentPage = id;
+
+  // Update nav pills
+  document.querySelectorAll(".pnav-pill").forEach(b => {
+    b.classList.toggle("active", b.dataset.page === id);
+  });
+  // Update dots
+  document.querySelectorAll(".pdot").forEach(d => {
+    d.classList.toggle("active", d.dataset.page === id);
+  });
+}
+
+/* ─── Reveal animations ─── */
+let revealObs;
+function triggerReveals() {
+  if (!revealObs) {
+    revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("in"); });
+    }, { threshold: 0.08 });
+  }
+  document.querySelectorAll(".reveal:not(.in)").forEach(el => revealObs.observe(el));
+  // Force home reveals since it's always visible
   setTimeout(() => {
-    document.querySelectorAll(".phero .fade-up").forEach(el => el.classList.add("visible"));
+    document.querySelectorAll("#page-" + currentPage + " .reveal").forEach(el => el.classList.add("in"));
   }, 60);
 }
 
-function goCard()      { showCard();      window.scrollTo(0, 0); }
-function goPortfolio() { showPortfolio(); window.scrollTo(0, 0); }
-
-/* ─── Init ─── */
-document.addEventListener("DOMContentLoaded", () => {
-  const isCard = location.search.includes("card") || location.hash === "#card";
-  isCard ? showCard() : showPortfolio();
+/* ─── Keyboard navigation ─── */
+document.addEventListener("keydown", e => {
+  if (!document.getElementById("view-portfolio").classList.contains("on")) return;
+  const idx = PAGES.indexOf(currentPage);
+  if (e.key === "ArrowRight" && idx < PAGES.length - 1) goPage(PAGES[idx + 1]);
+  if (e.key === "ArrowLeft"  && idx > 0)                 goPage(PAGES[idx - 1]);
 });
 
-/* ─── Sticky nav ─── */
-const pnav = document.getElementById("pnav");
-window.addEventListener("scroll", () => {
-  if (document.getElementById("page-portfolio").classList.contains("active")) {
-    pnav.classList.toggle("stuck", window.scrollY > 20);
-  }
-}, { passive: true });
-
-/* ─── Scroll reveal ─── */
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
-}, { threshold: 0.10, rootMargin: "0px 0px -40px 0px" });
-document.querySelectorAll(".fade-up").forEach(el => obs.observe(el));
-
-/* ─── QR toggle ─── */
-let qrReady = false;
+/* ─── QR Code ─── */
+let qrMade = false;
 function toggleQR() {
-  const panel = document.getElementById("c-qr-panel");
-  const btn   = document.getElementById("c-qr-btn");
+  const panel = document.getElementById("card-qr-panel");
+  const btn   = document.getElementById("qr-toggle-btn");
   const open  = panel.classList.contains("open");
   if (!open) {
-    if (!qrReady) {
-      new QRCode(document.getElementById("c-qrcode"), {
-        text: WA_CARD, width: 180, height: 180,
+    if (!qrMade) {
+      new QRCode(document.getElementById("card-qrcode"), {
+        text: WA_CARD, width: 170, height: 170,
         colorDark: "#000", colorLight: "#fff",
         correctLevel: QRCode.CorrectLevel.M
       });
-      qrReady = true;
+      qrMade = true;
     }
     panel.classList.add("open");
-    btn.style.color = "var(--gold)"; btn.style.borderColor = "rgba(201,169,110,.3)";
+    btn.classList.add("active");
   } else {
     panel.classList.remove("open");
-    btn.style.color = btn.style.borderColor = "";
+    btn.classList.remove("active");
+  }
+}
+
+/* ─── NFC Modal ─── */
+function openNfcModal() {
+  document.getElementById("nfc-overlay").classList.add("open");
+}
+function closeNfcModal(e) {
+  if (!e || e.target === document.getElementById("nfc-overlay")) {
+    document.getElementById("nfc-overlay").classList.remove("open");
+    const s = document.getElementById("nfc-status");
+    s.textContent = ""; s.className = "nfc-status-text";
+  }
+}
+
+function copyUrl() {
+  navigator.clipboard.writeText(CARD_URL).then(() => {
+    const btn = document.querySelector(".nfc-copy-btn");
+    btn.textContent = "Copiado ✓";
+    setTimeout(() => { btn.textContent = "Copiar"; }, 2000);
+  });
+}
+
+async function writeNFC() {
+  const status = document.getElementById("nfc-status");
+  const btn    = document.getElementById("nfc-write-btn");
+
+  if (!("NDEFReader" in window)) {
+    status.textContent = "Use o app NFC Tools para programar o cartão físico.";
+    status.className   = "nfc-status-text info";
+    return;
+  }
+
+  try {
+    btn.disabled = true;
+    status.textContent = "Aproxime o dispositivo NFC...";
+    status.className   = "nfc-status-text info";
+
+    const ndef = new NDEFReader();
+    await ndef.write({ records: [{ recordType: "url", data: CARD_URL }] });
+
+    status.textContent = "✓ Gravado com sucesso!";
+    status.className   = "nfc-status-text ok";
+    btn.disabled = false;
+
+    setTimeout(() => {
+      status.textContent = ""; status.className = "nfc-status-text";
+    }, 4000);
+  } catch (err) {
+    if (err.name === "NotAllowedError") {
+      status.textContent = "Permissão negada. Libere o acesso NFC no navegador.";
+    } else {
+      status.textContent = "Nenhum dispositivo encontrado. Tente novamente.";
+    }
+    status.className = "nfc-status-text err";
+    btn.disabled = false;
   }
 }
 
 /* ─── Salvar contato ─── */
 function saveContact() {
-  const v = ["BEGIN:VCARD","VERSION:3.0","FN:Ribamar Alves",
-    `TEL;TYPE=CELL:+${PHONE}`,"TITLE:Consultor Comercial & Dev Full-Stack",
-    "ADR:;;Brasília;;;DF;Brasil","URL:https://ribamaralves.dev","END:VCARD"].join("\n");
+  const v = [
+    "BEGIN:VCARD","VERSION:3.0","FN:Ribamar Alves",
+    `TEL;TYPE=CELL:+${PHONE}`,
+    "TITLE:Consultor Comercial & Dev Full-Stack",
+    "ADR:;;Brasília;;;DF;Brasil",
+    "URL:" + CARD_URL,
+    "END:VCARD"
+  ].join("\n");
   const a = Object.assign(document.createElement("a"), {
     href: URL.createObjectURL(new Blob([v], { type: "text/vcard;charset=utf-8" })),
     download: "Ribamar_Alves.vcf"
   });
   a.click();
 }
-
-/* ─── NFC ─── */
-async function writeNFC() {
-  const s = document.getElementById("c-nfc-status");
-  if (!("NDEFReader" in window)) {
-    s.textContent = "NFC não suportado neste dispositivo";
-    s.className = "c-nfc err"; return;
-  }
-  try {
-    s.textContent = "Aproxime os dispositivos..."; s.className = "c-nfc";
-    await (new NDEFReader()).write({ records: [{ recordType: "url", data: WA_CARD }] });
-    s.textContent = "✓ Pronto — encoste no outro celular"; s.className = "c-nfc ok";
-    setTimeout(() => { s.textContent = ""; s.className = "c-nfc"; }, 4000);
-  } catch { s.textContent = "Erro ao gravar NFC"; s.className = "c-nfc err"; }
-}
 </script>
-
 </body>
 </html>
