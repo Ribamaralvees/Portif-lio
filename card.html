@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <title>Ribamar Alves</title>
-<meta name="description" content="Cartão digital de Ribamar Alves — Consultor Comercial & Dev Full-Stack, Brasília DF.">
-
-<!-- PWA -->
+<meta name="description" content="Ribamar Alves — Consultor Comercial & Dev Full-Stack, Brasília DF.">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#07070B">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14,511 +12,164 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ribamar">
 <link rel="apple-touch-icon" href="icon-192.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
 <style>
-:root {
-  --bg:    #07070B;
-  --card:  #0E0D15;
-  --gold:  #C8A96A;
-  --gold2: #E4C87E;
-  --glt:   rgba(200,169,106,0.12);
-  --gmd:   rgba(200,169,106,0.24);
-  --text:  #EDE8E0;
-  --text2: rgba(237,232,224,0.55);
-  --text3: rgba(237,232,224,0.28);
-  --green: #25D366;
-  --bord:  rgba(200,169,106,0.22);
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body {
-  height: 100%; width: 100%; overflow: hidden;
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-  touch-action: none;
-}
-
-body {
-  background: var(--bg); color: var(--text);
-  font-family: 'Outfit', sans-serif;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  min-height: 100svh; position: relative;
-  user-select: none; -webkit-user-select: none;
-}
-
-/* Deep space background */
-.bg-layer {
-  position: fixed; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(200,169,106,.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(37,211,102,.04) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 20% 70%, rgba(100,80,160,.05) 0%, transparent 60%);
-}
-.bg-grain {
-  position: fixed; inset: 0; pointer-events: none; opacity: .4;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-}
-
-/* ─── SCENE ─── */
-.scene {
-  position: relative; z-index: 2;
-  perspective: 1100px;
-  cursor: pointer;
-  /* Touch: prevent text selection & context menu */
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* ─── CARD ─── */
-.card {
-  --rot-x: 0deg; --rot-y: 0deg;
-  --shine-x: 50%; --shine-y: 30%;
-  width: min(86vw, 320px);
-  aspect-ratio: 0.62;  /* ~credit card portrait */
-  transform-style: preserve-3d;
-  transform: rotateX(var(--rot-x)) rotateY(var(--rot-y));
-  transition: transform 0.12s ease-out;
-  border-radius: 22px;
-  will-change: transform;
-}
-.card.flipping { transition: transform 0.65s cubic-bezier(.4,0,.2,1); }
-.card.flipped  { transform: rotateX(var(--rot-x)) rotateY(calc(180deg + var(--rot-y))); }
-
-/* ─── CARD FACES ─── */
-.face {
-  position: absolute; inset: 0;
-  border-radius: 22px; backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  overflow: hidden;
-  background: var(--card);
-  border: 1px solid var(--bord);
-  box-shadow:
-    0 0 0 0.5px rgba(200,169,106,.08) inset,
-    0 2px 4px rgba(0,0,0,.4),
-    0 20px 60px rgba(0,0,0,.6),
-    0 40px 100px rgba(0,0,0,.4);
-}
-.face-back { transform: rotateY(180deg); }
-
-/* Gold line top */
-.face::before {
-  content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 1.5px;
-  background: linear-gradient(90deg, transparent, var(--gold), rgba(228,200,126,.5), transparent);
-}
-
-/* Shine effect */
-.face::after {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
-  background: radial-gradient(ellipse 60% 50% at var(--shine-x, 50%) var(--shine-y, 30%),
-    rgba(255,255,255,.06) 0%, transparent 65%);
-  pointer-events: none; mix-blend-mode: screen;
-  transition: none;
-}
-
-/* ─── CARD FRONT CONTENT ─── */
-.front-inner {
-  position: relative; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 28px 24px 24px; gap: 0;
-}
-
-/* Watermark */
-.wm {
-  position: absolute; bottom: 16px; right: 20px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 56px; font-weight: 300; line-height: 1;
-  color: rgba(200,169,106,.07); letter-spacing: -2px;
-  pointer-events: none; user-select: none;
-}
-
-/* Corner details */
-.corner-tl, .corner-br {
-  position: absolute; width: 20px; height: 20px;
-  border-color: rgba(200,169,106,.25); border-style: solid;
-}
-.corner-tl { top: 14px; left: 14px; border-width: 1px 0 0 1px; border-radius: 4px 0 0 0; }
-.corner-br { bottom: 14px; right: 14px; border-width: 0 1px 1px 0; border-radius: 0 0 4px 0; }
-
-/* Photo */
-.photo-ring {
-  position: relative; width: 96px; height: 96px;
-  margin-bottom: 18px;
-}
-.photo-ring::before {
-  content: ''; position: absolute; inset: -3px; border-radius: 50%;
-  background: conic-gradient(from 0deg, var(--gold), rgba(228,200,126,.3) 40%, rgba(228,200,126,.3) 60%, var(--gold));
-  opacity: .7; animation: spin 8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.photo-ring::after {
-  content: ''; position: absolute; inset: -6px; border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent, rgba(200,169,106,.15) 50%, transparent);
-  animation: spin 8s linear infinite reverse;
-}
-.photo-img {
-  position: relative; width: 100%; height: 100%; border-radius: 50%;
-  overflow: hidden; z-index: 1;
-  border: 1.5px solid rgba(200,169,106,.4);
-  box-shadow: 0 0 20px rgba(200,169,106,.15), 0 4px 16px rgba(0,0,0,.5);
-}
-.photo-img img { width:100%; height:100%; object-fit:cover; object-position:top center; }
-
-/* Name */
-.card-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 30px; font-weight: 400;
-  letter-spacing: -.3px; text-align: center;
-  line-height: 1; margin-bottom: 8px;
-  color: var(--text);
-}
-.card-name em { font-style: italic; color: var(--gold2); }
-
-/* Role */
-.card-role {
-  font-size: 8.5px; font-weight: 600; letter-spacing: 2.4px;
-  text-transform: uppercase; color: var(--text2);
-  text-align: center; margin-bottom: 20px;
-}
-
-/* Divider */
-.card-div {
-  width: 40px; height: 1px; margin-bottom: 16px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
-
-/* Info row */
-.card-info { display: flex; gap: 18px; align-items: center; margin-bottom: 0; }
-.info-item {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 10.5px; color: var(--text3);
-}
-.info-item svg { color: var(--gold); opacity: .7; flex-shrink: 0; }
-
-/* Tap hint at bottom */
-.tap-hint {
-  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
-  font-size: 9px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase;
-  display: flex; align-items: center; gap: 5px;
-  animation: pulse 2.5s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:.28} 50%{opacity:.55} }
-
-/* ─── CARD BACK CONTENT ─── */
-.back-inner {
-  position: relative; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 22px 20px;
-  gap: 0;
-}
-
-.back-label {
-  font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 14px;
-  display: flex; align-items: center; gap: 7px;
-}
-.back-label::before, .back-label::after {
-  content: ''; width: 14px; height: 1px; background: var(--gold); display: block; opacity: .5;
-}
-
-.qr-wrap {
-  background: #fff; border-radius: 14px;
-  padding: 12px; margin-bottom: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,.4), 0 0 0 1px rgba(200,169,106,.1);
-}
-
-.back-sub {
-  font-size: 10px; color: var(--text3); text-align: center;
-  letter-spacing: .5px; line-height: 1.6; margin-bottom: 20px;
-}
-
-/* Back action buttons */
-.back-actions { width: 100%; display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
-.back-btn {
-  width: 100%; height: 40px; border-radius: 11px;
-  border: none; cursor: pointer; font-family: 'Outfit', sans-serif;
-  font-size: 12.5px; font-weight: 600;
-  display: flex; align-items: center; justify-content: center; gap: 7px;
-  transition: all .18s; -webkit-tap-highlight-color: transparent;
-  text-decoration: none;
-}
-.back-btn:active { transform: scale(.97); }
-.back-btn-wa {
-  background: var(--green); color: #fff;
-  box-shadow: 0 4px 16px rgba(37,211,102,.22);
-}
-.back-btn-port { background: rgba(255,255,255,.07); color: var(--text); border: 1px solid rgba(255,255,255,.1); }
-.back-btn-save { background: var(--glt); color: var(--gold); border: 1px solid var(--gmd); }
-
-.back-tap {
-  font-size: 9px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase;
-  display: flex; align-items: center; gap: 4px;
-  animation: pulse 2.5s infinite;
-}
-
-/* ─── BOTTOM BAR ─── */
-.bottom-bar {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-  padding: 0 0 max(20px, env(safe-area-inset-bottom));
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-}
-
-/* Install banner */
-.install-banner {
-  display: none;
-  align-items: center; gap: 10px;
-  background: rgba(14,13,21,.92); backdrop-filter: blur(16px);
-  border: 1px solid rgba(200,169,106,.2); border-radius: 14px;
-  padding: 10px 16px; margin: 0 20px;
-  cursor: pointer; transition: all .2s;
-  -webkit-tap-highlight-color: transparent;
-}
-.install-banner:hover { border-color: rgba(200,169,106,.4); }
-.install-banner.show { display: flex; }
-.install-icon {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: var(--gold); display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.install-text { flex: 1; }
-.install-title { font-size: 12.5px; font-weight: 600; color: var(--text); }
-.install-sub   { font-size: 10.5px; color: var(--text3); margin-top: 1px; }
-.install-arrow { color: var(--gold); font-size: 16px; }
-
-/* Portfolio link */
-.port-link {
-  font-size: 11px; color: var(--text3); text-decoration: none;
-  display: flex; align-items: center; gap: 4px;
-  transition: color .2s; padding-bottom: 4px;
-}
-.port-link:hover { color: var(--text2); }
-</style>
-</head>
-<body>
-
-<div class="bg-layer"></div>
-<div class="bg-grain"></div>
-
-<!-- CARD SCENE -->
-<div class="scene" id="scene">
-  <div class="card" id="card">
-
-    <!-- FRONT -->
-    <div class="face face-front">
-      <div class="front-inner">
-        <div class="wm">RA</div>
-        <div class="corner-tl"></div>
-        <div class="corner-br"></div>
-
-        <div class="photo-ring">
-          <div class="photo-img">
-            <img src="eu.webp" alt="Ribamar Alves" draggable="false">
-          </div>
-        </div>
-
-        <div class="card-name">Ribamar <em>Alves</em></div>
-        <div class="card-role">Consultor Comercial &amp; Dev Full-Stack</div>
-        <div class="card-div"></div>
-
-        <div class="card-info">
-          <div class="info-item">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Brasília, DF
-          </div>
-          <div class="info-item">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            +55 61 99339-7747
-          </div>
-        </div>
-
-        <div class="tap-hint">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a5 5 0 0110 0v4"/><rect x="3" y="11" width="18" height="11" rx="2"/></svg>
-          toque para ver contatos
-        </div>
-      </div>
-    </div>
-
-    <!-- BACK -->
-    <div class="face face-back">
-      <div class="back-inner">
-        <div class="back-label">Contatos</div>
-
-        <div class="qr-wrap">
-          <div id="qrcode"></div>
-        </div>
-        <p class="back-sub">Aponte a câmera<br>para abrir no WhatsApp</p>
-
-        <div class="back-actions">
-          <a href="https://wa.me/5561993397747?text=Olá+Ribamar%2C+te+encontrei+pelo+cartão+digital!"
-             target="_blank" rel="noopener" class="back-btn back-btn-wa">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-            Falar no WhatsApp
-          </a>
-          <a href="index.html" class="back-btn back-btn-port">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            Ver Portfólio
-          </a>
-          <button onclick="saveContact()" class="back-btn back-btn-save">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Salvar Contato
-          </button>
-        </div>
-
-        <div class="back-tap">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-          voltar
-        </div>
-      </div>
-    </div>
-
-  </div>
+CSSEOF
+cat >> /tmp/v4/card.html << 'STYLE'
+:root{--bg:#07070B;--card:#0D0C14;--bg2:#13121C;--gold:#C8A96A;--glt:rgba(200,169,106,.11);--gmd:rgba(200,169,106,.22);--text:#EDE8E0;--t2:rgba(237,232,224,.55);--t3:rgba(237,232,224,.28);--bord:rgba(200,169,106,.20);--grn:#25D366}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%;overflow:hidden;overscroll-behavior:none;-webkit-font-smoothing:antialiased;touch-action:none}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100svh;user-select:none;-webkit-user-select:none}
+.amb{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 25%,rgba(200,169,106,.08) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(37,211,102,.04) 0%,transparent 60%)}
+.grain{position:fixed;inset:0;pointer-events:none;opacity:.38;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E")}
+.scene{position:relative;z-index:2;perspective:1100px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.card{--rx:0deg;--ry:0deg;--sx:50%;--sy:30%;width:min(84vw,310px);aspect-ratio:.615;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .14s ease-out;border-radius:22px;will-change:transform}
+.card.fa{transition:transform .65s cubic-bezier(.4,0,.2,1)}
+.card.fl{transform:rotateX(var(--rx)) rotateY(calc(180deg + var(--ry)))}
+.face{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;background:var(--card);border:1px solid var(--bord);box-shadow:0 0 0 .5px rgba(200,169,106,.07) inset,0 4px 6px rgba(0,0,0,.35),0 20px 56px rgba(0,0,0,.55),0 40px 90px rgba(0,0,0,.35)}
+.face-back{transform:rotateY(180deg)}
+.face::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),rgba(200,169,106,.4),transparent);z-index:1}
+.face::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(ellipse 65% 55% at var(--sx) var(--sy),rgba(255,255,255,.055) 0%,transparent 65%);pointer-events:none;mix-blend-mode:screen}
+.fi{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 22px 20px}
+.wm{position:absolute;bottom:14px;right:18px;font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;line-height:1;color:rgba(200,169,106,.065);letter-spacing:-2px;pointer-events:none}
+.cr{position:absolute;width:18px;height:18px;border-color:rgba(200,169,106,.22);border-style:solid}
+.ctl{top:12px;left:12px;border-width:1px 0 0 1px;border-radius:3px 0 0 0}
+.cbr{bottom:12px;right:12px;border-width:0 1px 1px 0;border-radius:0 0 3px 0}
+.phr{position:relative;width:min(22vw,88px);height:min(22vw,88px);margin-bottom:16px;flex-shrink:0}
+.phr::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(from 0deg,var(--gold),rgba(200,169,106,.2) 40%,rgba(200,169,106,.2) 60%,var(--gold));opacity:.65;animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.phi{position:relative;z-index:1;width:100%;height:100%;border-radius:50%;overflow:hidden;border:1.5px solid rgba(200,169,106,.38);box-shadow:0 0 18px rgba(200,169,106,.14),0 4px 14px rgba(0,0,0,.5)}
+.phi img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.fn{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,6.5vw,28px);font-weight:400;letter-spacing:-.3px;text-align:center;line-height:1;margin-bottom:6px}
+.fn em{font-style:italic;color:var(--gold)}
+.fr{font-size:clamp(7px,2vw,8.5px);font-weight:600;letter-spacing:2.2px;text-transform:uppercase;color:var(--t2);text-align:center;margin-bottom:16px}
+.fd{width:36px;height:1px;margin-bottom:14px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.finfo{display:flex;gap:16px;align-items:center}
+.fi-i{display:flex;align-items:center;gap:4px;font-size:clamp(9px,2.5vw,10.5px);color:var(--t3)}
+.fi-i svg{color:var(--gold);opacity:.7;flex-shrink:0}
+.ftap{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:8.5px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:4px;animation:bl 2.5s infinite}
+@keyframes bl{0%,100%{opacity:.28}50%{opacity:.55}}
+.bi{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 18px 16px}
+.blbl{font-size:8.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.blbl::before,.blbl::after{content:'';width:12px;height:1px;background:var(--gold);opacity:.5;display:block}
+.qrb{background:#fff;border-radius:12px;padding:10px;margin-bottom:10px;box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.bsub{font-size:9.5px;color:var(--t3);text-align:center;line-height:1.6;margin-bottom:16px}
+.bbtns{width:100%;display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.bb{width:100%;height:38px;border-radius:10px;border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;transition:all .18s;-webkit-tap-highlight-color:transparent}
+.bb:active{transform:scale(.97)}
+.bb-wa{background:var(--grn);color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.22)}
+.bbr{display:flex;gap:6px}
+.bb-sh{flex:1;background:var(--bg2);color:var(--text);border:1px solid rgba(255,255,255,.1)}
+.bb-sv{flex:1;background:var(--glt);color:var(--gold);border:1px solid var(--gmd)}
+.bb-nf{width:100%;height:32px;background:transparent;color:var(--t3);border:1px solid rgba(255,255,255,.06);border-radius:9px;font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .18s;-webkit-tap-highlight-color:transparent}
+.bb-nf:hover{background:var(--glt);color:var(--gold);border-color:var(--gmd)}
+.btap{font-size:8.5px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:4px;animation:bl 2.5s infinite}
+.ov{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:flex-end;justify-content:center;padding:0 0 max(16px,env(safe-area-inset-bottom));opacity:0;pointer-events:none;transition:opacity .28s}
+.ov.on{opacity:1;pointer-events:all}
+.sh{background:var(--bg2);border:1px solid rgba(255,255,255,.08);border-radius:24px 24px 16px 16px;width:100%;max-width:440px;padding:20px 20px max(20px,env(safe-area-inset-bottom));transform:translateY(24px);transition:transform .32s cubic-bezier(.22,.68,0,1)}
+.ov.on .sh{transform:translateY(0)}
+.shh{width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.12);margin:0 auto 16px}
+.sht{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;letter-spacing:-.4px;margin-bottom:6px}
+.shs{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:18px}
+.sts{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.st{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px 14px}
+.stn{width:22px;height:22px;border-radius:6px;background:var(--glt);border:1px solid var(--gmd);color:var(--gold);font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.stt{font-size:12px;color:var(--text);line-height:1.65}
+.stt strong{color:var(--gold);font-weight:600}
+.surl{background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:9px 12px;font-size:11px;color:var(--t2);font-family:monospace;word-break:break-all;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.scopy{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:var(--text);border-radius:7px;padding:4px 11px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .18s}
+.scopy:hover{background:rgba(255,255,255,.14)}
+.nst{font-size:11.5px;text-align:center;min-height:16px;margin-bottom:8px;transition:color .22s}
+.nst.ok{color:var(--grn)}.nst.err{color:#f87171}.nst.info{color:var(--gold)}
+.sw{width:100%;height:42px;background:var(--glt);border:1px solid var(--gmd);color:var(--gold);border-radius:11px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .18s;margin-bottom:8px}
+.sw:hover{background:var(--gmd)}.sw:disabled{opacity:.45;cursor:not-allowed}
+.sc{width:100%;height:38px;background:transparent;border:1px solid rgba(255,255,255,.07);color:var(--t3);border-radius:11px;font-family:'Outfit',sans-serif;font-size:12.5px;cursor:pointer;transition:all .18s}
+.sc:hover{background:rgba(255,255,255,.05);color:var(--t2)}
+.bot{position:fixed;bottom:0;left:0;right:0;z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 16px max(18px,env(safe-area-inset-bottom))}
+.ib{display:none;width:100%;max-width:340px;align-items:center;gap:10px;background:rgba(13,12,20,.94);backdrop-filter:blur(16px);border:1px solid rgba(200,169,106,.18);border-radius:14px;padding:10px 14px;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.ib:hover{border-color:rgba(200,169,106,.35)}.ib.show{display:flex}
+.iico{width:30px;height:30px;border-radius:8px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.it2{flex:1}.it2t{font-size:12px;font-weight:600;color:var(--text)}.it2s{font-size:10px;color:var(--t3);margin-top:1px}
+.pl{font-size:10.5px;color:var(--t3);text-decoration:none;display:flex;align-items:center;gap:4px;transition:color .2s}
+.pl:hover{color:var(--t2)}
+STYLE
+echo "CSS written, adding HTML..."</style></head><body>
+<div class="amb"></div><div class="grain"></div>
+<div class="scene" id="scene"><div class="card" id="card">
+<div class="face face-front"><div class="fi">
+<div class="wm">RA</div><div class="cr ctl"></div><div class="cr cbr"></div>
+<div class="phr"><div class="phi"><img src="eu.webp" alt="Ribamar Alves" draggable="false"></div></div>
+<div class="fn">Ribamar <em>Alves</em></div>
+<div class="fr">Consultor Comercial &amp; Dev Full-Stack</div>
+<div class="fd"></div>
+<div class="finfo">
+<div class="fi-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Brasília, DF</div>
+<div class="fi-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>(61) 99339-7747</div>
 </div>
-
-<!-- BOTTOM -->
-<div class="bottom-bar">
-  <div class="install-banner" id="install-banner">
-    <div class="install-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#07070B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    </div>
-    <div class="install-text">
-      <div class="install-title">Instalar no celular</div>
-      <div class="install-sub">Acesso rápido pela tela inicial</div>
-    </div>
-    <span class="install-arrow">→</span>
-  </div>
-  <a href="index.html" class="port-link">
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-    Ver portfólio completo
-  </a>
+<div class="ftap"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>toque para ver contatos</div>
+</div></div>
+<div class="face face-back"><div class="bi">
+<div class="blbl">Contatos</div>
+<div class="qrb"><div id="qrcode"></div></div>
+<p class="bsub">Aponte a câmera para o WhatsApp</p>
+<div class="bbtns">
+<a href="https://wa.me/5561993397747?text=Ol%C3%A1+Ribamar%2C+te+encontrei+pelo+cart%C3%A3o+digital!" target="_blank" rel="noopener" class="bb bb-wa"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.847L.057 23.483a.5.5 0 00.617.608l5.77-1.513A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.027-1.382l-.36-.214-3.728.978.996-3.635-.234-.374A9.797 9.797 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>Falar no WhatsApp</a>
+<div class="bbr">
+<button onclick="shareCard()" class="bb bb-sh"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Compartilhar</button>
+<button onclick="saveContact()" class="bb bb-sv"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Salvar</button>
 </div>
-
+<button onclick="openNfc()" class="bb-nf"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a9 9 0 019-9"/><path d="M3 12a4 4 0 014-4"/><circle cx="3" cy="17" r="1"/></svg>Configurar NFC no cartão físico</button>
+</div>
+<div class="btap"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>voltar</div>
+</div></div>
+</div></div>
+<div class="bot">
+<div class="ib" id="ib"><div class="iico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#07070B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><div class="it2"><div class="it2t">Instalar no celular</div><div class="it2s">Acesso rápido pela tela inicial</div></div><span style="color:var(--gold);font-size:15px">→</span></div>
+<a href="index.html" class="pl"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Ver portfólio completo</a>
+</div>
+<div class="ov" id="ov" onclick="mc(event)"><div class="sh" id="sh">
+<div class="shh"></div>
+<div class="sht">Configurar NFC</div>
+<p class="shs">O chip NFC do cartão físico abre seu cartão digital automaticamente quando alguém aproxima o celular — sem app, sem digitar, sem QR.</p>
+<div class="sts">
+<div class="st"><div class="stn">1</div><div class="stt">Baixe o app <strong>NFC Tools</strong> (gratuito — Android e iOS).</div></div>
+<div class="st"><div class="stn">2</div><div class="stt">Abra → <strong>Escrita</strong> → <strong>Adicionar registro</strong> → <strong>URL / URI</strong>.</div></div>
+<div class="st"><div class="stn">3</div><div class="stt">Cole o link abaixo, toque em <strong>OK</strong> → <strong>Gravar</strong> e aproxime do chip.</div></div>
+<div class="st"><div class="stn">4</div><div class="stt">Pronto. O chip fica gravado para sempre. Qualquer celular com NFC abrirá seu cartão.</div></div>
+</div>
+<div class="surl"><span id="nurl">https://portiflio-one.vercel.app/card</span><button class="scopy" id="cbtn" onclick="copyUrl()">Copiar</button></div>
+<div class="nst" id="nst"></div>
+<button class="sw" id="swbtn" onclick="writeNFC()" style="display:none"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a9 9 0 019-9"/><path d="M3 12a4 4 0 014-4"/><circle cx="3" cy="17" r="1"/></svg>Gravar direto pelo Chrome (Android)</button>
+<button class="sc" onclick="closeNfc()">Fechar</button>
+</div></div>
 <script>
-/* ─── QR Code ─── */
-const WA = "https://wa.me/5561993397747?text=" + encodeURIComponent("Olá Ribamar, te encontrei pelo cartão digital!");
-new QRCode(document.getElementById("qrcode"), {
-  text: WA, width: 160, height: 160,
-  colorDark: "#000", colorLight: "#fff",
-  correctLevel: QRCode.CorrectLevel.M
-});
-
-/* ─── Flip ─── */
-const scene = document.getElementById("scene");
-const card  = document.getElementById("card");
-let flipped = false, canFlip = true;
-
-function flipCard() {
-  if (!canFlip) return;
-  canFlip = false;
-  flipped = !flipped;
-  card.classList.add("flipping");
-  card.classList.toggle("flipped", flipped);
-  setTimeout(() => { card.classList.remove("flipping"); canFlip = true; }, 680);
-}
-
-scene.addEventListener("click", flipCard);
-scene.addEventListener("touchend", e => { e.preventDefault(); flipCard(); }, { passive: false });
-
-/* ─── 3D Tilt ─── */
-let tiltX = 0, tiltY = 0;
-let targetX = 0, targetY = 0;
-let gyroActive = false;
-let rafId;
-
-function lerp(a, b, t) { return a + (b - a) * t; }
-
-function applyTilt(rx, ry) {
-  targetX = Math.max(-12, Math.min(12, rx));
-  targetY = Math.max(-12, Math.min(12, ry));
-}
-
-function animateTilt() {
-  tiltX = lerp(tiltX, targetX, 0.08);
-  tiltY = lerp(tiltY, targetY, 0.08);
-
-  const shineX = 50 + tiltY * 2.5;
-  const shineY = 40 - tiltX * 2.5;
-
-  card.style.setProperty("--rot-x", tiltX + "deg");
-  card.style.setProperty("--rot-y", tiltY + "deg");
-  card.style.setProperty("--shine-x", shineX + "%");
-  card.style.setProperty("--shine-y", shineY + "%");
-
-  rafId = requestAnimationFrame(animateTilt);
-}
-animateTilt();
-
-/* Gyroscope (mobile) */
-function reqGyro() {
-  if (typeof DeviceOrientationEvent !== "undefined" &&
-      typeof DeviceOrientationEvent.requestPermission === "function") {
-    DeviceOrientationEvent.requestPermission().then(s => {
-      if (s === "granted") enableGyro();
-    });
-  } else {
-    enableGyro();
-  }
-}
-
-function enableGyro() {
-  let baseB = null, baseG = null;
-  window.addEventListener("deviceorientation", e => {
-    gyroActive = true;
-    if (baseB === null) { baseB = e.beta; baseG = e.gamma; }
-    applyTilt((e.beta - baseB) * .5, (e.gamma - baseG) * .5);
-  }, { passive: true });
-}
-
-/* Auto-enable gyro after first touch */
-document.addEventListener("touchstart", () => {
-  if (!gyroActive) reqGyro();
-}, { once: true, passive: true });
-
-/* Mouse tilt (desktop) */
-document.addEventListener("mousemove", e => {
-  if (gyroActive) return;
-  const cx = window.innerWidth  / 2;
-  const cy = window.innerHeight / 2;
-  applyTilt(-(e.clientY - cy) / 50, (e.clientX - cx) / 50);
-});
-document.addEventListener("mouseleave", () => { if (!gyroActive) applyTilt(0, 0); });
-
-/* ─── Install prompt ─── */
-let deferredPrompt;
-window.addEventListener("beforeinstallprompt", e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById("install-banner").classList.add("show");
-});
-document.getElementById("install-banner").addEventListener("click", async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  if (outcome === "accepted") document.getElementById("install-banner").classList.remove("show");
-  deferredPrompt = null;
-});
-
-/* ─── Save vCard ─── */
-function saveContact() {
-  const v = ["BEGIN:VCARD","VERSION:3.0","FN:Ribamar Alves",
-    "TEL;TYPE=CELL:+5561993397747",
-    "TITLE:Consultor Comercial & Dev Full-Stack",
-    "ADR:;;Brasília;;;DF;Brasil",
-    "URL:https://portiflio-one.vercel.app","END:VCARD"].join("\n");
-  Object.assign(document.createElement("a"),{
-    href: URL.createObjectURL(new Blob([v],{type:"text/vcard;charset=utf-8"})),
-    download:"Ribamar_Alves.vcf"
-  }).click();
-}
-
-/* ─── Service Worker ─── */
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").catch(() => {});
-}
-</script>
-</body>
-</html>
+const PHONE="5561993397747",CARD_URL="https://portiflio-one.vercel.app/card",WA_URL="https://wa.me/"+PHONE+"?text="+encodeURIComponent("Olá Ribamar, te encontrei pelo cartão digital!");
+new QRCode(document.getElementById("qrcode"),{text:WA_URL,width:148,height:148,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+const scene=document.getElementById("scene"),card=document.getElementById("card");
+let flipped=false,canFlip=true;
+function doFlip(){if(!canFlip)return;canFlip=false;flipped=!flipped;card.classList.add("fa");card.classList.toggle("fl",flipped);setTimeout(()=>{card.classList.remove("fa");canFlip=true},680)}
+scene.addEventListener("click",doFlip);
+scene.addEventListener("touchend",e=>{e.preventDefault();doFlip()},{passive:false});
+let cx=0,cy=0,tx=0,ty=0,gyro=false;
+function setT(rx,ry){tx=Math.max(-13,Math.min(13,rx));ty=Math.max(-13,Math.min(13,ry))}
+(function tick(){cx+=(tx-cx)*.09;cy+=(ty-cy)*.09;const sx=50+cy*2.8,sy=38-cx*2.5;card.style.setProperty("--rx",cx+"deg");card.style.setProperty("--ry",cy+"deg");card.style.setProperty("--sx",sx+"%");card.style.setProperty("--sy",sy+"%");requestAnimationFrame(tick)})();
+function enableGyro(){let bB=null,gB=null;window.addEventListener("deviceorientation",e=>{gyro=true;if(bB===null){bB=e.beta||60;gB=e.gamma||0}setT((e.beta-bB)*.55,(e.gamma-gB)*.55)},{passive:true})}
+function reqGyro(){if(typeof DeviceOrientationEvent!=="undefined"&&typeof DeviceOrientationEvent.requestPermission==="function"){DeviceOrientationEvent.requestPermission().then(s=>{if(s==="granted")enableGyro()})}else{enableGyro()}}
+document.addEventListener("touchstart",()=>{if(!gyro)reqGyro()},{once:true,passive:true});
+document.addEventListener("mousemove",e=>{if(gyro)return;setT(-(e.clientY-window.innerHeight/2)/52,(e.clientX-window.innerWidth/2)/52)});
+document.addEventListener("mouseleave",()=>{if(!gyro)setT(0,0)});
+async function shareCard(){const d={title:"Ribamar Alves — Dev Full-Stack",text:"Meu cartão digital. Acesse para falar comigo ou ver meu portfólio.",url:CARD_URL};if(navigator.share){try{await navigator.share(d)}catch(e){}}else{try{await navigator.clipboard.writeText(CARD_URL);alert("Link copiado!\n"+CARD_URL)}catch(e){prompt("Copie o link:",CARD_URL)}}}
+function saveContact(){const v=["BEGIN:VCARD","VERSION:3.0","FN:Ribamar Alves","TEL;TYPE=CELL:+"+PHONE,"TITLE:Consultor Comercial & Dev Full-Stack","ADR:;;Brasília;;;DF;Brasil","URL:"+CARD_URL,"END:VCARD"].join("\n");Object.assign(document.createElement("a"),{href:URL.createObjectURL(new Blob([v],{type:"text/vcard;charset=utf-8"})),download:"Ribamar_Alves.vcf"}).click()}
+function openNfc(){document.getElementById("ov").classList.add("on");if("NDEFReader" in window)document.getElementById("swbtn").style.display="flex"}
+function closeNfc(){document.getElementById("ov").classList.remove("on");clrSt()}
+function mc(e){if(e.target.id==="ov")closeNfc()}
+function clrSt(){const s=document.getElementById("nst");s.textContent="";s.className="nst"}
+function copyUrl(){navigator.clipboard.writeText(CARD_URL).then(()=>{const b=document.getElementById("cbtn");b.textContent="Copiado ✓";setTimeout(()=>b.textContent="Copiar",2500)}).catch(()=>prompt("Copie o link:",CARD_URL))}
+async function writeNFC(){const s=document.getElementById("nst"),b=document.getElementById("swbtn");try{b.disabled=true;s.textContent="Aproxime o celular do chip NFC...";s.className="nst info";const n=new NDEFReader();await n.write({records:[{recordType:"url",data:CARD_URL}]});s.textContent="✓ Chip gravado com sucesso!";s.className="nst ok";b.disabled=false;setTimeout(clrSt,5000)}catch(err){const m={NotAllowedError:"Permissão negada. Toque novamente e autorize.",NotSupportedError:"NFC não disponível neste dispositivo.",NetworkError:"Nenhum chip encontrado. Aproxime mais."};s.textContent=m[err.name]||"Tente com o chip mais próximo.";s.className="nst err";b.disabled=false}}
+let pwa;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();pwa=e;document.getElementById("ib").classList.add("show")});
+document.getElementById("ib").addEventListener("click",async()=>{if(!pwa)return;pwa.prompt();const{outcome}=await pwa.userChoice;if(outcome==="accepted")document.getElementById("ib").classList.remove("show");pwa=null});
+if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(()=>{});
+</script></body></html>
