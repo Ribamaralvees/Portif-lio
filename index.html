@@ -79,7 +79,7 @@ body::after {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   gap: 0; pointer-events: all;
-  transition: opacity .7s ease .1s, visibility .7s ease .1s;
+  transition: opacity .5s ease, visibility .5s ease;
 }
 #splash.out { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -550,7 +550,7 @@ body::after {
 }
 </style>
 </head>
-<body>
+<body style="background:#07070B">
 
 <!-- SPLASH -->
 <div id="splash" role="status" aria-label="Carregando">
@@ -895,7 +895,7 @@ let cur = "home", busy = false;
 
 /* ─── Splash ─── */
 window.addEventListener("load", () => {
-  setTimeout(() => document.getElementById("splash").classList.add("out"), 2000);
+  setTimeout(() => document.getElementById("splash").classList.add("out"), 1400);
 });
 
 function go(id) {

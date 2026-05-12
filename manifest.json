@@ -1,15 +1,15 @@
 {
-  "name": "Ribamar Alves",
+  "name": "Ribamar Alves · Dev Full-Stack",
   "short_name": "Ribamar",
-  "description": "Cartão digital de Ribamar Alves — Dev Full-Stack",
+  "description": "Portfólio de Ribamar Alves — Dev Full-Stack em Brasília",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#07070B",
   "theme_color": "#07070B",
-  "start_url": "/card",
+  "start_url": "/",
   "scope": "/",
   "icons": [
-    { "src": "favicon.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "favicon.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "maskable" }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" }
   ]
 }
