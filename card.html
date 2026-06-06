@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <title>Ribamar Alves</title>
-<meta name="description" content="Ribamar Alves — Consultor Comercial & Dev Full-Stack, Brasília DF.">
+<meta name="description" content="Ribamar Alves — Consultor Comercial & Dev Front-End, Brasília DF.">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#07070B">
 <meta name="mobile-web-app-capable" content="yes">
@@ -103,7 +103,7 @@ echo "CSS written, adding HTML..."</style></head><body>
 <div class="wm">RA</div><div class="cr ctl"></div><div class="cr cbr"></div>
 <div class="phr"><div class="phi"><img src="eu.webp" alt="Ribamar Alves" draggable="false"></div></div>
 <div class="fn">Ribamar <em>Alves</em></div>
-<div class="fr">Consultor Comercial &amp; Dev Full-Stack</div>
+<div class="fr">Consultor Comercial &amp; Dev Front-End</div>
 <div class="fd"></div>
 <div class="finfo">
 <div class="fi-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Brasília, DF</div>
@@ -161,8 +161,8 @@ function reqGyro(){if(typeof DeviceOrientationEvent!=="undefined"&&typeof Device
 document.addEventListener("touchstart",()=>{if(!gyro)reqGyro()},{once:true,passive:true});
 document.addEventListener("mousemove",e=>{if(gyro)return;setT(-(e.clientY-window.innerHeight/2)/52,(e.clientX-window.innerWidth/2)/52)});
 document.addEventListener("mouseleave",()=>{if(!gyro)setT(0,0)});
-async function shareCard(){const d={title:"Ribamar Alves — Dev Full-Stack",text:"Meu cartão digital. Acesse para falar comigo ou ver meu portfólio.",url:CARD_URL};if(navigator.share){try{await navigator.share(d)}catch(e){}}else{try{await navigator.clipboard.writeText(CARD_URL);alert("Link copiado!\n"+CARD_URL)}catch(e){prompt("Copie o link:",CARD_URL)}}}
-function saveContact(){const v=["BEGIN:VCARD","VERSION:3.0","FN:Ribamar Alves","TEL;TYPE=CELL:+"+PHONE,"TITLE:Consultor Comercial & Dev Full-Stack","ADR:;;Brasília;;;DF;Brasil","URL:"+CARD_URL,"END:VCARD"].join("\n");Object.assign(document.createElement("a"),{href:URL.createObjectURL(new Blob([v],{type:"text/vcard;charset=utf-8"})),download:"Ribamar_Alves.vcf"}).click()}
+async function shareCard(){const d={title:"Ribamar Alves — Dev Front-End",text:"Meu cartão digital. Acesse para falar comigo ou ver meu portfólio.",url:CARD_URL};if(navigator.share){try{await navigator.share(d)}catch(e){}}else{try{await navigator.clipboard.writeText(CARD_URL);alert("Link copiado!\n"+CARD_URL)}catch(e){prompt("Copie o link:",CARD_URL)}}}
+function saveContact(){const v=["BEGIN:VCARD","VERSION:3.0","FN:Ribamar Alves","TEL;TYPE=CELL:+"+PHONE,"TITLE:Consultor Comercial & Dev Front-End","ADR:;;Brasília;;;DF;Brasil","URL:"+CARD_URL,"END:VCARD"].join("\n");Object.assign(document.createElement("a"),{href:URL.createObjectURL(new Blob([v],{type:"text/vcard;charset=utf-8"})),download:"Ribamar_Alves.vcf"}).click()}
 function openNfc(){document.getElementById("ov").classList.add("on");if("NDEFReader" in window)document.getElementById("swbtn").style.display="flex"}
 function closeNfc(){document.getElementById("ov").classList.remove("on");clrSt()}
 function mc(e){if(e.target.id==="ov")closeNfc()}
